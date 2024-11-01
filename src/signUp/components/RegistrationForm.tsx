@@ -5,6 +5,7 @@ import {registrationSchema} from "../validation/registrationSchema.ts";
 import PasswordInput from "./PasswordInput.tsx";
 import FormInput from "./FormInput.tsx";
 import {FormInputs} from "../types/formInputsType.ts";
+import "../styles/registrationForm.sass";
 
 function RegistrationForm() {
     const {register, handleSubmit, formState: {errors}} = useForm<FormInputs>({
@@ -21,7 +22,6 @@ function RegistrationForm() {
             <h2>Inscription</h2>
 
             <FormInput
-                label="Prénom"
                 name="firstName"
                 type="text"
                 register={register}
@@ -29,37 +29,36 @@ function RegistrationForm() {
             />
 
             <FormInput
-                label="Nom"
                 name="lastName"
                 type="text"
                 register={register}
+                placeholder={'Nom de famille'}
                 error={errors.lastName}
             />
 
             <FormInput
-                label="Email"
                 name="email"
                 type="email"
                 register={register}
+                placeholder='Adresse email'
                 error={errors.email}
             />
             <FormInput
-                label="Age"
                 name="age"
                 type="text"
+                placeholder={'Âge'}
                 register={register}
                 error={errors.age}
             />
 
             <PasswordInput
-                label="Mot de passe"
                 name="password"
                 register={register}
+                placeholder='Mot de passe'
                 error={errors.password}
             />
 
             <PasswordInput
-                label="Confirmer le mot de passe"
                 name="confirmPassword"
                 register={register}
                 error={errors.confirmPassword}

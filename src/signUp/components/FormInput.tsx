@@ -1,9 +1,10 @@
 // src/components/FormInput.tsx
 import {FieldError, UseFormRegister} from 'react-hook-form';
 import {FormInputs} from "../types/formInputsType";
+import "../styles/formInput.sass";
+
 
 type FormInputProps = {
-    label: string;
     name: keyof FormInputs;
     type: string;
     register: UseFormRegister<FormInputs>;
@@ -13,7 +14,6 @@ type FormInputProps = {
 };
 
 function FormInput({
-                       label,
                        name,
                        type,
                        register,
@@ -23,7 +23,6 @@ function FormInput({
                    }: FormInputProps) {
     return (
         <div className={`form-group ${className || ''}`}>
-            <label htmlFor={name}>{label}</label>
             <input
                 id={name}
                 type={type}
