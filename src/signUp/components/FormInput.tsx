@@ -1,32 +1,28 @@
 // src/components/FormInput.tsx
-
-import React from 'react';
 import {FieldError, UseFormRegister} from 'react-hook-form';
-import {IFormInputs} from "../types/formInputs.ts";
+import {FormInputs} from "../types/formInputsType";
 
-
-interface FormInputProps {
+type FormInputProps = {
     label: string;
-    name: keyof IFormInputs;
+    name: keyof FormInputs;
     type: string;
-    register: UseFormRegister<IFormInputs>;
+    register: UseFormRegister<FormInputs>;
     error?: FieldError;
     placeholder?: string;
     className?: string;
-}
+};
 
-
-const FormInput: React.FC<FormInputProps> = ({
-                                                 label,
-                                                 name,
-                                                 type,
-                                                 register,
-                                                 error,
-                                                 placeholder,
-                                                 className,
-                                             }) => {
+function FormInput({
+                       label,
+                       name,
+                       type,
+                       register,
+                       error,
+                       placeholder,
+                       className,
+                   }: FormInputProps) {
     return (
-        <div className={`form-group ${className}`}>
+        <div className={`form-group ${className || ''}`}>
             <label htmlFor={name}>{label}</label>
             <input
                 id={name}

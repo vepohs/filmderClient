@@ -1,9 +1,10 @@
-// src/types/formInputs.ts
+// src/types/formInputsType.ts
 
-export interface IFormInputs {
+export type FormInputs = {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
     confirmPassword: string;
+    age: number;
 }

@@ -1,13 +1,13 @@
 // src/components/PasswordInput.tsx
 
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {FieldError, UseFormRegister} from 'react-hook-form';
-import {IFormInputs} from "../types/formInputs.ts";
+import {FormInputs} from "../types/formInputsType.ts";
 
 interface PasswordInputProps {
     label: string;
-    name: keyof IFormInputs;
-    register: UseFormRegister<IFormInputs>;
+    name: keyof FormInputs;
+    register: UseFormRegister<FormInputs>;
     error?: FieldError;
 }
 
@@ -30,6 +30,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({label, name, register, err
             {error && <span className="error">{error.message}</span>}
         </div>
     );
-};
+}
 
 export default PasswordInput;

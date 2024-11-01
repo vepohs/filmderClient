@@ -4,15 +4,15 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {registrationSchema} from "../validation/registrationSchema.ts";
 import PasswordInput from "./PasswordInput.tsx";
 import FormInput from "./FormInput.tsx";
-import {IFormInputs} from "../types/formInputs.ts";
+import {FormInputs} from "../types/formInputsType.ts";
 
 function RegistrationForm() {
-    const {register, handleSubmit, formState: {errors}} = useForm<IFormInputs>({
+    const {register, handleSubmit, formState: {errors}} = useForm<FormInputs>({
         resolver: yupResolver(registrationSchema),
         mode: 'onBlur',
     });
 
-    const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+    const onSubmit: SubmitHandler<FormInputs> = (data) => {
         console.log('Données du formulaire :', data);
     };
 
