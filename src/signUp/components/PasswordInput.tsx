@@ -2,7 +2,10 @@
 
 import {useState} from 'react';
 import {FieldError, UseFormRegister} from 'react-hook-form';
-import {FormInputs} from "../types/formInputsType.ts";
+import {FormInputs} from '../types/formInputsType';
+import OpenEye from './icons/OpenEye';
+import CloseEye from './icons/CloseEye';
+import "../styles/PasswordInput.sass";
 
 interface PasswordInputProps {
     name: keyof FormInputs;
@@ -23,8 +26,14 @@ function PasswordInput({ name, register, error,placeholder}: PasswordInputProps)
                     type={showPassword ? 'text' : 'password'}
                     {...register(name)}
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? 'Masquer' : 'Afficher'}
+                <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="password-toggle-button"
+                    aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                    aria-pressed={showPassword}
+                >
+                    {showPassword ? <OpenEye/> : <CloseEye/>}
                 </button>
             </div>
             {error && <span className="error">{error.message}</span>}

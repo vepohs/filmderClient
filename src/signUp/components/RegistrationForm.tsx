@@ -7,6 +7,7 @@ import FormInput from "./FormInput.tsx";
 import {FormInputs} from "../types/formInputsType.ts";
 import "../styles/registrationForm.sass";
 
+
 function RegistrationForm() {
     const {register, handleSubmit, formState: {errors}} = useForm<FormInputs>({
         resolver: yupResolver(registrationSchema),
