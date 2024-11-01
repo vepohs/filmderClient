@@ -33,6 +33,6 @@ function FormInput({
             {error && <span className="error">{error.message}</span>}
         </div>
     );
-};
+}
 
 export default FormInput;

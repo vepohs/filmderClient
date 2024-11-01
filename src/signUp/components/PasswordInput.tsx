@@ -11,7 +11,7 @@ interface PasswordInputProps {
     error?: FieldError;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({label, name, register, error}) => {
+function PasswordInput({label, name, register, error}: PasswordInputProps) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (

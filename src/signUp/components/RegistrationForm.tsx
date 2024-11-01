@@ -43,6 +43,13 @@ function RegistrationForm() {
                 register={register}
                 error={errors.email}
             />
+            <FormInput
+                label="Age"
+                name="age"
+                type="text"
+                register={register}
+                error={errors.age}
+            />
 
             <PasswordInput
                 label="Mot de passe"
