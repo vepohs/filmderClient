@@ -6,6 +6,7 @@ import PasswordInput from "./PasswordInput.tsx";
 import FormInput from "./FormInput.tsx";
 import {FormInputs} from "../types/formInputsType.ts";
 import "../styles/registrationForm.sass";
+import axios from "axios";
 
 
 function RegistrationForm() {
@@ -14,8 +15,31 @@ function RegistrationForm() {
         mode: 'onBlur',
     });
 
-    const onSubmit: SubmitHandler<FormInputs> = (data) => {
-        console.log('Données du formulaire :', data);
+    const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+
+        const data4 = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            age: data.age, // Assurez-vous de fournir un nombre ici
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            countryId: 1, // Par exemple, vous pouvez définir l'ID du pays en fonction d'une logique TMDB
+            ppPath: 'path/to/profile_picture.jpg' // Ce champ est optionnel, ajoutez-le seulement si nécessaire
+        };
+
+        const data5 = {
+            data,
+            countryId: 1,
+            ppPath: 'path/to/profile_picture.jpg'
+        }
+
+        console.log(data5)
+
+
+        const response = await axios.post('http://localhost:3012/api/users/createUser', data4);
+
+        console.log('Réponse du serveur :', response.data);
     };
 
     return (

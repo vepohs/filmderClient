@@ -7,6 +7,7 @@ import OpenEye from './icons/OpenEye';
 import CloseEye from './icons/CloseEye';
 import "../styles/PasswordInput.sass";
 
+
 interface PasswordInputProps {
     name: keyof FormInputs;
     register: UseFormRegister<FormInputs>;
@@ -14,7 +15,7 @@ interface PasswordInputProps {
     placeholder: string;
 }
 
-function PasswordInput({ name, register, error,placeholder}: PasswordInputProps) {
+function PasswordInput({name, register, error, placeholder}: PasswordInputProps) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
