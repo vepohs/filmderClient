@@ -33,11 +33,16 @@ function FormInput({
                 {...register(name)}
             />
             {error && (
-                <a data-tooltip-id="my-tooltip" data-tooltip-content={error.message} data-tooltip-variant="error">
+                <a data-tooltip-id="my-tooltip"
+                   data-tooltip-content={error.message}
+                   data-tooltip-variant="error"
+                   data-tooltip-place="bottom"
+                >
                     <Warning/>
                 </a>
             )}
-            <Tooltip id="my-tooltip"/>
+            <Tooltip id="my-tooltip" className="tooltip"
+            />
         </div>
     );
 }

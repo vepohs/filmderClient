@@ -50,4 +50,13 @@ input::placeholder {
   top: 10px;
 }
 
+.tooltip {
+  background-color: #000000 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  padding: 8px !important;
+  border-radius: 4px !important;
+  text-align: center !important;
+}
+
 /*# sourceMappingURL=FormInput.css.map */
