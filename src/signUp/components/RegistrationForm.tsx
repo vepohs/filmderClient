@@ -6,6 +6,7 @@ import PasswordInput from "./PasswordInput.tsx";
 import FormInput from "./FormInput.tsx";
 import {FormInputs} from "../types/formInputsType.ts";
 import "../styles/registrationForm.sass";
+import MyLogo from "./filmder.tsx";
 
 
 function RegistrationForm() {
@@ -20,11 +21,14 @@ function RegistrationForm() {
 
     return (
         <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
-            <h2>Inscription</h2>
+            <div className='title-container'> <MyLogo></MyLogo>
+                <h2>SIGN UP</h2>
+            </div>
 
             <FormInput
                 name="firstName"
                 type="text"
+                placeholder={'Prénom'}
                 register={register}
                 error={errors.firstName}
             />
@@ -61,11 +65,13 @@ function RegistrationForm() {
 
             <PasswordInput
                 name="confirmPassword"
+                placeholder='Confirmer le mot de passe'
                 register={register}
                 error={errors.confirmPassword}
             />
+            <button className="inscription" type="submit">SIGN UP</button>
+            <div className='signin'> <p  className='signintxt1'>Already have a account?</p> <a className='signintxt'>sign in</a></div>
 
-            <button type="submit">S'inscrire</button>
         </form>
     );
 }
