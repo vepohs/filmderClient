@@ -36,7 +36,7 @@ function FormInput({
                 <a data-tooltip-id="my-tooltip"
                    data-tooltip-content={error.message}
                    data-tooltip-variant="error"
-                   data-tooltip-place="bottom"
+                   data-tooltip-place="top"
                 >
                     <Warning/>
                 </a>
