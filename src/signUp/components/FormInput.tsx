@@ -2,6 +2,7 @@
 import {FieldError, UseFormRegister} from 'react-hook-form';
 import {FormInputs} from "../types/formInputsType";
 import "../styles/formInput.sass";
+import Warning from "./icons/Warning.tsx";
 
 
 type FormInputProps = {
@@ -29,7 +30,7 @@ function FormInput({
                 placeholder={placeholder}
                 {...register(name)}
             />
-            {error && <span className="error">{error.message}</span>}
+            {error && <Warning/>}
         </div>
     );
 }
