@@ -1,11 +1,91 @@
 .registration-form {
-  background: linear-gradient(45deg, #860e33, #c08822, #a61919);
+  background: linear-gradient(to right, #893f3f, #e96060, #cc6f6f), linear-gradient(to bottom, #8b3aa9, #815353, #822828);
+  background-blend-mode: multiply;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+.registration-form .test {
+  background: #f8d6c7;
+  background-clip: text;
+  color: transparent;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 30px;
+}
+.registration-form .test:hover {
+  background: #f8d6c7;
+}
+.registration-form .test:focus {
+  outline: none;
+}
+.registration-form .test:active {
+  background: #f8d6c7;
+}
+.registration-form h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 40px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.inscription {
+  background: white;
+  width: 280px;
+  height: 60px;
+  border-radius: 40px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  border: none;
+  outline: none;
+  color: #1d113d;
+}
+
+.signintxt {
+  color: white;
+  font-size: 20px;
+  padding-left: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.signin {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.signintxt1 {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 50px;
+  padding-left: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.title-container {
+  padding-top: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.svgg {
+  position: relative;
+  right: 100px;
+  padding-top: 20px;
+  fill: white;
+  color: white;
 }
 
 /*# sourceMappingURL=RegistrationForm.css.map */
