@@ -7,6 +7,7 @@ import OpenEye from './icons/OpenEye';
 import CloseEye from './icons/CloseEye';
 import "../styles/PasswordInput.sass";
 import Warning from "./icons/Warning.tsx";
+import {Tooltip} from "react-tooltip";
 
 
 interface PasswordInputProps {
@@ -39,7 +40,7 @@ function PasswordInput({name, register, error, placeholder}: PasswordInputProps)
                 </button>
             </div>
             {error && (
-                <a data-tooltip-id="my-tooltip"
+                <a data-tooltip-id="my-tooltip1"
                    data-tooltip-content={error.message}
                    data-tooltip-variant="error"
                    data-tooltip-place="top"
@@ -47,6 +48,8 @@ function PasswordInput({name, register, error, placeholder}: PasswordInputProps)
                     <Warning/>
                 </a>
             )}
+            <Tooltip id="my-tooltip1" className="tooltip" positionStrategy="fixed"
+            />
         </div>
     );
 }

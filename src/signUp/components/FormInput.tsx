@@ -41,7 +41,7 @@ function FormInput({
                     <Warning/>
                 </a>
             )}
-            <Tooltip id="my-tooltip" className="tooltip"
+            <Tooltip id="my-tooltip" className="tooltip" positionStrategy="fixed"
             />
         </div>
     );
