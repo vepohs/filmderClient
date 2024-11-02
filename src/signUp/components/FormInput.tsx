@@ -2,6 +2,7 @@
 import {FieldError, UseFormRegister} from 'react-hook-form';
 import {FormInputs} from "../types/formInputsType";
 import "../styles/formInput.sass";
+import {Tooltip} from "react-tooltip";
 import Warning from "./icons/Warning.tsx";
 
 
@@ -13,6 +14,7 @@ type FormInputProps = {
     placeholder?: string;
     className?: string;
 };
+
 
 function FormInput({
                        name,
@@ -30,9 +32,15 @@ function FormInput({
                 placeholder={placeholder}
                 {...register(name)}
             />
-            {error && <Warning/>}
+            {error && (
+                <a data-tooltip-id="my-tooltip" data-tooltip-content={error.message} data-tooltip-variant="error">
+                    <Warning/>
+                </a>
+            )}
+            <Tooltip id="my-tooltip"/>
         </div>
     );
 }
+
 
 export default FormInput;

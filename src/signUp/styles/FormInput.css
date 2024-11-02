@@ -1,4 +1,5 @@
 .form-group {
+  display: flex;
   background-clip: text;
   color: transparent;
   width: 70vw;
