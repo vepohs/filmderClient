@@ -45,7 +45,7 @@ function RegistrationForm() {
 
     return (
         <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className='title-container'> <MyLogo></MyLogo>
+            <div className='title-container'><MyLogo></MyLogo>
                 <h2>SIGN UP</h2>
             </div>
 
@@ -94,9 +94,8 @@ function RegistrationForm() {
                 error={errors.confirmPassword}
             />
             <button className="inscription" type="submit">SIGN UP</button>
-            <div className='signin'> <p  className='signintxt1'>Already have a account?</p> <a className='signintxt'>sign in</a></div>
-
-            <button type="submit">S'inscrire</button>
+            <div className='signin'><p className='signintxt1'>Already have a account?</p> <a className='signintxt'>sign
+                in</a></div>
         </form>
     );
 }
