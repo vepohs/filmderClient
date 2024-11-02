@@ -6,6 +6,7 @@ import {FormInputs} from '../types/formInputsType';
 import OpenEye from './icons/OpenEye';
 import CloseEye from './icons/CloseEye';
 import "../styles/PasswordInput.sass";
+import Warning from "./icons/Warning.tsx";
 
 
 interface PasswordInputProps {
@@ -37,7 +38,15 @@ function PasswordInput({name, register, error, placeholder}: PasswordInputProps)
                     {showPassword ? <OpenEye/> : <CloseEye/>}
                 </button>
             </div>
-            {error && <span className="error">{error.message}</span>}
+            {error && (
+                <a data-tooltip-id="my-tooltip"
+                   data-tooltip-content={error.message}
+                   data-tooltip-variant="error"
+                   data-tooltip-place="top"
+                >
+                    <Warning/>
+                </a>
+            )}
         </div>
     );
 }
