@@ -5,6 +5,12 @@ import {FormInputs} from "../types/formInputsType.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {registrationSchema} from "../validation/registrationSchema.ts";
 import axios from "axios";
+// @ts-ignore
+import "../styles/SignUpForm.sass";
+import {EmailIcon} from "./icons/EmailIcon.tsx";
+import {NameIcon} from "./icons/NameIcon.tsx";
+import {AgeIcon} from "./icons/AgeIcon.tsx";
+import {PasswordIcon} from "./icons/PasswordIcon.tsx";
 
 type IsUniqueEmailResponse = {
     isUnique: boolean;
@@ -48,14 +54,15 @@ export function SignUpForm() {
     return (
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
             <FormInput
+                icon={NameIcon}
                 name="firstName"
                 type="text"
                 placeholder={'Prénom'}
                 register={register}
                 error={errors.firstName}
             />
-
             <FormInput
+                icon={NameIcon}
                 name="lastName"
                 type="text"
                 register={register}
@@ -64,6 +71,7 @@ export function SignUpForm() {
             />
 
             <FormInput
+                icon={EmailIcon}
                 name="email"
                 type="email"
                 register={register}
@@ -71,6 +79,7 @@ export function SignUpForm() {
                 error={errors.email}
             />
             <FormInput
+                icon={AgeIcon}
                 name="age"
                 type="text"
                 placeholder={'Âge'}
@@ -79,6 +88,7 @@ export function SignUpForm() {
             />
 
             <PasswordInput
+                icon={PasswordIcon}
                 name="password"
                 register={register}
                 placeholder='Mot de passe'
@@ -86,12 +96,13 @@ export function SignUpForm() {
             />
 
             <PasswordInput
+                icon={PasswordIcon}
                 name="confirmPassword"
-                placeholder='Confirmer le mot de passe'
+                placeholder='Mot de passe'
                 register={register}
                 error={errors.confirmPassword}
             />
-            <button className="sumbitBtn" type="submit">SIGN UP</button>
+            <button className="submitBtn" type="submit">SIGN UP</button>
         </form>
     );
 }

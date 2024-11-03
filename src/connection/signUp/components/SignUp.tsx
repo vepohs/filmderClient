@@ -1,3 +1,4 @@
+// @ts-ignore
 import "../styles/SignUpGlobalStyle.sass";
 
 import {SignUpForm} from "./SignUpForm.tsx";

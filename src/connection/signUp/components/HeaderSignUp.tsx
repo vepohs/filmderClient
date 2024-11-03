@@ -1,4 +1,5 @@
 import MyLogo from "./icons/filmderIcon.tsx";
+// @ts-ignore
 import "../styles/HeaderStyle.sass";
 
 

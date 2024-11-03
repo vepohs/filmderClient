@@ -1,9 +1,11 @@
-// src/components/icons/CloseEyeIcon.tsx
 
-import React from 'react';
+// @ts-ignore
+import "../../styles/EyeIcon.sass";
 
-const CloseEyeIcon: React.FC = () => (
+export function CloseEyeIcon() {
+    return(
     <svg
+        className='eyeIcon'
         width="16px"
         height="16px"
         viewBox="0 0 28 28"
@@ -22,6 +24,5 @@ const CloseEyeIcon: React.FC = () => (
             fill="#ffffff"
         />
     </svg>
-);
+); }
 
-export default CloseEyeIcon;

@@ -1,7 +1,7 @@
-import React from 'react';
-
-const OpenEyeIcon: React.FC = () => (
-    <svg
+// @ts-ignore
+import "../../styles/EyeIcon.sass";
+export function OpenEyeIcon() {
+    return (<svg
         width="16px"
         height="16px"
         viewBox="0 0 28 28"
@@ -20,7 +20,5 @@ const OpenEyeIcon: React.FC = () => (
             fill="#ffffff"
             fillRule="evenodd"
         />
-    </svg>
-);
-
-export default OpenEyeIcon;
+    </svg>);
+}
