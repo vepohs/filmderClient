@@ -1,6 +1,6 @@
 import React from "react";
 
-const Warning: React.FC = () => (
+const WarningIcon: React.FC = () => (
     <svg fill="#ffffff" height="26px" width="26px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 466.705 466.705" stroke="#ffffff">
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -13,7 +13,7 @@ const Warning: React.FC = () => (
 );
 
 
-export default Warning;
+export default WarningIcon;
 
 
 

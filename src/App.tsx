@@ -1,11 +1,9 @@
-import RegistrationForm from "./signUp/components/RegistrationForm.tsx";
+import SignUp from "./connection/signUp/components/SignUp.tsx";
 
 function App() {
 
     return (
-        <>
-            <RegistrationForm/>
-        </>
+            <SignUp/>
     );
 }
 

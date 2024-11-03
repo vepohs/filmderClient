@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OpenEye: React.FC = () => (
+const OpenEyeIcon: React.FC = () => (
     <svg
         width="16px"
         height="16px"
@@ -23,4 +23,4 @@ const OpenEye: React.FC = () => (
     </svg>
 );
 
-export default OpenEye;
+export default OpenEyeIcon;

@@ -1,32 +1,28 @@
-// src/components/forms/RegistrationF.tsx
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {registrationSchema} from "../validation/registrationSchema.ts";
-import PasswordInput from "./PasswordInput.tsx";
 import FormInput from "./FormInput.tsx";
+import PasswordInput from "./PasswordInput.tsx";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {FormInputs} from "../types/formInputsType.ts";
-// @ts-ignore
-import "../styles/registrationForm.sass";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {registrationSchema} from "../validation/registrationSchema.ts";
 import axios from "axios";
-import MyLogo from "./filmder.tsx";
 
 type IsUniqueEmailResponse = {
     isUnique: boolean;
 };
 
-function RegistrationForm() {
+export function SignUpForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<FormInputs>({
         resolver: yupResolver(registrationSchema),
         mode: 'onBlur',
     });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        try{
-            const mailResponse  = await axios.post<IsUniqueEmailResponse>('http://localhost:3013/api/users/isUniqueEmail', { email: data.email });
+        try {
+            const mailResponse = await axios.post<IsUniqueEmailResponse>('http://localhost:3013/api/users/isUniqueEmail', {email: data.email});
             const isUnique = mailResponse.data.isUnique;
             if (!isUnique) {
-                setError('email', { message: 'Cet email est déjà utilisé' });
-                return ;
+                setError('email', {message: 'Cet email est déjà utilisé'});
+                return;
             }
 
             const response = await axios.post('http://localhost:3013/api/users/createUser', data);
@@ -37,26 +33,20 @@ function RegistrationForm() {
             if (axios.isAxiosError(error)) {
                 if (error.code === "ERR_NETWORK") {
                     console.log("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
-                } else if (error.response?.status === 401) {
-                    setError('email', { message: 'Cet email est déjà utilisé' });
+                } else if (error.response?.status === 409) {
+                    setError('email', {message: 'Cet email est déjà utilisé'});
                 } else if (error.response?.status === 500) {
                     alert("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
                 } else {
                     console.log("Une erreur inatendu DANS AXIOSest survenue. Veuillez réessayer.");
                 }
             } else {
-                // Erreur inconnue - n'affiche rien dans la console pour éviter de divulguer des informations
                 console.log("Une erreur inatenduuu est survenue.");
             }
         }
     };
-
     return (
-        <form className="registration-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className='title-container'><MyLogo></MyLogo>
-                <h2>SIGN UP</h2>
-            </div>
-
+        <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
             <FormInput
                 name="firstName"
                 type="text"
@@ -69,7 +59,7 @@ function RegistrationForm() {
                 name="lastName"
                 type="text"
                 register={register}
-                placeholder={'Nom de famille'}
+                placeholder={'Nom'}
                 error={errors.lastName}
             />
 
@@ -101,11 +91,7 @@ function RegistrationForm() {
                 register={register}
                 error={errors.confirmPassword}
             />
-            <button className="inscription" type="submit">SIGN UP</button>
-            <div className='signin'><p className='signintxt1'>Already have a account?</p> <a className='signintxt'>sign
-                in</a></div>
+            <button className="sumbitBtn" type="submit">SIGN UP</button>
         </form>
     );
 }
-
-export default RegistrationForm;

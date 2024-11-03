@@ -2,12 +2,12 @@
 
 import {useState} from 'react';
 import {FieldError, UseFormRegister} from 'react-hook-form';
-import {FormInputs} from '../types/formInputsType';
-import OpenEye from './icons/OpenEye';
-import CloseEye from './icons/CloseEye';
+import {FormInputs} from '../types/formInputsType.ts';
+import OpenEyeIcon from './icons/OpenEyeIcon.tsx';
+import CloseEyeIcon from './icons/CloseEyeIcon.tsx';
 // @ts-ignore
 import "../styles/PasswordInput.sass";
-import Warning from "./icons/Warning.tsx";
+import WarningIcon from "./icons/WarningIcon.tsx";
 import {Tooltip} from "react-tooltip";
 
 
@@ -37,7 +37,7 @@ function PasswordInput({name, register, error, placeholder}: PasswordInputProps)
                     aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
                     aria-pressed={showPassword}
                 >
-                    {showPassword ? <OpenEye/> : <CloseEye/>}
+                    {showPassword ? <OpenEyeIcon/> : <CloseEyeIcon/>}
                 </button>
             </div>
             {error && (
@@ -46,7 +46,7 @@ function PasswordInput({name, register, error, placeholder}: PasswordInputProps)
                    data-tooltip-variant="error"
                    data-tooltip-place="top"
                 >
-                    <Warning/>
+                    <WarningIcon/>
                 </a>
             )}
             <Tooltip id="my-tooltip1" className="tooltip" positionStrategy="fixed"

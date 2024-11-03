@@ -1,0 +1,18 @@
+import {Tooltip} from "react-tooltip";
+import WarningIcon from "./icons/WarningIcon.tsx";
+
+export function ErrorTooltip({message}: { message: string | undefined }) {
+    return (
+        <>
+            <a
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content={message}
+                data-tooltip-variant="error"
+                data-tooltip-place="top"
+            >
+                <WarningIcon />
+            </a>
+            <Tooltip id="my-tooltip" className="tooltip" positionStrategy="fixed" />
+        </>
+    );
+}

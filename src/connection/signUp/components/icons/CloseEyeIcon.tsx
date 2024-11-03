@@ -1,8 +1,8 @@
-// src/components/icons/CloseEye.tsx
+// src/components/icons/CloseEyeIcon.tsx
 
 import React from 'react';
 
-const CloseEye: React.FC = () => (
+const CloseEyeIcon: React.FC = () => (
     <svg
         width="16px"
         height="16px"
@@ -24,4 +24,4 @@ const CloseEye: React.FC = () => (
     </svg>
 );
 
-export default CloseEye;
+export default CloseEyeIcon;
