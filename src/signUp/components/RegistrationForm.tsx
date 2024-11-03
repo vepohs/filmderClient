@@ -9,28 +9,45 @@ import "../styles/registrationForm.sass";
 import axios from "axios";
 import MyLogo from "./filmder.tsx";
 
+type IsUniqueEmailResponse = {
+    isUnique: boolean;
+};
 
 function RegistrationForm() {
-    const {register, handleSubmit, formState: {errors}} = useForm<FormInputs>({
+    const {register, handleSubmit, formState: {errors}, setError} = useForm<FormInputs>({
         resolver: yupResolver(registrationSchema),
         mode: 'onBlur',
     });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        console.log("click kaaris")
-        const data4 = {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            age: data.age, // Assurez-vous de fournir un nombre ici
-            password: data.password,
-            confirmPassword: data.confirmPassword,
+        try{
+            const mailResponse  = await axios.post<IsUniqueEmailResponse>('http://localhost:3013/api/users/isUniqueEmail', { email: data.email });
+            const isUnique = mailResponse.data.isUnique;
+            if (!isUnique) {
+                setError('email', { message: 'Cet email est déjà utilisé' });
+                return ;
+            }
 
-        };
+            const response = await axios.post('http://localhost:3013/api/users/createUser', data);
+            console.log(response);
 
-        const response = await axios.post('http://localhost:3013/api/users/createUser', data4);
-
-        console.log('Réponse du serveur :', response.data);
+        } catch (error: unknown) {
+            // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE
+            if (axios.isAxiosError(error)) {
+                if (error.code === "ERR_NETWORK") {
+                    console.log("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
+                } else if (error.response?.status === 401) {
+                    setError('email', { message: 'Cet email est déjà utilisé' });
+                } else if (error.response?.status === 500) {
+                    alert("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
+                } else {
+                    console.log("Une erreur inatendu DANS AXIOSest survenue. Veuillez réessayer.");
+                }
+            } else {
+                // Erreur inconnue - n'affiche rien dans la console pour éviter de divulguer des informations
+                console.log("Une erreur inatenduuu est survenue.");
+            }
+        }
     };
 
     return (

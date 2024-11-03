@@ -13,20 +13,7 @@ export const registrationSchema = yup.object({
     email: yup.string().matches(
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         'Email non valide'
-    ).required("L'email est requis")
-        .test('unique-email', "Cet email est déjà utilisé", async (value) => {
-        if (!value) return false;
-
-        try {
-            // Si serveur down ici c est la merde 
-            const response  = await axios.post<IsUniqueEmailResponse>('http://localhost:3013/api/users/isUniqueEmail', { email: value });
-            const isUnique = response.data.isUnique;
-            return isUnique; // Assurez-vous que l'API renvoie `{ isUnique: true }` si l'email est unique
-        } catch (error) {
-            console.error("Erreur lors de la vérification de l'email :", error);
-            return false; // Échoue la validation en cas d'erreur réseau
-        }
-    }),
+    ).required("L'email est requis"),
 
     password: yup.string().min(8, 'Au moins 8 caractères \n et un chiffre').matches(/\d/, "Au moins 8 caractères \n et un chiffre").required('Le mot de passe est requis'),
     age: yup
