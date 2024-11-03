@@ -1,6 +1,7 @@
 // src/components/FormInput.tsx
 import {FieldError, UseFormRegister} from 'react-hook-form';
 import {FormInputs} from "../types/formInputsType";
+// @ts-ignore
 import "../styles/formInput.sass";
 import {Tooltip} from "react-tooltip";
 import Warning from "./icons/Warning.tsx";

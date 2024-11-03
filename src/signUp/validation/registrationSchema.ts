@@ -1,10 +1,5 @@
 // src/validation/registrationSchema.ts
 import * as yup from 'yup';
-import axios from "axios";
-
-type IsUniqueEmailResponse = {
-    isUnique: boolean;
-};
 
 
 export const registrationSchema = yup.object({

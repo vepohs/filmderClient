@@ -1,7 +1,8 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import App from './App.tsx'
-import "./signUp/styles/index.sass"
+// @ts-ignore
+import "./index.sass"
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

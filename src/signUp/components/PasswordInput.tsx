@@ -5,6 +5,7 @@ import {FieldError, UseFormRegister} from 'react-hook-form';
 import {FormInputs} from '../types/formInputsType';
 import OpenEye from './icons/OpenEye';
 import CloseEye from './icons/CloseEye';
+// @ts-ignore
 import "../styles/PasswordInput.sass";
 import Warning from "./icons/Warning.tsx";
 import {Tooltip} from "react-tooltip";

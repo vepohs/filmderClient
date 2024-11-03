@@ -5,6 +5,7 @@ import {registrationSchema} from "../validation/registrationSchema.ts";
 import PasswordInput from "./PasswordInput.tsx";
 import FormInput from "./FormInput.tsx";
 import {FormInputs} from "../types/formInputsType.ts";
+// @ts-ignore
 import "../styles/registrationForm.sass";
 import axios from "axios";
 import MyLogo from "./filmder.tsx";
