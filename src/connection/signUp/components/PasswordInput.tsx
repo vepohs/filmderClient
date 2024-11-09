@@ -1,8 +1,8 @@
 // src/components/PasswordInput.tsx
 
 import {useState} from 'react';
-import {FieldError, UseFormRegister} from 'react-hook-form';
-import {FormInputs} from '../types/formInputsType.ts';
+import {FieldError, FieldValues, Path, UseFormRegister} from 'react-hook-form';
+import {FormInputs, LoginFormInputs} from '../types/formInputsType.ts';
 import {OpenEyeIcon} from './icons/OpenEyeIcon.tsx';
 import {CloseEyeIcon} from './icons/CloseEyeIcon.tsx';
 import {Tooltip} from "react-tooltip";
@@ -14,15 +14,15 @@ import "../styles/Icon.sass";
 
 
 
-interface PasswordInputProps {
-    name: keyof FormInputs;
-    register: UseFormRegister<FormInputs>;
+interface PasswordInputProps<TFormValues extends FieldValues> {
+    name: Path<TFormValues>;
+    register: UseFormRegister<TFormValues>;
     error?: FieldError;
     placeholder: string;
     icon: React.ElementType;
 }
 
-function PasswordInput({name, register, error, placeholder,icon :Icon}: PasswordInputProps) {
+function PasswordInput<TFormValues>({name, register, error, placeholder,icon :Icon}: PasswordInputProps<TFormValues>) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -30,7 +30,7 @@ function PasswordInput({name, register, error, placeholder,icon :Icon}: Password
         <div className="inputPasswordContainer">
             {Icon && <Icon className="icon" />}
             <input className='inputPassword'
-                id={name}
+                id={String(name)}
                 placeholder={placeholder}
                 type={showPassword ? 'text' : 'password'}
                 {...register(name)}

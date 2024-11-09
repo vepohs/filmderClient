@@ -1,35 +1,35 @@
 // src/components/FormInput.tsx
-import { FieldError, UseFormRegister } from 'react-hook-form';
-import { FormInputs } from "../types/formInputsType.ts";
+import {FieldError, FieldValues, Path, UseFormRegister} from 'react-hook-form';
+import {FormInputs, LoginFormInputs} from "../types/formInputsType.ts";
 // @ts-ignore
 import "../styles/FormInput.sass";
 // @ts-ignore
 import '../styles/Icon.sass';
 import { ErrorTooltip } from "./ErrorTooltip.tsx";
 
-type FormInputProps = {
-    name: keyof FormInputs;
+type FormInputProps<TFormValues extends FieldValues> = {
+    name: Path<TFormValues>;
     type: string;
-    register: UseFormRegister<FormInputs>;
+    register: UseFormRegister<TFormValues>;
     error?: FieldError;
     placeholder: string;
     icon: React.ElementType;
 };
 
-function FormInput({
+function FormInput <TFormValues extends FieldValues> ({
                        name,
                        type,
                        register,
                        error,
                        placeholder,
                        icon: Icon,
-                   }: FormInputProps) {
+                   }: FormInputProps<TFormValues>){
     return (
         <div className="inputContainer">
             {Icon && <Icon className="icon" />}
             <input
                 className="input"
-                id={name}
+                id={String(name)}
                 type={type}
                 placeholder={placeholder}
                 {...register(name)}

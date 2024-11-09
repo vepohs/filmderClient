@@ -53,7 +53,7 @@ export function SignUpForm() {
     };
     return (
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
+            <FormInput<FormInputs>
                 icon={NameIcon}
                 name="firstName"
                 type="text"
@@ -61,7 +61,7 @@ export function SignUpForm() {
                 register={register}
                 error={errors.firstName}
             />
-            <FormInput
+            <FormInput<FormInputs>
                 icon={NameIcon}
                 name="lastName"
                 type="text"
@@ -70,7 +70,7 @@ export function SignUpForm() {
                 error={errors.lastName}
             />
 
-            <FormInput
+            <FormInput<FormInputs>
                 icon={EmailIcon}
                 name="email"
                 type="email"
@@ -78,7 +78,7 @@ export function SignUpForm() {
                 placeholder='Adresse email'
                 error={errors.email}
             />
-            <FormInput
+            <FormInput<FormInputs>
                 icon={AgeIcon}
                 name="age"
                 type="text"
@@ -87,7 +87,7 @@ export function SignUpForm() {
                 error={errors.age}
             />
 
-            <PasswordInput
+            <PasswordInput<FormInputs>
                 icon={PasswordIcon}
                 name="password"
                 register={register}
@@ -95,7 +95,7 @@ export function SignUpForm() {
                 error={errors.password}
             />
 
-            <PasswordInput
+            <PasswordInput<FormInputs>
                 icon={PasswordIcon}
                 name="confirmPassword"
                 placeholder='Mot de passe'

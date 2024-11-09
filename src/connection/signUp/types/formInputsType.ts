@@ -8,3 +8,8 @@ export type FormInputs = {
     confirmPassword: string;
     age: number;
 }
+
+export type LoginFormInputs = {
+    email: string;
+    password: string;
+};
