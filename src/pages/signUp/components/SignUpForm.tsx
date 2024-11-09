@@ -5,12 +5,13 @@ import {FormInputs} from "../../../types/formInputsTypes.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {signUpSchema} from "../signUpSchema.ts";
 import axios from "axios";
-// @ts-ignore
-import "../style/SignUpForm.sass";
 import {EmailIcon} from "../../../common/icons/EmailIcon.tsx";
 import {NameIcon} from "../../../common/icons/NameIcon.tsx";
 import {AgeIcon} from "../../../common/icons/AgeIcon.tsx";
 import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
+
+// @ts-ignore
+import "../style/SignUpForm.sass";
 
 type IsUniqueEmailResponse = {
     isUnique: boolean;
@@ -24,14 +25,14 @@ export function SignUpForm() {
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         try {
-            const mailResponse = await axios.post<IsUniqueEmailResponse>('http://localhost:3013/api/users/isUniqueEmail', {email: data.email});
+            const mailResponse = await axios.post<IsUniqueEmailResponse>('http://localhost:3014/api/users/isUniqueEmail', {email: data.email});
             const isUnique = mailResponse.data.isUnique;
             if (!isUnique) {
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
 
-            const response = await axios.post('http://localhost:3013/api/users/createUser', data);
+            const response = await axios.post('http://localhost:3014/api/users/createUser', data);
             console.log(response);
 
         } catch (error: unknown) {

@@ -12,6 +12,7 @@ import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
+import {useLoginContext} from "../../../contexts/LoginContextProvider.tsx";
 
 
 export function LoginForm() {
@@ -20,8 +21,10 @@ export function LoginForm() {
         mode: 'onBlur',
     });
 
-    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-        try {
+    const loginContext = useLoginContext();
+
+    const tryLogin = async (data: LoginFormInputs) => {
+/*        try {
             const response = await axios.post('http://localhost:3014/api/auth/login', data);
             console.log(response);
             // Gérer la connexion réussie (redirection, stockage du token, etc.)
@@ -40,6 +43,14 @@ export function LoginForm() {
                 console.log("Une erreur inattendue est survenue.");
             }
         }
+
+ */
+        loginContext.login(data.email, data.password);
+    }
+
+    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+        console.log(data)
+        await tryLogin(data);
     };
 
     return (

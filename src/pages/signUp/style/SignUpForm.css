@@ -1,0 +1,25 @@
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  height: 100%;
+}
+
+.submitBtn {
+  background: #ffffff;
+  width: 60vw;
+  height: 7vh;
+  border-radius: 40px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 3vh;
+  border: none;
+  outline: none;
+  color: #1d113d;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=SignUpForm.css.map */

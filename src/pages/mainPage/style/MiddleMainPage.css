@@ -1,0 +1,38 @@
+.middleMainPage {
+  width: 90%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.middleMainPage .imageContainer {
+  position: relative;
+  display: inline-block;
+}
+.middleMainPage .imageContainer img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.middleMainPage .imageContainer svg {
+  position: absolute;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.middleMainPage .imageContainer svg {
+  padding: 10px;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  bottom: 30px;
+  right: 30px;
+  align-items: center;
+  align-content: center;
+}
+.middleMainPage .imageContainer .button2 {
+  bottom: 10px;
+  right: 10px;
+}
+
+/*# sourceMappingURL=MiddleMainPage.css.map */

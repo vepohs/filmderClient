@@ -1,0 +1,15 @@
+.headerSignUpContainer {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 40px;
+  color: #ffffff;
+}
+
+/*# sourceMappingURL=HeaderSignUp.css.map */
