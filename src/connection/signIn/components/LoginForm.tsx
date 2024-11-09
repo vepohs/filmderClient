@@ -1,18 +1,17 @@
-// src/components/LoginForm.tsx
-
+// src/AAAcomponents/LoginForm.tsx
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import axios from "axios";
+
+import {LoginFormInputs} from "../../signUp/types/formInputsType.ts";
+import {loginSchema} from "../../signUp/validation/signInSchema.ts";
+import FormInput from "../../../AAAcomponents/common/FormInput.tsx";
+import {EmailIcon} from "../../../AAAcomponents/assets/EmailIcon.tsx";
+import PasswordInput from "../../../AAAcomponents/common/PasswordInput.tsx";
+import {PasswordIcon} from "../../../AAAcomponents/assets/PasswordIcon.tsx";
 
 // @ts-ignore
 import "../styles/LoginForm.sass";
-import {LoginFormInputs} from "../../signUp/types/formInputsType.ts";
-import {loginSchema} from "../../signUp/validation/signInSchema.ts";
-import FormInput from "../../signUp/components/FormInput.tsx";
-import {EmailIcon} from "../../signUp/components/icons/EmailIcon.tsx";
-import PasswordInput from "../../signUp/components/PasswordInput.tsx";
-import {PasswordIcon} from "../../signUp/components/icons/PasswordIcon.tsx";
 
 
 export function LoginForm() {

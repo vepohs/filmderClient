@@ -1,5 +1,5 @@
 // @ts-ignore
-import "../../styles/EyeIcon.sass";
+import "../../connection/signUp/styles/EyeIcon.sass";
 export function OpenEyeIcon() {
     return (<svg
         width="16px"

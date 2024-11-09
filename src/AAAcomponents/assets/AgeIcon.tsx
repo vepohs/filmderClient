@@ -1,5 +1,5 @@
 // @ts-ignore
-import '../../styles/Icon.sass';
+import '../../connection/signUp/styles/Icon.sass';
 export function AgeIcon() {
     return (
         <svg className='icon' viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg">

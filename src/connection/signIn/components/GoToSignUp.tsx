@@ -1,4 +1,4 @@
-// src/components/GoToSignUp.tsx
+// src/AAAcomponents/GoToSignUp.tsx
 
 // @ts-ignore
 import "../styles/GoToSignUp.sass";

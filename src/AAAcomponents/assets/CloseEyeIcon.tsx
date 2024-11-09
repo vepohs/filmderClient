@@ -1,6 +1,6 @@
 
 // @ts-ignore
-import "../../styles/EyeIcon.sass";
+import "../../connection/signUp/styles/EyeIcon.sass";
 
 export function CloseEyeIcon() {
     return(

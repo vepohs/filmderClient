@@ -1,4 +1,4 @@
-import MyLogo from "./icons/filmderIcon.tsx";
+import MyLogo from "../../../AAAcomponents/assets/filmderIcon.tsx";
 // @ts-ignore
 import "../styles/HeaderStyle.sass";
 

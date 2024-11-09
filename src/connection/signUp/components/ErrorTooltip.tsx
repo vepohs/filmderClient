@@ -1,5 +1,5 @@
 import {Tooltip} from "react-tooltip";
-import {WarningIcon} from "./icons/WarningIcon.tsx";
+import {WarningIcon} from "../../../AAAcomponents/assets/WarningIcon.tsx";
 
 export function ErrorTooltip({message}: { message: string | undefined }) {
     return (

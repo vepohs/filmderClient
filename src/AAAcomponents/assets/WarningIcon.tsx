@@ -1,6 +1,6 @@
 
 // @ts-ignore
-import '../../styles/WarningIcon.sass';
+import '../../connection/signUp/styles/WarningIcon.sass';
 
 export function WarningIcon() {
     return (

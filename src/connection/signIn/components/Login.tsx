@@ -1,10 +1,9 @@
-// src/components/Login.tsx
-
-// @ts-ignore
-
+// src/AAAcomponents/Login.tsx
 import { LoginForm } from "./LoginForm.tsx";
 import { HeaderLogin } from "./HeaderLogin.tsx";
 import { GoToSignUp } from "./GoToSignUp.tsx";
+
+// @ts-ignore
 import"../styles/LoginIndex.sass";
 
 function Login() {

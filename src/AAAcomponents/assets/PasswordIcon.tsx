@@ -1,5 +1,5 @@
 // @ts-ignore
-import '../../styles/Icon.sass';
+import '../../connection/signUp/styles/Icon.sass';
 
 export function PasswordIcon() {
     return (

@@ -1,5 +1,5 @@
-import FormInput from "./FormInput.tsx";
-import PasswordInput from "./PasswordInput.tsx";
+import FormInput from "../../../AAAcomponents/common/FormInput.tsx";
+import PasswordInput from "../../../AAAcomponents/common/PasswordInput.tsx";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {FormInputs} from "../types/formInputsType.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -7,10 +7,10 @@ import {registrationSchema} from "../validation/registrationSchema.ts";
 import axios from "axios";
 // @ts-ignore
 import "../styles/SignUpForm.sass";
-import {EmailIcon} from "./icons/EmailIcon.tsx";
-import {NameIcon} from "./icons/NameIcon.tsx";
-import {AgeIcon} from "./icons/AgeIcon.tsx";
-import {PasswordIcon} from "./icons/PasswordIcon.tsx";
+import {EmailIcon} from "../../../AAAcomponents/assets/EmailIcon.tsx";
+import {NameIcon} from "../../../AAAcomponents/assets/NameIcon.tsx";
+import {AgeIcon} from "../../../AAAcomponents/assets/AgeIcon.tsx";
+import {PasswordIcon} from "../../../AAAcomponents/assets/PasswordIcon.tsx";
 
 type IsUniqueEmailResponse = {
     isUnique: boolean;

@@ -1,11 +1,12 @@
-// src/components/FormInput.tsx
+// src/AAAcomponents/FormInput.tsx
 import {FieldError, FieldValues, Path, UseFormRegister} from 'react-hook-form';
-import {FormInputs, LoginFormInputs} from "../types/formInputsType.ts";
+
+import { ErrorTooltip } from "../../connection/signUp/components/ErrorTooltip.tsx";
+
 // @ts-ignore
-import "../styles/FormInput.sass";
+import "../../connection/signUp/styles/FormInput.sass";
 // @ts-ignore
-import '../styles/Icon.sass';
-import { ErrorTooltip } from "./ErrorTooltip.tsx";
+import '../../connection/signUp/styles/Icon.sass';
 
 type FormInputProps<TFormValues extends FieldValues> = {
     name: Path<TFormValues>;

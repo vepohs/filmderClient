@@ -1,8 +1,8 @@
-// src/components/HeaderLogin.tsx
+// src/AAAcomponents/HeaderLogin.tsx
 
+import MyLogo from "../../../AAAcomponents/assets/filmderIcon.tsx";
 
 // @ts-ignore
-import MyLogo from "../../signUp/components/icons/filmderIcon.tsx";
 import "../styles/HeaderStyle.sass";
 
 export function HeaderLogin() {
