@@ -1,11 +1,12 @@
-
-import Login from "./connection/signIn/components/Login.tsx";
+import _Login from "./pages/login/_Login.tsx";
+import _SignUp from "./pages/signUp/_SignUp.tsx";
+import {_MainPage} from "./pages/mainPage/_MainPage.tsx";
 
 
 function App() {
 
     return (
-            <Login/>
+            <_SignUp/>
     );
 }
 
