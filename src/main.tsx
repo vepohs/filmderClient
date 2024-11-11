@@ -5,13 +5,17 @@ import App from "./App.tsx";
 
 // @ts-ignore
 import "./App.sass"
+import {AuthProvider} from "./context/AuthContext.tsx";
 
 
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </AuthProvider>
+
     </StrictMode>,
 )

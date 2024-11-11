@@ -5,6 +5,8 @@ import {MiddleMainPage} from "./components/MiddleMainPage.tsx";
 import './_MainPageStyle.sass';
 
 export function _MainPage() {
+
+
     return (
         <div className="mainPage">
             <HeaderMainPage/>

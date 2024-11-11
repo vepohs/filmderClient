@@ -12,7 +12,9 @@ import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
-import {useLoginContext} from "../../../contexts/LoginContextProvider.tsx";
+import {useAuth} from "../../../context/AuthContext.tsx";
+import {useNavigate} from "react-router-dom";
+
 
 
 export function LoginForm() {
@@ -21,13 +23,17 @@ export function LoginForm() {
         mode: 'onBlur',
     });
 
-    const loginContext = useLoginContext();
+    const navigate = useNavigate();
+    const auth = useAuth();
+
 
     const tryLogin = async (data: LoginFormInputs) => {
-/*        try {
+        try {
             const response = await axios.post('http://localhost:3014/api/auth/login', data);
-            console.log(response);
-            // Gérer la connexion réussie (redirection, stockage du token, etc.)
+            const token = response.data.accessToken;
+            auth?.login(token);
+            navigate('/mainApp');
+            console.log("yoooo" + auth?.isAuthenticated);
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
@@ -43,10 +49,8 @@ export function LoginForm() {
                 console.log("Une erreur inattendue est survenue.");
             }
         }
-
- */
-        loginContext.login(data.email, data.password);
     }
+
 
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
         console.log(data)
