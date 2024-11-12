@@ -36,12 +36,9 @@ export function LoginForm() {
             const token = response.data.accessToken;
             const refreshToken = response.data.refreshToken;
 
+            // TODO Ca reste 7 jours a synchro avec server
             document.cookie = `refreshToken=${refreshToken}; path=/; max-age=604800`;
             console.log("Cookies après définition :", document.cookie);
-
-
-            // route a appellé http://localhost:3014/api/auth/refreshToken
-           // console.log(await getNewAccessToken());
 
             auth?.login(token);
             navigate('/mainApp');
