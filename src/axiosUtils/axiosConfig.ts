@@ -19,7 +19,6 @@ authentificateRequestAxios.interceptors.request.use(
     error => Promise.reject(error)
 );
 
-// Y a de l'idee mais trop compliqué pour l'instant
 // Interceptor de réponse - pour rafraîchir le token en cas de 401
 authentificateRequestAxios.interceptors.response.use(
     response => response,
@@ -34,9 +33,6 @@ authentificateRequestAxios.interceptors.response.use(
                 return authentificateRequestAxios(error.config);
             } catch (refreshError) {
                 console.error("Token refresh failed:", refreshError);
-                // Gestion de l’échec de rafraîchissement : rediriger vers la page de login par exemple
-                // todo mettre un navigate surement
-                window.location.href = "/login";
                 return Promise.reject(refreshError);
             }
         }

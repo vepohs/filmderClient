@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             } else {
                 setIsAuthenticated(false);
                 localStorage.removeItem('accessToken');
-
             }
         } catch (error) {
             console.log(error);
