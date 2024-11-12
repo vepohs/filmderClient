@@ -1,13 +1,13 @@
 // src/AuthContext.tsx
 import React, {createContext, useState, useContext, useEffect} from 'react';
-import axios from "axios";
+import authentificateRequestAxios from "../axiosUtils/axiosConfig.ts";
 
 interface AuthContextType {
     isAuthenticated: boolean;
     loading: boolean;
     login: (token : string) => void;
     logout: () => void;
-    verifyToken: (token: string) => Promise<void>; // Signature correcte pour verifyToken
+    verifyToken: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -26,16 +26,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const verifyToken = async (token: string) => {
+    const verifyToken = async () => {
         try {
             setLoading(true);
-            // Envoyer une requête au backend pour vérifier le token
-            const response = await axios.get('http://localhost:3014/api/protected/test', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            // Si le token est valide, mettre à jour l'état
+            const response = await authentificateRequestAxios.get('/protected/test');
             if (response.status === 200) {
                 setIsAuthenticated(true);
             } else {
@@ -45,48 +39,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
         } catch (error) {
             console.log(error);
-            // En cas d'erreur, considérer que le token est invalide
             setIsAuthenticated(false);
         } finally {
             setLoading(false);
         }
-
-        const newAccessToken = await getNewAccessToken();
-        console.log("newAccessToken");
-        console.log(newAccessToken);
     };
-
-
-    // Function to get a new access token using the refresh token
-    const getNewAccessToken = async () => {
-        try {
-            console.log("JE DEMANDE UN NEW ACCESS TOKEN");
-            const response = await axios.post(
-                'http://localhost:3014/api/auth/refreshToken',
-                {},
-                { withCredentials: true }  // Indique à Axios d’envoyer les cookies
-            );
-            const newAccessToken = response.data.accessToken;
-            return newAccessToken;
-        } catch (error) {
-            console.error("Failed to refresh access token", error);
-            throw error;
-        }
-    };
-/*
-    useEffect(() => {
-        const verify = async () => {
-            const token = localStorage.getItem('accessToken');
-            if (token) {
-                await verifyToken(token);
-            } else {
-                setLoading(false);
-            }
-        };
-        verify();
-    }, []);
-
-*/
 
     const login = (token : string) => {
         setIsAuthenticated(true);
@@ -96,6 +53,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         console.log("isAuthenticated a changé :", isAuthenticated);
     }, [isAuthenticated]);
+
     const logout = () => {
         setIsAuthenticated(false);
         localStorage.removeItem('accessToken');
