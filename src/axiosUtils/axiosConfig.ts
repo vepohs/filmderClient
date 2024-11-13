@@ -2,13 +2,13 @@
 import axios from "axios";
 
 // Création d'une instance Axios pour la configuration
-const authentificateRequestAxios = axios.create({
-    baseURL: "http://localhost:3014/api",  // Point de départ de toutes les URL d'API
+const axiosWithAuth = axios.create({
+    baseURL: "http://localhost:3014/api",  // Point de départ pour tt les requêtes
     withCredentials: true  // Inclure les cookies, si nécessaire (pour le refresh token)
 });
 
 // Interceptor de requête - pour ajouter le token à chaque requête sortante
-authentificateRequestAxios.interceptors.request.use(
+axiosWithAuth.interceptors.request.use(
     config => {
         const token = localStorage.getItem('accessToken');
         if (token) {
@@ -20,7 +20,7 @@ authentificateRequestAxios.interceptors.request.use(
 );
 
 // Interceptor de réponse - pour rafraîchir le token en cas de 401
-authentificateRequestAxios.interceptors.response.use(
+axiosWithAuth.interceptors.response.use(
     response => response,
     async error => {
         if (error.response?.status === 401) {
@@ -30,7 +30,7 @@ authentificateRequestAxios.interceptors.response.use(
                 localStorage.setItem('accessToken', newAccessToken);
                 error.config.headers.Authorization = `Bearer ${newAccessToken}`;
                 // Relancer la requête initiale avec le nouveau token
-                return authentificateRequestAxios(error.config);
+                return axiosWithAuth(error.config);
             } catch (refreshError) {
                 console.error("Token refresh failed:", refreshError);
                 return Promise.reject(refreshError);
@@ -47,7 +47,7 @@ const getNewAccessToken = async () => {
         const response = await axios.post(
             'http://localhost:3014/api/auth/refreshToken',
             {},
-            { withCredentials: true }  // Indique à Axios d’envoyer les cookies
+            {withCredentials: true}  // Indique à Axios d’envoyer les cookies
         );
         const newAccessToken = response.data.accessToken;
         console.log("newAccessToken", newAccessToken);
@@ -58,4 +58,4 @@ const getNewAccessToken = async () => {
     }
 };
 
-export default authentificateRequestAxios;
+export default axiosWithAuth;

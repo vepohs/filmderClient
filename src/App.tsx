@@ -3,15 +3,18 @@ import _SignUp from "./pages/signUp/_SignUp.tsx";
 import {_MainPage} from "./pages/mainPage/_MainPage.tsx";
 import {Route, Routes} from "react-router-dom";
 import ProtectedRoute from "./context/ProtectedRoute.tsx";
+import PublicRoute from "./context/PublicRoute.tsx";
 
 
 function App() {
     return (
         <Routes>
 
-            <Route path="/" element={<_Login/>}/>
-            <Route path="/signup" element={<_SignUp/>}/>
-            <Route path="/login" element={<_Login/>}/>
+            <Route element={<PublicRoute />}>
+                <Route path="/" element={<_Login/>}/>
+                <Route path="/login" element={<_Login/>}/>
+                <Route path="/signup" element={<_SignUp/>}/>
+            </Route>
 
             {/* Route protégée avec des routes imbriquées */}
             <Route path="/mainApp" element={<ProtectedRoute />}>

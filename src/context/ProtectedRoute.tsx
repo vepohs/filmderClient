@@ -12,7 +12,8 @@ const ProtectedRoute = () => {
         verifyToken();
     }, []);
 
-    if (loading) {
+    // Evite le pb d'affichage quand on refresh la page ou qu'on est en train de parler a l'api
+    if (loading || isAuthenticated === null) {
         return <div>Chargement...</div>;
     }
 

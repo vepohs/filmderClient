@@ -1,51 +1,54 @@
 // src/AuthContext.tsx
-import React, {createContext, useState, useContext, useEffect} from 'react';
-import authentificateRequestAxios from "../axiosUtils/axiosConfig.ts";
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 import axios from "axios";
 import {LoginFormInputs} from "../types/formInputsTypes.ts";
 
 interface AuthContextType {
-    isAuthenticated: boolean;
+    isAuthenticated: boolean | null;
     loading: boolean;
-    login: (credentials : LoginFormInputs) => void;
+    login: (credentials: LoginFormInputs) => void;
     logout: () => void;
     verifyToken: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
     isAuthenticated: false,
-    loading: true,
-    login: () => {},
-    logout: () => {},
-    verifyToken: async () => {},
+    loading: false,
+    login: () => {
+    },
+    logout: () => {
+    },
+    verifyToken: async () => {
+    },
 });
 
 export const useAuth = () => {
     return useContext(AuthContext);
 };
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
+export const AuthProvider = ({children}: { children: React.ReactNode }) => {
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const verifyToken = async () => {
         try {
             setLoading(true);
-            const response = await authentificateRequestAxios.get('/protected/test');
+            const response = await axiosWithAuth.get('users/protected/verifyAccessToken');
             if (response.status === 200) {
                 setIsAuthenticated(true);
             }
         } catch (error) {
             console.log(error);
             localStorage.removeItem('accessToken');
-
+            setLoading(false);
             setIsAuthenticated(false);
         } finally {
             setLoading(false);
         }
     };
 
-    const login = async (credentials : LoginFormInputs) => {
+    const login = async (credentials: LoginFormInputs) => {
         //TODO peut etre faire la connextion dans AuthContext non ?
         const response = await axios.post('http://localhost:3014/api/auth/login', credentials);
         const token = response.data.accessToken;
@@ -69,7 +72,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, loading, verifyToken, login, logout }}>
+        <AuthContext.Provider value={{isAuthenticated, loading, verifyToken, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
