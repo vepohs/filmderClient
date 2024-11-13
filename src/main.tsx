@@ -7,8 +7,6 @@ import "./axiosUtils/axiosConfig.ts"
 import "./App.sass"
 import {AuthProvider} from "./context/AuthContext.tsx";
 
-
-
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <AuthProvider>

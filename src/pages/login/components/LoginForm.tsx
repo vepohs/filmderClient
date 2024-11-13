@@ -28,19 +28,10 @@ export function LoginForm() {
 
 
 
-
     const tryLogin = async (data: LoginFormInputs) => {
         try {
-            //TODO peut etre faire la connextion dans AuthContext non ?
-            const response = await axios.post('http://localhost:3014/api/auth/login', data);
-            const token = response.data.accessToken;
-            const refreshToken = response.data.refreshToken;
 
-            // TODO Ca reste 7 jours a synchro avec server
-            document.cookie = `refreshToken=${refreshToken}; path=/; max-age=604800`;
-            console.log("Cookies après définition :", document.cookie);
-
-            auth?.login(token);
+            auth?.login(data);
             navigate('/mainApp');
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
