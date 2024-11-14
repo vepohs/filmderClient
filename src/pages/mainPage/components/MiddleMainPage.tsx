@@ -25,7 +25,7 @@ export function MiddleMainPage() {
                 console.error("Erreur lors de la récupération du film :", error);
             }
         };
-
+        //TODO ATTENTION DECOMMENTER
        // fetchMovie();
     }, []);
 
