@@ -7,6 +7,7 @@ import {GoToSignIn} from "./components/GoToSignIn.tsx";
 
 
 function _SignUp() {
+
     return (
         <div className="signUpGlobalStyle">
             <HeaderSignUp/>

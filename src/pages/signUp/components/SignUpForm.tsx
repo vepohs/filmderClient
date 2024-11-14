@@ -12,6 +12,7 @@ import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 
 // @ts-ignore
 import "../style/SignUpForm.sass";
+import {useNavigate} from "react-router-dom";
 
 type IsUniqueEmailResponse = {
     isUnique: boolean;
@@ -23,17 +24,20 @@ export function SignUpForm() {
         mode: 'onBlur',
     });
 
+    const navigate = useNavigate();
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         try {
-            const mailResponse = await axios.post<IsUniqueEmailResponse>('http://localhost:3014/api/users/isUniqueEmail', {email: data.email});
+            const mailResponse = await axios.post<IsUniqueEmailResponse>('http://localhost:3017/api/users/isUniqueEmail', {email: data.email});
             const isUnique = mailResponse.data.isUnique;
             if (!isUnique) {
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
 
-            const response = await axios.post('http://localhost:3014/api/users/createUser', data);
+            const response = await axios.post('http://localhost:3017/api/users/createUser', data);
             console.log(response);
+            navigate("/protected/preferences"); // Remplacez "/welcome" par le chemin de la page cible
+
 
         } catch (error: unknown) {
             // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE

@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import ProtectedRoute from "./context/ProtectedRoute.tsx";
 import PublicRoute from "./context/PublicRoute.tsx";
 import _UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
+import HasPreferenceRoute from "./context/HasPreference.tsx";
 
 
 function App() {
@@ -19,8 +20,11 @@ function App() {
 
             {/* Route protégée avec des routes imbriquées */}
             <Route path="/protected" element={<ProtectedRoute/>}>
-                <Route index element={<_MainPage/>}/>
                 <Route path="preferences" element={<_UserPreferences/>}/>
+
+                <Route path="hasPreferences" element={<HasPreferenceRoute/>}/>
+                    <Route index element={<_MainPage/>}/>
+
 
                 {/* On peut imbriqué d'autre route ici ex:
                  <Route path="profile" element={<Profile />} />

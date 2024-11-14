@@ -6,7 +6,6 @@ import {useEffect} from "react";
 const ProtectedRoute = () => {
     const { isAuthenticated, loading, verifyToken } = useAuth() || {};
 
-   // const location = useLocation();
     // Verif a chaque fois que le user veut une page si il est bien autentifier
     useEffect(() => {
         verifyToken();

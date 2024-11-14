@@ -26,7 +26,7 @@ export function MiddleMainPage() {
             }
         };
 
-        fetchMovie();
+       // fetchMovie();
     }, []);
 
     useEffect(() => {
@@ -52,7 +52,7 @@ export function MiddleMainPage() {
             <div className="imageContainer">
                 <img src={imgPath!} style={{width: "400px", height: "400px"}} alt="Image description"/>
                 <button onClick={handleNextImage}>
-                    <Like/>
+                   clique
                 </button>
             </div>
         </div>

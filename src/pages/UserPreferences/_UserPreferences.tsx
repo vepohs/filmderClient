@@ -21,12 +21,12 @@ function UserPreferences() {
     const submitPreferences = async () => {
         try {
             const data = {
-                genreIds: selectedGenres,
-                providerIds: selectedProviders,
-                rewatch: isRewatchChecked,
+                genrePreferenceIds: selectedGenres,
+                providerPreferenceIds: selectedProviders,
+                rewatchPreference: isRewatchChecked,
             };
-            //const response = await axiosWithAuth.post("users/protected/setPreferences", data);
-            //console.log("Préférences enregistrées avec succès:", response.data);
+            const response = await axiosWithAuth.post("users/protected/setPreferences", data);
+            console.log("Préférences enregistrées avec succès:", response.data);
             console.log(data)
             alert("Préférences enregistrées avec succès !");
         } catch (error) {
@@ -54,13 +54,10 @@ function UserPreferences() {
                 name: provider.name,
                 logoPath: provider.logoPath
             }));
-
             setGenres(fetchedGenres);
             setProviders(fetchedProviders);
-
             console.log("fetchedGenres", fetchedGenres);
             console.log("fetchedProviders", fetchedProviders);
-
         } catch (error) {
             console.error(error);
         }
