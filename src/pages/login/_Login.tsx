@@ -1,18 +1,18 @@
 // src/AAAcomponents/_Login.tsx
-import { LoginForm } from "./components/LoginForm.tsx";
-import { HeaderLogin } from "./components/HeaderLogin.tsx";
-import { GoToSignUp } from "./components/GoToSignUp.tsx";
+import {LoginForm} from "./components/LoginForm.tsx";
+import {HeaderLogin} from "./components/HeaderLogin.tsx";
+import {GoToSignUp} from "./components/GoToSignUp.tsx";
 
 // @ts-ignore
-import"./_Login.sass";
+import "./_Login.sass";
 
 function _Login() {
     return (
-        <div className="container">
-            <HeaderLogin />
-            <LoginForm />
-            <GoToSignUp />
-            </div>
+        <div className="loginContainer">
+            <HeaderLogin/>
+            <LoginForm/>
+            <GoToSignUp/>
+        </div>
     );
 }
 
