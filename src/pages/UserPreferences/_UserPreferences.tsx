@@ -39,6 +39,7 @@ function UserPreferences() {
         try {
             const response = await axiosWithAuth.get("users/protected/getPreferences");
             console.log("response", response);
+            console.log("response", response);
 
             const fetchedGenres = response.data.genrePreference.map((genre: { id: number; name: string }) => ({
                 id: genre.id,

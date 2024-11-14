@@ -2,7 +2,6 @@
 import "../style/MiddleMainPage.sass";
 import {useEffect, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {Like} from "../../../common/icons/Like.tsx";
 
 export function MiddleMainPage() {
     const [movie, setMovie] = useState(null); // State pour stocker la réponse
@@ -15,8 +14,9 @@ export function MiddleMainPage() {
             try {
                 const response = await axiosWithAuth.get("/movie/protected/getMovie");
                 setMovie(response.data); // Enregistre les données dans le state
+                console.log("yoooooooo")
                 console.log(response); // Log si nécessaire
-
+                console.log(response.data.movie[0].imagePath)
                 // Définit l'image initiale
                 if (response.data.movie && response.data.movie.length > 0) {
                     setImgPath(response.data.movie[0].imagePath);
@@ -26,7 +26,7 @@ export function MiddleMainPage() {
             }
         };
         //TODO ATTENTION DECOMMENTER
-       // fetchMovie();
+        fetchMovie();
     }, []);
 
     useEffect(() => {
@@ -52,7 +52,7 @@ export function MiddleMainPage() {
             <div className="imageContainer">
                 <img src={imgPath!} style={{width: "400px", height: "400px"}} alt="Image description"/>
                 <button onClick={handleNextImage}>
-                   clique
+                    clique
                 </button>
             </div>
         </div>

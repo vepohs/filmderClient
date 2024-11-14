@@ -5,34 +5,39 @@ import {Route, Routes} from "react-router-dom";
 import ProtectedRoute from "./context/ProtectedRoute.tsx";
 import PublicRoute from "./context/PublicRoute.tsx";
 import _UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
-import HasPreferenceRoute from "./context/HasPreference.tsx";
+import UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
+import PreferencesProtected from "./context/PreferencesProtected.tsx";
+import {PreferenceProvider} from "./context/PreferenceProvider.tsx";
 
 
 function App() {
     return (
-        <Routes>
+        <PreferenceProvider>
+            <Routes>
 
-            <Route element={<PublicRoute/>}>
-                <Route path="/" element={<_Login/>}/>
-                <Route path="/login" element={<_Login/>}/>
-                <Route path="/signup" element={<_SignUp/>}/>
-            </Route>
+                <Route element={<PublicRoute/>}>
+                    <Route path="/" element={<_Login/>}/>
+                    <Route path="/login" element={<_Login/>}/>
+                    <Route path="/signup" element={<_SignUp/>}/>
+                </Route>
 
-            {/* Route protégée avec des routes imbriquées */}
-            <Route path="/protected" element={<ProtectedRoute/>}>
-                <Route path="preferences" element={<_UserPreferences/>}/>
+                {/* Route protégée avec des routes imbriquées */}
+                <Route path="/protected" element={<ProtectedRoute/>}>
+                    <Route index element={<UserPreferences/>}/>
+                    <Route path="preferences" element={<_UserPreferences/>}/>
 
-                <Route path="hasPreferences" element={<HasPreferenceRoute/>}/>
-                    <Route index element={<_MainPage/>}/>
+                    <Route path="hasPreferences" element={<PreferencesProtected/>}>
+                        <Route index element={<_MainPage/>}/>
+                    </Route>
+
+                    <Route path="*" element="erreur 404"/>
+                </Route>
 
 
-                {/* On peut imbriqué d'autre route ici ex:
-                 <Route path="profile" element={<Profile />} />
-                <Route path="settings" element={<Settings />} />
-                 */}
-            </Route>
-            <Route path="*" element="erreur 404"/>
-        </Routes>
+                <Route path="*" element="erreur 404"/>
+            </Routes>
+        </PreferenceProvider>
+
     );
 }
 
