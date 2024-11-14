@@ -1,16 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 
 interface CheckboxProps {
     label: string;
+    isChecked: boolean;
+    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReWatchCheckBox: React.FC<CheckboxProps> = ({label}) => {
-    const [isChecked, setIsChecked] = useState<boolean>(false);
-
+const ReWatchCheckBox: React.FC<CheckboxProps> = ({label, isChecked, setIsChecked}) => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
 
+    console.log("isChecked", isChecked);
     return (
         <label style={{display: "flex", alignItems: "center", cursor: "pointer"}}>
             <input

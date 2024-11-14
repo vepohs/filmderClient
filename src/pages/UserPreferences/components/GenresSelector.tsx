@@ -1,23 +1,22 @@
-// components/GenresSelector.tsx
-import React, {useState} from "react";
+import React from "react";
+// @ts-ignore
 import "../_UserPreferences.sass";
-
 
 interface GenreSelectorProps {
     genres: { id: number; name: string }[];
+    selectedGenres: number[];
+    setSelectedGenres: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const GenresSelector: React.FC<GenreSelectorProps> = ({genres}) => {
-    const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
-
+const GenresSelector: React.FC<GenreSelectorProps> = ({genres, selectedGenres, setSelectedGenres}) => {
     const toggleGenre = (genreId: number) => {
-        console.log("c est clické ma gueule" + genreId)
         setSelectedGenres((prevSelected) =>
             prevSelected.includes(genreId)
                 ? prevSelected.filter((g) => g !== genreId)
                 : [...prevSelected, genreId]
         );
     };
+
 
     return (
         <div className="genreContainer">

@@ -9,12 +9,31 @@ import {useEffect, useState} from "react"; // Assurez-vous d'avoir le style impo
 
 function UserPreferences() {
 
+    // Verif mais je crois que ducoup des qu'on va modifier un truc ca va tt re render
     const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
     const [providers, setProviders] = useState<{ id: number; name: string }[]>([]);
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
     const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
     const [isRewatchChecked, setIsRewatchChecked] = useState<boolean>(false);
 
+
+    // Fonction pour envoyer les préférences sélectionnées au backend
+    const submitPreferences = async () => {
+        try {
+            const data = {
+                genreIds: selectedGenres,
+                providerIds: selectedProviders,
+                rewatch: isRewatchChecked,
+            };
+            //const response = await axiosWithAuth.post("users/protected/setPreferences", data);
+            //console.log("Préférences enregistrées avec succès:", response.data);
+            console.log(data)
+            alert("Préférences enregistrées avec succès !");
+        } catch (error) {
+            console.error("Erreur lors de l'envoi des préférences:", error);
+            alert("Une erreur s'est produite lors de l'enregistrement des préférences.");
+        }
+    };
 
     const askForPreferences = async () => {
         try {
@@ -53,15 +72,26 @@ function UserPreferences() {
     return (
         <>
             <h1>GENNNNREEEEEE</h1>
-            <GenresSelector genres={genres}/>
+            <GenresSelector
+                genres={genres}
+                selectedGenres={selectedGenres}
+                setSelectedGenres={setSelectedGenres}
+            />
             <hr></hr>
 
             <h1> REWAAAAAATCH</h1>
-            <ReWatchCheckBox label="Rewatch"/>
+            <ReWatchCheckBox label="Rewatch" isChecked={isRewatchChecked} setIsChecked={setIsRewatchChecked}/>
             <hr></hr>
 
             <h1>Providers</h1>
-            <ProviderSelector providers={providers}/>
+            <ProviderSelector
+                providers={providers}
+                selectedProviders={selectedProviders}
+                setSelectedProviders={setSelectedProviders}
+            />
+            <button onClick={submitPreferences} className="submitButton">
+                Enregistrer les préférences
+            </button>
         </>
 
     );

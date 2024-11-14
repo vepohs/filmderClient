@@ -1,13 +1,14 @@
-import React, {useState} from "react";
-import "../_UserPreferences.sass"
+import React from "react";
+// @ts-ignore
+import "../_UserPreferences.sass";
 
 interface ProviderSelectorProps {
     providers: { id: number; name: string }[];
+    selectedProviders: number[];
+    setSelectedProviders: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers}) => {
-    const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
-
+const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers, selectedProviders, setSelectedProviders}) => {
     const toggleProvider = (providerId: number) => {
         setSelectedProviders((prevSelected) =>
             prevSelected.includes(providerId)
@@ -16,6 +17,7 @@ const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers}) => {
         );
     };
 
+    console.log("selectedProviders", selectedProviders);
     return (
         <div className="providerContainer">
             {providers.map((provider) => (
