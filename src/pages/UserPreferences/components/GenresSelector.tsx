@@ -1,19 +1,21 @@
 // components/GenresSelector.tsx
 import React, {useState} from "react";
+import "../_UserPreferences.sass";
 
 
 interface GenreSelectorProps {
-    genres: string[];
+    genres: { id: number; name: string }[];
 }
 
 const GenresSelector: React.FC<GenreSelectorProps> = ({genres}) => {
-    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 
-    const toggleGenre = (genre: string) => {
+    const toggleGenre = (genreId: number) => {
+        console.log("c est clické ma gueule" + genreId)
         setSelectedGenres((prevSelected) =>
-            prevSelected.includes(genre)
-                ? prevSelected.filter((g) => g !== genre)
-                : [...prevSelected, genre]
+            prevSelected.includes(genreId)
+                ? prevSelected.filter((g) => g !== genreId)
+                : [...prevSelected, genreId]
         );
     };
 
@@ -21,11 +23,11 @@ const GenresSelector: React.FC<GenreSelectorProps> = ({genres}) => {
         <div className="genreContainer">
             {genres.map((genre) => (
                 <button
-                    key={genre}
-                    onClick={() => toggleGenre(genre)}
-                    className={`genreButton ${selectedGenres.includes(genre) ? "selected" : ""}`}
+                    key={genre.id}
+                    onClick={() => toggleGenre(genre.id)}
+                    className={`genreButton ${selectedGenres.includes(genre.id) ? "selected" : ""}`}
                 >
-                    {genre}
+                    {genre.name}
                 </button>
             ))}
         </div>

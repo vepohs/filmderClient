@@ -1,18 +1,18 @@
-// components/ProviderSelector.tsx
 import React, {useState} from "react";
+import "../_UserPreferences.sass"
 
 interface ProviderSelectorProps {
-    providers: string[];
+    providers: { id: number; name: string }[];
 }
 
 const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers}) => {
-    const [selectedProviders, setSelectedProviders] = useState<string[]>([]);
+    const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
 
-    const toggleProvider = (provider: string) => {
+    const toggleProvider = (providerId: number) => {
         setSelectedProviders((prevSelected) =>
-            prevSelected.includes(provider)
-                ? prevSelected.filter((p) => p !== provider)
-                : [...prevSelected, provider]
+            prevSelected.includes(providerId)
+                ? prevSelected.filter((p) => p !== providerId)
+                : [...prevSelected, providerId]
         );
     };
 
@@ -20,11 +20,11 @@ const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers}) => {
         <div className="providerContainer">
             {providers.map((provider) => (
                 <button
-                    key={provider}
-                    onClick={() => toggleProvider(provider)}
-                    className={`providerButton ${selectedProviders.includes(provider) ? "selected" : ""}`}
+                    key={provider.id}
+                    onClick={() => toggleProvider(provider.id)}
+                    className={`providerButton ${selectedProviders.includes(provider.id) ? "selected" : ""}`}
                 >
-                    {provider}
+                    {provider.name}
                 </button>
             ))}
         </div>

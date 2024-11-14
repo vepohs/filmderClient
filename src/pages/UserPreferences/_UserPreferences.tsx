@@ -4,17 +4,44 @@ import ReWatchCheckBox from "./components/ReWatchCheckBox.tsx";
 import GenresSelector from "./components/GenresSelector.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
-import {useEffect} from "react"; // Assurez-vous d'avoir le style importé
+import {useEffect, useState} from "react"; // Assurez-vous d'avoir le style importé
 
-const genres: string[] = ["actions", "aventure", "comédie", "drame", "fantastique", "horreur", "science-fiction", "thriller"];
-const providers: string[] = ["Netflix", "Amazon Prime", "Disney+", "Hulu", "HBO Max", "Apple TV", "Peacock", "Paramount+", "Starz", "Showtime"];
 
 function UserPreferences() {
+
+    const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
+    const [providers, setProviders] = useState<{ id: number; name: string }[]>([]);
+    const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+    const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
+    const [isRewatchChecked, setIsRewatchChecked] = useState<boolean>(false);
+
 
     const askForPreferences = async () => {
         try {
             const response = await axiosWithAuth.get("users/protected/getPreferences");
-            console.log(response.data);
+            console.log("response", response);
+
+            const fetchedGenres = response.data.genrePreference.map((genre: { id: number; name: string }) => ({
+                id: genre.id,
+                name: genre.name
+            }));
+
+            const fetchedProviders = response.data.providerPreference.map((provider: {
+                id: number;
+                name: string;
+                logoPath: string
+            }) => ({
+                id: provider.id,
+                name: provider.name,
+                logoPath: provider.logoPath
+            }));
+
+            setGenres(fetchedGenres);
+            setProviders(fetchedProviders);
+
+            console.log("fetchedGenres", fetchedGenres);
+            console.log("fetchedProviders", fetchedProviders);
+
         } catch (error) {
             console.error(error);
         }
@@ -36,7 +63,6 @@ function UserPreferences() {
             <h1>Providers</h1>
             <ProviderSelector providers={providers}/>
         </>
-
 
     );
 }
