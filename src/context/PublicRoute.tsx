@@ -1,6 +1,6 @@
 // src/context/PublicRoute.tsx
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import {Navigate, Outlet} from 'react-router-dom';
+import {useAuth} from './AuthContext';
 import {useEffect} from "react";
 
 const PublicRoute = () => {
@@ -15,7 +15,7 @@ const PublicRoute = () => {
         return <div>Chargement...</div>;
     }
 
-    return !isAuthenticated ? <Outlet /> : <Navigate to="/mainApp" />;
+    return !isAuthenticated ? <Outlet/> : <Navigate to="/protected"/>;
 };
 
 export default PublicRoute;
