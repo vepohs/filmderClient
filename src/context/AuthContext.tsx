@@ -56,7 +56,6 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
 
         // TODO Ca reste 7 jours a synchro avec server
         document.cookie = `refreshToken=${refreshToken}; path=/; max-age=604800`;
-        console.log("Cookies après définition :", document.cookie);
         setIsAuthenticated(true);
         localStorage.setItem('accessToken', token);
 
