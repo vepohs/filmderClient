@@ -47,7 +47,7 @@ export function LoginForm() {
     };
 
     return (
-        <div className="container">
+        <div className="loginContainer">
             <div className="login-box">
                 <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                     <FormInput
