@@ -17,6 +17,7 @@ export function MiddleMainPage() {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [index, setIndex] = useState<number>(0);
     const [imgPath, setImgPath] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     async function fetchMovies() {
         try {
@@ -74,10 +75,14 @@ export function MiddleMainPage() {
     const handleNextImage = async () => {
         if (movies.length > 0) {
             if (index + 1 > movies.length - 1) {
+                setLoading(true)
                 console.log("Plus de films à afficher, envoi d'une nouvelle requête...");
                 await fetchMovies();
+                console.log("Nouveaux films après fetchMovies :", movies);
                 setIndex(0)
+                setLoading(false)
             } else {
+                console.log("Passage à l'image suivante...");
                 setIndex((prevIndex) => (prevIndex + 1));
             }
         }
@@ -90,7 +95,7 @@ export function MiddleMainPage() {
                 <button onClick={handleLike}>
                     LIKE
                 </button>
-                <button onClick={handleDislike}>
+                <button onClick={handleDislike} disabled={loading}>
                     DISLIKE
                 </button>
             </div>
