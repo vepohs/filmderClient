@@ -5,7 +5,6 @@ import {Route, Routes} from "react-router-dom";
 import ProtectedRoute from "./context/ProtectedRoute.tsx";
 import PublicRoute from "./context/PublicRoute.tsx";
 import _UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
-import UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
 import PreferencesProtected from "./context/PreferencesProtected.tsx";
 import {PreferenceProvider} from "./context/PreferenceProvider.tsx";
 
@@ -23,16 +22,17 @@ function App() {
 
                 {/* Route protégée avec des routes imbriquées */}
                 <Route path="/protected" element={<ProtectedRoute/>}>
-                    <Route index element={<UserPreferences/>}/>
                     <Route path="preferences" element={<_UserPreferences/>}/>
-
-                    <Route path="hasPreferences" element={<PreferencesProtected/>}>
-                        <Route index element={<_MainPage/>}/>
-                    </Route>
-
+                    <Route index
+                           element={
+                               <PreferencesProtected>
+                                   <_MainPage/>
+                               </PreferencesProtected>
+                           }
+                    />
                     <Route path="*" element="erreur 404"/>
-                </Route>
 
+                </Route>
 
                 <Route path="*" element="erreur 404"/>
             </Routes>

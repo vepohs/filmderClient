@@ -1,21 +1,19 @@
-// src/context/PreferencesProtected.tsx
-import {Navigate, Outlet} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {usePreferences} from "./PreferenceProvider";
 import {useEffect} from "react";
 
-const PreferencesProtected: React.FC = () => {
+const PreferencesProtected: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const {hasPreferences, loading, getPreferences} = usePreferences();
 
     useEffect(() => {
         getPreferences();
     }, []);
 
-
-    if (loading) {
+    if (loading || hasPreferences === null) {
         return <div>Loading...</div>;
     }
 
-    return hasPreferences ? <Outlet/> : <Navigate to="/protected/preferences" replace/>;
+    return hasPreferences ? <>{children}</> : <Navigate to="/protected/preferences" replace/>;
 };
 
 export default PreferencesProtected;

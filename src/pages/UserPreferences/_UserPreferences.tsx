@@ -4,7 +4,8 @@ import ReWatchCheckBox from "./components/ReWatchCheckBox.tsx";
 import GenresSelector from "./components/GenresSelector.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
-import {useEffect, useState} from "react"; // Assurez-vous d'avoir le style importé
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom"; // Assurez-vous d'avoir le style importé
 
 
 function UserPreferences() {
@@ -16,6 +17,7 @@ function UserPreferences() {
     const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
     const [isRewatchChecked, setIsRewatchChecked] = useState<boolean>(false);
 
+    const navigate = useNavigate(); // Initialiser useNavigate
 
     // Fonction pour envoyer les préférences sélectionnées au backend
     const submitPreferences = async () => {
@@ -29,6 +31,8 @@ function UserPreferences() {
             console.log("Préférences enregistrées avec succès:", response.data);
             console.log(data)
             alert("Préférences enregistrées avec succès !");
+            navigate("/protected");
+
         } catch (error) {
             console.error("Erreur lors de l'envoi des préférences:", error);
             alert("Une erreur s'est produite lors de l'enregistrement des préférences.");

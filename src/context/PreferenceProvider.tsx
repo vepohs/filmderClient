@@ -3,7 +3,7 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 
 interface PreferenceContextType {
-    hasPreferences: boolean;
+    hasPreferences: boolean | null;
     loading: boolean;
     getPreferences: () => void;
 }
@@ -11,19 +11,13 @@ interface PreferenceContextType {
 const PreferenceContext = createContext<PreferenceContextType | undefined>(undefined);
 
 export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const [hasPreferences, setHasPreferences] = useState<boolean>(false);
+    const [hasPreferences, setHasPreferences] = useState<boolean | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
     const getPreferences = async () => {
         setLoading(true);
         try {
             const response = await axiosWithAuth.get("/users/protected/getUserPreferences");
-            console.log("ZIZIZIZIZIZI")
-            console.log(response.data)
-            console.log(response.data.genrePreference.length === 0)
-            console.log(response.data.providerPreference.length === 0)
-            console.log(response.data.genrePreference.length > 0 && response.data.providerPreference.length > 0)
-            console.log("iciiiiii")
             setHasPreferences(response.data.genrePreference.length > 0 && response.data.providerPreference.length > 0);
 
         } catch (error) {
@@ -45,6 +39,13 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
 };
 
 export const usePreferences = () => {
-    return useContext(PreferenceContext);
+    const context = useContext(PreferenceContext);
+
+    if (!context) {
+        throw new Error(
+            "usePreferences must be used within a PreferenceProvider"
+        );
+    }
+    return context;
 
 };
