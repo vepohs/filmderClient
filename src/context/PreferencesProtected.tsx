@@ -7,7 +7,7 @@ const PreferencesProtected: React.FC<{ children: React.ReactNode }> = ({children
 
     useEffect(() => {
         getPreferences();
-    }, []);
+    }, [hasPreferences]);
 
     if (loading || hasPreferences === null) {
         return <div>Loading...</div>;

@@ -5,10 +5,14 @@ import GenresSelector from "./components/GenresSelector.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom"; // Assurez-vous d'avoir le style importé
+import {useNavigate} from "react-router-dom";
+import {usePreferences} from "../../context/PreferenceProvider.tsx"; // Assurez-vous d'avoir le style importé
 
 
 function UserPreferences() {
+
+    const {getPreferences} = usePreferences();
+
 
     // Verif mais je crois que ducoup des qu'on va modifier un truc ca va tt re render
     const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
@@ -27,9 +31,12 @@ function UserPreferences() {
                 providerPreferenceIds: selectedProviders,
                 rewatchPreference: isRewatchChecked,
             };
-            const response = await axiosWithAuth.post("users/protected/setPreferences", data);
-            console.log("Préférences enregistrées avec succès:", response.data);
-            console.log(data)
+            await axiosWithAuth.post("users/protected/setPreferences", data);
+
+            // Sans ca y a pas de vérif de préférences donc
+            // Soit le gars peut tt retirer et ca marche
+            // Soit a la création du compte hasPreferences reste a faux et ca redirige pas vers /protected
+            getPreferences();
             alert("Préférences enregistrées avec succès !");
             navigate("/protected");
 
@@ -39,10 +46,9 @@ function UserPreferences() {
         }
     };
 
-    const askForPreferences = async () => {
+    const askForAllPreferences = async () => {
         try {
             const response = await axiosWithAuth.get("users/protected/getPreferences");
-            console.log("response", response);
             console.log("response", response);
 
             const fetchedGenres = response.data.genrePreference.map((genre: { id: number; name: string }) => ({
@@ -61,14 +67,37 @@ function UserPreferences() {
             }));
             setGenres(fetchedGenres);
             setProviders(fetchedProviders);
-            console.log("fetchedGenres", fetchedGenres);
-            console.log("fetchedProviders", fetchedProviders);
         } catch (error) {
             console.error(error);
         }
     }
+
+    const askForUserPreferences = async () => {
+        try {
+            const response = await axiosWithAuth.get("users/protected/getUserPreferences");
+
+            // Extraction et mise à jour des préférences utilisateur
+            const userGenrePreferences = response.data.genrePreference.map((genre: {
+                id: number;
+                name: string
+            }) => genre.id);
+            const userProviderPreferences = response.data.providerPreference.map((provider: {
+                id: number;
+                name: string
+            }) => provider.id);
+
+            setSelectedGenres(userGenrePreferences);
+            setSelectedProviders(userProviderPreferences);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des préférences utilisateur:", error);
+            alert("Impossible de récupérer les préférences utilisateur. Veuillez réessayer.");
+        }
+    };
+
+
     useEffect(() => {
-        askForPreferences();
+        askForAllPreferences();
+        askForUserPreferences();
     }, []);
 
     return (

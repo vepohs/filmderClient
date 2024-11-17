@@ -7,6 +7,7 @@ import PublicRoute from "./context/PublicRoute.tsx";
 import _UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
 import PreferencesProtected from "./context/PreferencesProtected.tsx";
 import {PreferenceProvider} from "./context/PreferenceProvider.tsx";
+import _GroupPage from "./pages/groupPage/_GroupPage.tsx";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/" element={<_Login/>}/>
                     <Route path="/login" element={<_Login/>}/>
                     <Route path="/signup" element={<_SignUp/>}/>
+
                 </Route>
 
                 {/* Route protégée avec des routes imbriquées */}
@@ -30,6 +32,8 @@ function App() {
                                </PreferencesProtected>
                            }
                     />
+                    <Route path="groupPage" element={<_GroupPage/>}/>
+
                     <Route path="*" element="erreur 404"/>
 
                 </Route>
