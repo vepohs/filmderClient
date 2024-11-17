@@ -21,9 +21,7 @@ export function MiddleMainPage() {
 
     async function fetchMovies() {
         try {
-            console.log("DONNNNNE FILMMMMMMMM");
             const response = await axiosWithAuth.get<MovieResponse>("/movie/protected/getMovie");
-            console.log("Réponse reçue :", response.data);
             if (response.data.movie && response.data.movie.length > 0) {
                 setMovies(response.data.movie);
                 setImgPath(response.data.movie[0].imagePath);
@@ -45,14 +43,10 @@ export function MiddleMainPage() {
 
     const sendSwipeResponse = async (movie: number, liked: boolean) => {
         try {
-            console.log("Envoi de la réponse...");
-
-
-            const response = await axiosWithAuth.post("/users/protected/swipeMovie", {
+            await axiosWithAuth.post("/users/protected/swipeMovie", {
                 movie,
                 liked,
             });
-            console.log("Réponse envoyée avec succès :", response.data);
         } catch (error) {
             console.error("Erreur lors de l'envoi de la réponse :", error);
         }
@@ -61,14 +55,14 @@ export function MiddleMainPage() {
     const handleLike = async () => {
         if (movies.length > 0 && movies[index]) {
             sendSwipeResponse(movies[index].id, true);
-            await handleNextImage();
+            handleNextImage();
         }
     };
 
     const handleDislike = async () => {
         if (movies.length > 0 && movies[index]) {
             sendSwipeResponse(movies[index].id, false);
-            await handleNextImage();
+            handleNextImage();
         }
     };
 
@@ -76,9 +70,7 @@ export function MiddleMainPage() {
         if (movies.length > 0) {
             if (index + 1 > movies.length - 1) {
                 setLoading(true)
-                console.log("Plus de films à afficher, envoi d'une nouvelle requête...");
                 await fetchMovies();
-                console.log("Nouveaux films après fetchMovies :", movies);
                 setIndex(0)
                 setLoading(false)
             } else {
