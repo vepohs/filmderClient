@@ -9,7 +9,7 @@ export function HeaderLogin() {
     return (
         <div className='headerLoginContainer'>
             <MyLogo />
-            <h2>Se connecter</h2>
+            <h2>Connexion</h2>
         </div>
     );
 }

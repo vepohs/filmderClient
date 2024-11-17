@@ -13,6 +13,7 @@ import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 // @ts-ignore
 import "../style/LoginForm.sass";
 import {useAuth} from "../../../context/AuthContext.tsx";
+import {GoToSignUp} from "./GoToSignUp.tsx";
 
 export function LoginForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({
@@ -47,7 +48,6 @@ export function LoginForm() {
     };
 
     return (
-        <div className="loginContainer">
             <div className="login-box">
                 <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                     <FormInput
@@ -65,10 +65,10 @@ export function LoginForm() {
                         placeholder='Mot de passe'
                         error={errors.password}
                     />
-                    <button className="submitBtn" type="submit">Se connecter</button>
+                    <button className="submitBtnSignIn" type="submit">Se connecter</button>
                 </form>
+                <GoToSignUp/>
             </div>
-        </div>
     );
 }
 

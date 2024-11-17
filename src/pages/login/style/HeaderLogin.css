@@ -1,17 +1,12 @@
 .headerLoginContainer {
-  position: fixed;
-  top: 0;
-  align-items: center;
-  text-align: center;
+  display: flex;
   justify-content: center;
-  padding: 40px;
-}
-
-h2 {
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  font-size: 40px;
-  color: #ffffff;
+  align-items: center;
+  height: 10vh;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  margin-top: 50px;
 }
 
 /*# sourceMappingURL=HeaderLogin.css.map */
