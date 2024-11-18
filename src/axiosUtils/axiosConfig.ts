@@ -1,9 +1,10 @@
 // src/utils/axiosConfig.ts
 import axios from "axios";
+import {API_BASE_URL} from "../config/constants.ts";
 
 // Création d'une instance Axios pour la configuration
 const axiosWithAuth = axios.create({
-    baseURL: "http://localhost:3017/api",  // Point de départ pour tt les requêtes
+    baseURL: `${API_BASE_URL}/api`,  // Point de départ pour tt les requêtes
     withCredentials: true  // Inclure les cookies, si nécessaire (pour le refresh token)
 });
 
@@ -45,7 +46,7 @@ const getNewAccessToken = async () => {
     try {
         console.log("JE DEMANDE UN NEW ACCESS TOKEN");
         const response = await axios.post(
-            'http://localhost:3017/api/auth/refreshToken',
+            `${API_BASE_URL}/api/auth/refreshToken`,
             {},
             {withCredentials: true}  // Indique à Axios d’envoyer les cookies
         );

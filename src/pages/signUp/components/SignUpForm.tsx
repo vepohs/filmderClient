@@ -13,6 +13,7 @@ import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 // @ts-ignore
 import "../style/SignUpForm.sass";
 import {useNavigate} from "react-router-dom";
+import {API_BASE_URL} from "../../../config/constants.ts";
 
 type IsUniqueEmailResponse = {
     isUnique: boolean;
@@ -26,15 +27,17 @@ export function SignUpForm() {
 
     const navigate = useNavigate();
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+
         try {
-            const mailResponse = await axios.post<IsUniqueEmailResponse>('http://localhost:3017/api/users/isUniqueEmail', {email: data.email});
+            const mailResponse = await axios.post<IsUniqueEmailResponse>(`${API_BASE_URL}/api/users/isUniqueEmail`
+                , {email: data.email});
             const isUnique = mailResponse.data.isUnique;
             if (!isUnique) {
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
 
-            const response = await axios.post('http://localhost:3017/api/users/createUser', data);
+            const response = await axios.post(`${API_BASE_URL}/api/users/createUser`, data);
             console.log(response);
             navigate("/protected/preferences"); // Remplacez "/welcome" par le chemin de la page cible
 

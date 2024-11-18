@@ -3,6 +3,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 import axios from "axios";
 import {LoginFormInputs} from "../types/formInputsTypes.ts";
+import {API_BASE_URL} from "../config/constants.ts";
 
 interface AuthContextType {
     isAuthenticated: boolean | null;
@@ -50,7 +51,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
 
     const login = async (credentials: LoginFormInputs) => {
         //TODO peut etre faire la connextion dans AuthContext non ?
-        const response = await axios.post('http://localhost:3017/api/auth/login', credentials);
+        const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
         const token = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
 
