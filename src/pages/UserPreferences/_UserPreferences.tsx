@@ -101,7 +101,7 @@ function UserPreferences() {
     }, []);
 
     return (
-        <>
+        <div className="UserPreferencesGlobal">
             <h1>GENNNNREEEEEE</h1>
             <GenresSelector
                 genres={genres}
@@ -123,7 +123,7 @@ function UserPreferences() {
             <button onClick={submitPreferences} className="submitButton">
                 Enregistrer les préférences
             </button>
-        </>
+        </div>
 
     );
 }

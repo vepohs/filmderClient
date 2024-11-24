@@ -2,6 +2,7 @@
 import "../style/MiddleMainPage.sass";
 import {useEffect, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
+import {Like} from "../../../common/icons/Like.tsx";
 
 interface Movie {
     id: number;
@@ -84,6 +85,12 @@ export function MiddleMainPage() {
         );
     }
 
+    const logout = async () => {
+        const response = await axiosWithAuth.post("/auth/logout")
+       // localStorage.removeItem("accessToken")
+        console.log(response)
+    }
+
     return (
         <div className="middleMainPage">
             <div className="imageContainer">
@@ -93,6 +100,9 @@ export function MiddleMainPage() {
                 </button>
                 <button onClick={handleDislike}>
                     DISLIKE
+                </button>
+                <button onClick={logout}>
+                    Logout
                 </button>
             </div>
         </div>

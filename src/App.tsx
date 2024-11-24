@@ -8,8 +8,7 @@ import _UserPreferences from "./pages/UserPreferences/_UserPreferences.tsx";
 import PreferencesProtected from "./context/PreferencesProtected.tsx";
 import {PreferenceProvider} from "./context/PreferenceProvider.tsx";
 import _GroupPage from "./pages/groupPage/_GroupPage.tsx";
-
-
+import "./App.sass"
 function App() {
     return (
         <PreferenceProvider>
