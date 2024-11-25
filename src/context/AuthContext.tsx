@@ -52,6 +52,8 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const login = async (credentials: LoginFormInputs) => {
         //TODO peut etre faire la connextion dans AuthContext non ?
         const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
+        console.log("QUIJESUISLA");
+        console.log(response)
         const token = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
 

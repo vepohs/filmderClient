@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 // @ts-ignore
 import "./_GroupPage.sass";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
@@ -7,20 +7,16 @@ import ActionButtons from "./components/ActionButtons.tsx";
 import Popup from "./components/Popup.tsx";
 
 export type Group = {
-    id: number;
+    groupId: number;
     name: string;
 };
 
 const GroupPage: React.FC = () => {
-    const [userGroups, setUserGroups] = useState<Group[]>([
-        {id: 1, name: "Developers"},
-        {id: 2, name: "React Enthusiasts"},
-        {id: 3, name: "TypeScript Masters"},
-    ]);
+    const [userGroups, setUserGroups] = useState<Group[]>([]);
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [popupMode, setPopupMode] = useState<"create" | "join">("create");
-    const [groupName, setGroupName] = useState("");
+    const [popUpText, setpopUpText] = useState("");
 
     const handleOpenPopup = (mode: "create" | "join") => {
         setPopupMode(mode);
@@ -29,21 +25,18 @@ const GroupPage: React.FC = () => {
 
     const handlePopupClose = () => {
         setIsPopupOpen(false);
-        setGroupName("");
+        setpopUpText("");
     };
 
     const handleCreateGroupSubmit = async () => {
-        if (groupName.trim()) {
-            const newGroup: Group = {
-                id: userGroups.length + 1,
-                name: groupName,
-            };
-            console.log("Creating group:", newGroup);
+        if (popUpText.trim()) {
+
+            console.log("LE NOM DU GROUPE C", popUpText);
             const response = await axiosWithAuth.post("/group/protected/groupAdd", {
-                name: groupName,
+                name: popUpText,
             });
-            console.log("Creating group response:", response);
-            setUserGroups([...userGroups, newGroup]);
+            console.log("LA REPONSE RECU C :", response);
+            await getGroupsForUser()
             handlePopupClose();
         } else {
             alert("Le nom du groupe ne peut pas être vide !");
@@ -51,13 +44,14 @@ const GroupPage: React.FC = () => {
     };
 
     const handleJoinGroupSubmit = async () => {
-        if (groupName.trim()) {
+        if (popUpText.trim()) {
             try {
                 const response = await axiosWithAuth.post("/group/protected/groupJoin", {
-                    groupId: groupName,
+                    groupId: popUpText,
                 });
                 console.log("Joining group response:", response);
                 alert("You successfully joined the group!");
+                getGroupsForUser();
                 handlePopupClose();
             } catch (error) {
                 console.error("Error joining the group:", error);
@@ -76,6 +70,18 @@ const GroupPage: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        getGroupsForUser();
+    }, []);
+
+    async function getGroupsForUser(): Promise<void> {
+        console.log("Fetching user groups...");
+        const response = await axiosWithAuth.get("/users/protected/getGroup");
+        console.log("User groups:", response.data.group);
+        setUserGroups(response.data.group);
+
+    }
+
     return (
         <div className="group-page">
             <h1>Group Page</h1>
@@ -84,8 +90,8 @@ const GroupPage: React.FC = () => {
             {isPopupOpen && (
                 <Popup
                     mode={popupMode}
-                    groupName={groupName}
-                    onGroupNameChange={setGroupName}
+                    groupName={popUpText}
+                    onGroupNameChange={setpopUpText}
                     onClose={handlePopupClose}
                     onSubmit={handleSubmit}
                 />

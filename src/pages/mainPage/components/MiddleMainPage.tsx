@@ -35,7 +35,7 @@ export function MiddleMainPage() {
             if (response.data.movie && response.data.movie.length > 0) {
                 console.log("FILM RECUUUU :", response.data.movie);
                 setMovies((prevMovies) => [...prevMovies, ...response.data.movie]); // Ajout des nouveaux films à la liste existante
-
+                console.log("tous les films", movies);
             } else {
                 console.log("Aucun film reçu");
             }
@@ -44,6 +44,7 @@ export function MiddleMainPage() {
         } finally {
             setLoading(false);
         }
+        console.log("tous les films", movies);
     }
 
     useEffect(() => {

@@ -10,7 +10,7 @@ const GroupList: React.FC<GroupListProps> = ({groups}) => (
         <h2>Your Groups</h2>
         <div className="groups-container">
             {groups.map((group) => (
-                <div key={group.id} className="group-card">
+                <div key={group.groupId} className="group-card">
                     {group.name}
                 </div>
             ))}
