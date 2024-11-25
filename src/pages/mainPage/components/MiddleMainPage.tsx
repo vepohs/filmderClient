@@ -2,7 +2,6 @@
 import "../style/MiddleMainPage.sass";
 import {useEffect, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {Like} from "../../../common/icons/Like.tsx";
 
 interface Movie {
     id: number;
@@ -23,7 +22,15 @@ export function MiddleMainPage() {
             if (loading) return;
             setLoading(true);
 
-            const response = await axiosWithAuth.get<MovieResponse>("/movie/protected/getMovie");
+            console.log("FETCH MOVIES");
+            console.log("MOVIES :", movies);
+            const moviesIds = movies.map((movie) => movie.id);
+            // const params = moviesIds.length > 0 ? { excludeIds: moviesIds.join(',') } : {};
+            console.log("MOVIES IDS :", moviesIds);
+            console.log(moviesIds)
+            const response = await axiosWithAuth.post<MovieResponse>("/movie/protected/getMovie", {
+                listExcluedIds: moviesIds,
+            });
             console.log("REPONSE :", response);
             if (response.data.movie && response.data.movie.length > 0) {
                 console.log("FILM RECUUUU :", response.data.movie);
@@ -87,7 +94,7 @@ export function MiddleMainPage() {
 
     const logout = async () => {
         const response = await axiosWithAuth.post("/auth/logout")
-       // localStorage.removeItem("accessToken")
+        // localStorage.removeItem("accessToken")
         console.log(response)
     }
 
