@@ -1,35 +1,87 @@
+
 .middleMainPage
-  width: 90%
-  height: 70%
-  display: flex
-  justify-content: center
-  align-items: center
+  height: 78%
+  width: 100%
+  overflow: scroll
+  scroll-behavior: smooth
+
 
   .imageContainer
+    height: 100%
+    width: 100%
     position: relative
-    display: inline-block
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+
 
     img
-      width: 100%
-      height: auto
+      width: 90%
+      height: 90%
       object-fit: contain
 
-    svg
+    .svgLike
+      height: 60px
+      width: 60px
       position: absolute
-      color: white
-      border: none
-      border-radius: 4px
-      cursor: pointer
-
-    svg
+      bottom: 10%
+      right: 10%
       padding: 10px
-      background: rgb(255, 255, 255)
       border-radius: 50%
-      bottom: 30px
-      right: 30px
-      align-items: center
-      align-content: center
+      background-color: #ffffff
 
-    .button2
-      bottom: 10px
-      right: 10px
+    .svgDislike
+      height: 60px
+      width: 60px
+      position: absolute
+      bottom: 10%
+      left: 10%
+      padding: 10px
+      border-radius: 50%
+      background-color: #ffffff
+
+  .detailContainer
+    margin-top: 2px
+    display: flex
+    flex-direction: column
+    overflow: hidden
+    border: none
+    color : #f8d8d8
+    margin-left: 30px
+    margin-right: 30px
+
+
+
+    .title_duration_container
+
+      display: flex
+      text-align: center
+
+      .title
+        font-size: 1.3em
+        font-weight: bold
+
+      .duration
+        padding-left: 10px
+        font-size: 1.3em
+        font-weight: bold
+      .releaseDate
+        padding-left: 10px
+        font-size: 1.3em
+        font-weight: bold
+
+    .grade_votes_container
+      padding-top: 10px
+      display: flex
+      text-align: center
+
+      .averageGrade
+        padding-left: 10px
+
+      .votes
+    .synopsisContainer
+      padding-top: 10px
+      display: flex
+
+

@@ -1,7 +1,9 @@
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
+import {SvgLike} from "./SvgLike.tsx";
+import {SvgDislike} from "./SvgDislike.tsx";
 
 interface Movie {
     id: number;
@@ -16,7 +18,7 @@ interface MovieResponse {
 export function MiddleMainPage() {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
-
+    const containerRef = useRef(null);
     async function fetchMovies(): Promise<void> {
         try {
             if (loading) return;
@@ -66,6 +68,9 @@ export function MiddleMainPage() {
         if (movies.length > 0) {
             sendSwipeResponse(movies[0].id, true);
             handleNextImage();
+            if (containerRef.current) {
+                containerRef.current.scrollTo(0, 0);
+            }
         }
     };
 
@@ -73,6 +78,9 @@ export function MiddleMainPage() {
         if (movies.length > 0) {
             sendSwipeResponse(movies[0].id, false);
             handleNextImage();
+            if (containerRef.current) {
+                containerRef.current.scrollTo(0, 0);
+            }
         }
     };
 
@@ -93,25 +101,38 @@ export function MiddleMainPage() {
         );
     }
 
-    const logout = async () => {
-        const response = await axiosWithAuth.post("/auth/logout")
-        // localStorage.removeItem("accessToken")
-        console.log(response)
-    }
+
 
     return (
-        <div className="middleMainPage">
+        <div className="middleMainPage" ref={containerRef}>
             <div className="imageContainer">
-                <img src={movies[0].imagePath} style={{width: "400px", height: "400px"}} alt="Image description"/>
-                <button onClick={handleLike}>
-                    LIKE
-                </button>
-                <button onClick={handleDislike}>
-                    DISLIKE
-                </button>
-                <button onClick={logout}>
-                    Logout
-                </button>
+                <img src={movies[0].imagePath} alt="Image description"/>
+                <SvgLike onClick={handleLike}>
+                </SvgLike>
+                <SvgDislike onClick={handleDislike}>
+                </SvgDislike>
+            </div>
+            <div className="detailContainer">
+                <div className='title_duration_container'>
+                    <div className='title'>{movies[0].title}</div>
+                    <div className='duration'>{movies[0].duration} min</div>
+                </div>
+                <div className='releaseDate'>{movies[0].releaseDate}</div>
+                <div className='grade_votes_container'>
+                    <div className='votes'> Votes: {movies[0].votes} </div>
+                    <div className='averageGrade'>{movies[0].averageGrade.toFixed(1)}/10</div>
+                </div>
+
+                <div className='synopsisContainer'>
+                    <div className='synopsis'>{movies[0].synopsis}</div>
+                </div>
+                <div className="providersContainer">
+                    {movies[0].providers.map((provider) => (
+                        <div key={provider.id} className="provider">
+                            <img src={provider.logoPath} alt={provider.name} className="providerLogo"/>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

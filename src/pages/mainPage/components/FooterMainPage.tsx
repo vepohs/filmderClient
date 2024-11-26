@@ -1,6 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
+import "../style/FooterMainPage.css";
+import {AvatarSelector} from "./AvatarSeelector.tsx";
 
 interface Group {
     groupId: string;
@@ -50,7 +52,6 @@ export function FooterMainPage() {
 
     return (
         <div className="footerPrefer">
-            <h1>Footer</h1>
             <button onClick={handleGroupPageNavigation}>Groupe</button>
             <button onClick={handleComboBoxChange}>Parametre</button>
             <label htmlFor="group-select">Mes Groupes:</label>
@@ -70,7 +71,9 @@ export function FooterMainPage() {
                         {group.name}
                     </option>
                 ))}
+
             </select>
+
         </div>
     );
 }
