@@ -62,7 +62,7 @@ export function FooterMainPage() {
         } else {
             console.log("Groupe");
             console.log("selectedGroup", e.target.value);
-            navigate(`/protected/groupMainPage/${e.target.value}`, {replace: true});
+            navigate(`/protected/groupMainPage/${e.target.value}`);
 
         }
     };
