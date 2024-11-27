@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 
 import {useNavigate, useParams} from "react-router-dom";
-import GenresSelector from "./pages/UserPreferences/components/GenresSelector.tsx";
-import ReWatchCheckBox from "./pages/UserPreferences/components/ReWatchCheckBox.tsx";
-import ProviderSelector from "./pages/UserPreferences/components/ProvidersSelector.tsx";
-import axiosWithAuth from "./axiosUtils/axiosConfig.ts";
+import GenresSelector from "./components/GenresSelector.tsx";
+import ReWatchCheckBox from "./components/ReWatchCheckBox.tsx";
+import ProviderSelector from "./components/ProvidersSelector.tsx";
+import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
 
 interface PreferencesFormProps {
     type: string;

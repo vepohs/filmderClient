@@ -1,8 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import "../style/FooterMainPage.css";
-import {AvatarSelector} from "./AvatarSeelector.tsx";
+
 
 interface Group {
     groupId: string;
@@ -19,12 +18,13 @@ export function FooterMainPage() {
     const handleGroupPageNavigation = () => {
         navigate("/protected/groupPage"); // Redirige vers la route groupPage
     };
+    /*
 
-    const handlePreferenceNavigation = () => {
-        navigate("/protected/groupPreferences"); // Redirige vers la route groupPage
-    };
+        const handlePreferenceNavigation = () => {
+            navigate("/protected/groupPreferences"); // Redirige vers la route groupPage
+        };
 
-
+    */
     useEffect(() => {
         getGroupsForUser();
     }, []);
@@ -40,12 +40,12 @@ export function FooterMainPage() {
         }
     }
 
-    const handleComboBoxChange = () => {
+    const onParamsClick = () => {
         if (selectedGroup === "me") {
-            navigate("/protected/preferences"); // Redirige vers la page de préférences
+            navigate("/protected/preferences");
             console.log("Moi");
         } else {
-            navigate(`/protected/groupPreferences/${selectedGroup}`); // Redirige vers la page d'un groupe
+            navigate(`/protected/groupPreferences/${selectedGroup}`);
             console.log("Groupe");
         }
     };
@@ -53,7 +53,7 @@ export function FooterMainPage() {
     return (
         <div className="footerPrefer">
             <button onClick={handleGroupPageNavigation}>Groupe</button>
-            <button onClick={handleComboBoxChange}>Parametre</button>
+            <button onClick={onParamsClick}>Parametre</button>
             <label htmlFor="group-select">Mes Groupes:</label>
             <select
                 id="group-select"
