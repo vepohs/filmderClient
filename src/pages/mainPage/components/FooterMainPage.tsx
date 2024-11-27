@@ -50,6 +50,24 @@ export function FooterMainPage() {
         }
     };
 
+    const handleComboBoxChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
+        setSelectedGroup(e.target.value)
+        console.log("e.target.value", e.target.value);
+
+        if (e.target.value === "me") {
+            console.log("Moi");
+            navigate("/protected");
+
+        } else {
+            console.log("Groupe");
+            console.log("selectedGroup", e.target.value);
+            navigate(`/protected/groupMainPage/${e.target.value}`, {replace: true});
+
+        }
+    };
+
+
     return (
         <div className="footerPrefer">
             <button onClick={handleGroupPageNavigation}>Groupe</button>
@@ -59,8 +77,7 @@ export function FooterMainPage() {
                 id="group-select"
                 value={selectedGroup}
                 onChange={(e) => {
-                    console.log("e.target.value", e.target.value);
-                    setSelectedGroup(e.target.value)
+                    handleComboBoxChange(e)
                 }
                 }
 

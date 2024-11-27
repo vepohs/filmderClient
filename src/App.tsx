@@ -1,6 +1,6 @@
 import _Login from "./pages/login/_Login.tsx";
 import _SignUp from "./pages/signUp/_SignUp.tsx";
-import {_MainPage} from "./pages/mainPage/_MainPage.tsx";
+import {_UserMainPage} from "./pages/mainPage/_UserMainPage.tsx";
 import {Route, Routes} from "react-router-dom";
 import ProtectedRoute from "./context/ProtectedRoute.tsx";
 import PublicRoute from "./context/PublicRoute.tsx";
@@ -11,6 +11,7 @@ import _GroupPage from "./pages/groupPage/_GroupPage.tsx";
 // @ts-ignore
 import "./App.sass"
 import _PreferenceGroup from "./pages/preferences/_PreferenceGroup.tsx";
+import {_GroupMainPage} from "./pages/mainPage/_GroupMainPage.tsx";
 
 function App() {
     return (
@@ -31,10 +32,11 @@ function App() {
                     <Route index
                            element={
                                <PreferencesProtected>
-                                   <_MainPage/>
+                                   <_UserMainPage/>
                                </PreferencesProtected>
                            }
                     />
+                    <Route path="groupMainPage/:groupId" element={<_GroupMainPage/>}/>
                     <Route path="groupPage" element={<_GroupPage/>}/>
 
                     <Route path="*" element="erreur 404"/>

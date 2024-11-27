@@ -1,9 +1,10 @@
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import {SvgLike} from "./SvgLike.tsx";
 import {SvgDislike} from "./SvgDislike.tsx";
+import {useParams} from "react-router-dom";
 
 interface Movie {
     id: number;
@@ -15,10 +16,47 @@ interface MovieResponse {
     movie: Movie[];
 }
 
-export function MiddleMainPage() {
+interface PreferencesFormProps {
+    type: "user" | "group";
+}
+
+const MiddleMainPage: React.FC<PreferencesFormProps> = ({type}) => {
+
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const containerRef = useRef(null);
+
+    const {groupId} = useParams<{ groupId: string }>();
+    
+    // Recharger les films si `groupId` ou `type` change
+    useEffect(() => {
+        // Réinitialiser les films lorsque le groupe change
+        setMovies([]);
+        if (type === "group" && !groupId) {
+            console.error("groupId est requis pour un groupe.");
+            return;
+        }
+        fetchMovies();
+    }, [groupId, type]);
+
+    const requestMovies = (excludedIds: number[]) => {
+        if (type === "user") {
+            return axiosWithAuth.post<MovieResponse>("movie/protected/getMovie", {
+                listExcluedIds: excludedIds,
+            });
+        } else if (type === "group") {
+            if (!groupId) {
+                throw new Error("groupId est requis pour récupérer les films d'un groupe.");
+            }
+            return axiosWithAuth.post<MovieResponse>("movie/protected/getGroupMovie", {
+                listExcluedIds: excludedIds,
+                groupId,
+            });
+        } else {
+            throw new Error("Type invalide");
+        }
+    };
+
     async function fetchMovies(): Promise<void> {
         try {
             if (loading) return;
@@ -26,17 +64,16 @@ export function MiddleMainPage() {
 
             console.log("FETCH MOVIES");
             console.log("MOVIES :", movies);
+            // a vérif mais je crois que movie id c'est le film qu'on a deja quoi
             const moviesIds = movies.map((movie) => movie.id);
             // const params = moviesIds.length > 0 ? { excludeIds: moviesIds.join(',') } : {};
             console.log("MOVIES IDS :", moviesIds);
             console.log(moviesIds)
-            const response = await axiosWithAuth.post<MovieResponse>("/movie/protected/getMovie", {
-                listExcluedIds: moviesIds,
-            });
+            const response = await requestMovies(moviesIds);
             console.log("REPONSE :", response);
-            if (response.data.movie && response.data.movie.length > 0) {
-                console.log("FILM RECUUUU :", response.data.movie);
-                setMovies((prevMovies) => [...prevMovies, ...response.data.movie]); // Ajout des nouveaux films à la liste existante
+            if (response.data.movies && response.data.movies.length > 0) {
+                console.log("FILM RECUUUU :", response.data.movies);
+                setMovies((prevMovies) => [...prevMovies, ...response.data.movies]); // Ajout des nouveaux films à la liste existante
                 console.log("tous les films", movies);
             } else {
                 console.log("Aucun film reçu");
@@ -102,7 +139,6 @@ export function MiddleMainPage() {
     }
 
 
-
     return (
         <div className="middleMainPage" ref={containerRef}>
             <div className="imageContainer">
@@ -137,3 +173,4 @@ export function MiddleMainPage() {
         </div>
     );
 }
+export default MiddleMainPage;
