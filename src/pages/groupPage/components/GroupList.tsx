@@ -1,21 +1,27 @@
-import React from "react";
-import {Group} from "../_GroupPage.tsx";
+import React, {useContext} from "react";
+import {SelectedGroupContext} from "../../../context/SelectedGroupContext.tsx";
 
-type GroupListProps = {
-    groups: Group[];
-};
+const GroupList: React.FC = () => {
+    const selectedGroupContext = useContext(SelectedGroupContext);
 
-const GroupList: React.FC<GroupListProps> = ({groups}) => (
-    <div className="groups-section">
-        <h2>Your Groups</h2>
-        <div className="groups-container">
-            {groups.map((group) => (
-                <div key={group.groupId} className="group-card">
-                    {group.name}
-                </div>
-            ))}
+    if (!selectedGroupContext) {
+        throw new Error("GroupList must be used within a SelectedGroupProvider");
+    }
+
+    const {userGroups} = selectedGroupContext;
+
+    return (
+        <div className="groups-section">
+            <h2>Your Groups</h2>
+            <div className="groups-container">
+                {userGroups.map((group) => (
+                    <div key={group.groupId} className="group-card">
+                        {group.name}
+                    </div>
+                ))}
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default GroupList;

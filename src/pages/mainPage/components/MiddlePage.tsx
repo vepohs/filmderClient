@@ -1,33 +1,39 @@
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {SvgLike} from "./SvgLike.tsx";
-import {SvgDislike} from "./SvgDislike.tsx";
-import {useParams} from "react-router-dom";
+import {SvgLike} from "./icons/SvgLike.tsx";
+import {SvgDislike} from "./icons/SvgDislike.tsx";
+import {SelectedGroupContext} from "../../../context/SelectedGroupContext.tsx";
 
 interface Movie {
     id: number;
     imagePath: string;
-    title?: string; // Ajoutez d'autres champs si nécessaire
+    title?: string;
 }
 
 interface MovieResponse {
     movie: Movie[];
 }
 
-interface PreferencesFormProps {
-    type: "user" | "group";
-}
-
-const MiddleMainPage: React.FC<PreferencesFormProps> = ({type}) => {
+const MiddleMainPage: React.FC = () => {
 
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const containerRef = useRef(null);
 
-    const {groupId} = useParams<{ groupId: string }>();
-    
+    const selectedGroupContext = useContext(SelectedGroupContext);
+
+    if (!selectedGroupContext) {
+        throw new Error("MiddleMainPage must be used within a SelectedGroupProvider");
+    }
+
+    const {selectedGroup} = selectedGroupContext;
+
+    const type = selectedGroup === "me" ? "user" : "group";
+    const groupId = selectedGroup !== "me" ? selectedGroup : undefined;
+
+
     // Recharger les films si `groupId` ou `type` change
     useEffect(() => {
         // Réinitialiser les films lorsque le groupe change

@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 // @ts-ignore
 import "./_GroupPage.sass";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
 import GroupList from "./components/GroupList.tsx";
 import ActionButtons from "./components/ActionButtons.tsx";
 import Popup from "./components/Popup.tsx";
+import {SelectedGroupContext} from "../../context/SelectedGroupContext.tsx";
 
 export type Group = {
     groupId: number;
@@ -12,11 +13,18 @@ export type Group = {
 };
 
 const GroupPage: React.FC = () => {
-    const [userGroups, setUserGroups] = useState<Group[]>([]);
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [popupMode, setPopupMode] = useState<"create" | "join">("create");
     const [popUpText, setpopUpText] = useState("");
+
+    const selectedGroupContext = useContext(SelectedGroupContext);
+
+    if (!selectedGroupContext) {
+        throw new Error("MiddleMainPage must be used within a SelectedGroupProvider");
+    }
+
+    const {getGroupsForUser} = selectedGroupContext;
 
     const handleOpenPopup = (mode: "create" | "join") => {
         setPopupMode(mode);
@@ -74,19 +82,12 @@ const GroupPage: React.FC = () => {
         getGroupsForUser();
     }, []);
 
-    async function getGroupsForUser(): Promise<void> {
-        console.log("Fetching user groups...");
-        const response = await axiosWithAuth.get("/users/protected/getGroup");
-        console.log("User groups:", response.data.group);
-        setUserGroups(response.data.group);
-
-    }
 
     return (
         <div className="group-page">
             <h1>Group Page</h1>
             <ActionButtons onOpenPopup={handleOpenPopup}/>
-            <GroupList groups={userGroups}/>
+            <GroupList/>
             {isPopupOpen && (
                 <Popup
                     mode={popupMode}

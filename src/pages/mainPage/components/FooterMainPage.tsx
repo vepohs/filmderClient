@@ -1,72 +1,46 @@
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
-import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-
-
-interface Group {
-    groupId: string;
-    name: string;
-}
+import {useContext} from "react";
+import {SelectedGroupContext} from "../../../context/SelectedGroupContext.tsx";
 
 
 export function FooterMainPage() {
     const navigate = useNavigate(); // Initialisez le hook useNavigate
-    const [userGroups, setUserGroups] = useState<Group[]>([]);
-    const [selectedGroup, setSelectedGroup] = useState<string>("me"); // État pour le groupe sélectionné
+    const selectedGroupContext = useContext(SelectedGroupContext);
 
+    if (!selectedGroupContext) {
+        throw new Error("FooterMainPage must be used within a SelectedGroupProvider");
+    }
+
+    const {selectedGroup, setSelectedGroup, userGroups} = selectedGroupContext;
 
     const handleGroupPageNavigation = () => {
         navigate("/protected/groupPage"); // Redirige vers la route groupPage
     };
-    /*
-
-        const handlePreferenceNavigation = () => {
-            navigate("/protected/groupPreferences"); // Redirige vers la route groupPage
-        };
-
-    */
-    useEffect(() => {
-        getGroupsForUser();
-    }, []);
-
-    async function getGroupsForUser(): Promise<void> {
-        try {
-            console.log("Fetching user groups...");
-            const response = await axiosWithAuth.get("/users/protected/getGroup");
-            console.log("User groups:", response.data.group);
-            setUserGroups(response.data.group); // Met à jour l'état avec les groupes
-        } catch (error) {
-            console.error("Error fetching groups:", error);
-        }
-    }
 
     const onParamsClick = () => {
         if (selectedGroup === "me") {
             navigate("/protected/preferences");
-            console.log("Moi");
         } else {
             navigate(`/protected/groupPreferences/${selectedGroup}`);
-            console.log("Groupe");
         }
     };
 
     const handleComboBoxChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
-        setSelectedGroup(e.target.value)
+        const selectedGroup = e.target.value;
+        setSelectedGroup(selectedGroup)
         console.log("e.target.value", e.target.value);
+        console.log("je change mais on s 'en fou mtn c'est faut automatiquement ")
+        /*
+                if (selectedGroup === "me") {
+                    navigate("/protected");
+                } else {
+                    navigate(`/protected/groupMainPage/${selectedGroup}`);
+                }
 
-        if (e.target.value === "me") {
-            console.log("Moi");
-            navigate("/protected");
+         */
 
-        } else {
-            console.log("Groupe");
-            console.log("selectedGroup", e.target.value);
-            navigate(`/protected/groupMainPage/${e.target.value}`);
-
-        }
     };
-
 
     return (
         <div className="footerPrefer">
@@ -76,11 +50,7 @@ export function FooterMainPage() {
             <select
                 id="group-select"
                 value={selectedGroup}
-                onChange={(e) => {
-                    handleComboBoxChange(e)
-                }
-                }
-
+                onChange={handleComboBoxChange}
             >
                 <option value="me">Moi</option>
                 {userGroups.map((group) => (

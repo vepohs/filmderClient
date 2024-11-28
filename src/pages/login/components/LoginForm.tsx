@@ -23,9 +23,9 @@ export function LoginForm() {
 
     const auth = useAuth();
 
-    const tryLogin = (data: LoginFormInputs) => {
+    const tryLogin = async (data: LoginFormInputs) => {
         try {
-            auth?.login(data);
+            await auth?.login(data);
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
@@ -44,31 +44,31 @@ export function LoginForm() {
     }
 
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-        tryLogin(data);
+        await tryLogin(data);
     };
 
     return (
-            <div className="login-box">
-                <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
-                    <FormInput
-                        icon={EmailIcon}
-                        name="email"
-                        type="email"
-                        placeholder='Adresse email'
-                        register={register}
-                        error={errors.email}
-                    />
-                    <PasswordInput
-                        icon={PasswordIcon}
-                        name="password"
-                        register={register}
-                        placeholder='Mot de passe'
-                        error={errors.password}
-                    />
-                    <button className="submitBtnSignIn" type="submit">Se connecter</button>
-                </form>
-                <GoToSignUp/>
-            </div>
+        <div className="login-box">
+            <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
+                <FormInput
+                    icon={EmailIcon}
+                    name="email"
+                    type="email"
+                    placeholder='Adresse email'
+                    register={register}
+                    error={errors.email}
+                />
+                <PasswordInput
+                    icon={PasswordIcon}
+                    name="password"
+                    register={register}
+                    placeholder='Mot de passe'
+                    error={errors.password}
+                />
+                <button className="submitBtnSignIn" type="submit">Se connecter</button>
+            </form>
+            <GoToSignUp/>
+        </div>
     );
 }
 

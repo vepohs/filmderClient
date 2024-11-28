@@ -1,7 +1,9 @@
+// @ts-ignore
 import "../style/HeaderMainPage.sass";
 import MyLogo from "../../../common/icons/filmderIcon.tsx";
-import {SvgLogout} from "./SvgLogout.tsx";
+import {SvgLogout} from "./icons/SvgLogout.tsx";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
+
 export function HeaderMainPage() {
     const logout = async () => {
         const response = await axiosWithAuth.post("/auth/logout")
@@ -10,7 +12,7 @@ export function HeaderMainPage() {
     }
     return (
         <div className='headerPrefer'>
-            <MyLogo />
+            <MyLogo/>
             <SvgLogout onClick={logout}></SvgLogout>
         </div>
     );
