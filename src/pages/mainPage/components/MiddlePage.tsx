@@ -68,19 +68,16 @@ const MiddleMainPage: React.FC = () => {
             if (loading) return;
             setLoading(true);
 
-            console.log("FETCH MOVIES");
-            console.log("MOVIES :", movies);
-            // a vérif mais je crois que movie id c'est le film qu'on a deja quoi
-            const moviesIds = movies.map((movie) => movie.id);
+            console.log("Je vais demander des films voici la liste actuel");
+            console.log(movies);
+
+            const excludedIds = movies.map((movie) => movie.id);
             // const params = moviesIds.length > 0 ? { excludeIds: moviesIds.join(',') } : {};
-            console.log("MOVIES IDS :", moviesIds);
-            console.log(moviesIds)
-            const response = await requestMovies(moviesIds);
+
+            const response = await requestMovies(excludedIds);
             console.log("REPONSE :", response);
             if (response.data.movies && response.data.movies.length > 0) {
-                console.log("FILM RECUUUU :", response.data.movies);
                 setMovies((prevMovies) => [...prevMovies, ...response.data.movies]); // Ajout des nouveaux films à la liste existante
-                console.log("tous les films", movies);
             } else {
                 console.log("Aucun film reçu");
             }
@@ -89,12 +86,7 @@ const MiddleMainPage: React.FC = () => {
         } finally {
             setLoading(false);
         }
-        console.log("tous les films", movies);
     }
-
-    useEffect(() => {
-        fetchMovies();
-    }, []);
 
     const sendSwipeResponse = async (movie: number, liked: boolean) => {
         try {
@@ -108,6 +100,8 @@ const MiddleMainPage: React.FC = () => {
     };
 
     const handleLike = () => {
+        console.log("j'ai appuye sur like c est comment les films")
+        console.log(movies)
         if (movies.length > 0) {
             sendSwipeResponse(movies[0].id, true);
             handleNextImage();

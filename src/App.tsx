@@ -27,8 +27,10 @@ function App() {
 
 
                 <Route path="/protected" element={<ProtectedRoute/>}>
+
                     <Route path="preferences" element={<_UserPreferences/>}/>
                     <Route path="groupPreferences/:groupId" element={<_PreferenceGroup/>}/>
+
                     <Route index
                            element={
                                <PreferencesProtected>

@@ -1,5 +1,5 @@
 // src/context/SelectedGroupContext.tsx
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import axiosWithAuth from "../axiosUtils/axiosConfig";
 
 interface Group {
@@ -27,10 +27,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
 
     async function getGroupsForUser(): Promise<void> {
         try {
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            console.log("Fetching groups for user");
             const response = await axiosWithAuth.get("/users/protected/getGroup");
-            console.log("response bro")
             console.log(response)
             setUserGroups(response.data.group);
         } catch (error) {
@@ -44,3 +41,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
         </SelectedGroupContext.Provider>
     );
 };
+
+export const useSelectedGroup = () => {
+    return useContext(SelectedGroupContext);
+}
