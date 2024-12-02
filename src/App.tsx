@@ -11,6 +11,7 @@ import _GroupPage from "./pages/groupPage/_GroupPage.tsx";
 import "./App.sass"
 import _PreferenceGroup from "./pages/preferences/_PreferenceGroup.tsx";
 import _MainPage from "./pages/mainPage/_MainPage.tsx";
+import {_GroupLike, GroupLike} from "./_GroupLike.tsx";
 
 function App() {
     return (
@@ -42,8 +43,9 @@ function App() {
                     <Route path="groupPage" element={<_GroupPage/>}/>
 
                     <Route path="*" element="erreur 404"/>
-
+                    <Route path ="groupLike" element={<GroupLike/>}/>
                 </Route>
+
 
                 <Route path="*" element="erreur 404"/>
             </Routes>
