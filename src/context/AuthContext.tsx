@@ -50,14 +50,11 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
         const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
         console.log("QUIJESUISLA");
         console.log(response)
-        const token = response.data.accessToken;
+        const accesToken = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
-
-        // TODO Ca reste 7 jours a synchro avec server
-//        document.cookie = `refreshToken=${refreshToken}; path=/; max-age=604800`;
+        localStorage.setItem('accessToken', accesToken);
+        localStorage.setItem('refreshToken', refreshToken);
         setIsAuthenticated(true);
-        localStorage.setItem('accessToken', token);
-
     };
 
     useEffect(() => {

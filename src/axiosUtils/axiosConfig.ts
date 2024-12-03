@@ -5,13 +5,13 @@ import {API_BASE_URL} from "../config/constants.ts";
 // Création d'une instance Axios pour la configuration
 const axiosWithAuth = axios.create({
     baseURL: `${API_BASE_URL}/api`,  // Point de départ pour tt les requêtes
-    withCredentials: true  // Inclure les cookies, si nécessaire (pour le refresh token)
 });
 
 // Interceptor de requête - pour ajouter le token à chaque requête sortante
 axiosWithAuth.interceptors.request.use(
     config => {
         const token = localStorage.getItem('accessToken');
+
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -45,11 +45,21 @@ axiosWithAuth.interceptors.response.use(
 const getNewAccessToken = async () => {
     try {
         console.log("JE DEMANDE UN NEW ACCESS TOKEN");
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (!refreshToken) {
+            throw new Error("No refresh token available in localStorage");
+        }
+
         const response = await axios.post(
             `${API_BASE_URL}/api/auth/refreshToken`,
-            {},
-            {withCredentials: true}  // Indique à Axios d’envoyer les cookies
+            {}, // Si le corps de la requête est vide, laissez un objet vide
+            {
+                headers: {
+                    'refreshtoken': refreshToken, // Ajout du refreshToken dans les headers
+                },
+            }
         );
+
         const newAccessToken = response.data.accessToken;
         console.log("newAccessToken", newAccessToken);
         return newAccessToken;
@@ -58,5 +68,7 @@ const getNewAccessToken = async () => {
         throw error;
     }
 };
+
+
 
 export default axiosWithAuth;
