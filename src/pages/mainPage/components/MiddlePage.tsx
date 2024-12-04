@@ -1,20 +1,30 @@
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import {SvgLike} from "./icons/SvgLike.tsx";
 import {SvgDislike} from "./icons/SvgDislike.tsx";
-import {SelectedGroupContext} from "../../../context/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 
 interface Movie {
+    // TODO je sais pas trop le type qu'on doit mettre 
+    providers: Provider[];
+    synopsis: string;
+    averageGrade: number;
+    duration: number;
     id: number;
     imagePath: string;
+    releaseDate: string;
     title?: string;
+    votes: number;
 }
 
-interface MovieResponse {
-    movie: Movie[];
+interface Provider {
+    id: number;
+    name: string;
+    logoPath: string;
 }
+
 
 const MiddleMainPage: React.FC = () => {
 
@@ -22,71 +32,22 @@ const MiddleMainPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const containerRef = useRef(null);
 
-    const selectedGroupContext = useContext(SelectedGroupContext);
 
-    if (!selectedGroupContext) {
-        throw new Error("MiddleMainPage must be used within a SelectedGroupProvider");
-    }
-
-    const {selectedGroup} = selectedGroupContext;
-
-    const type = selectedGroup === "me" ? "user" : "group";
-    const groupId = selectedGroup !== "me" ? selectedGroup : undefined;
+    const {fetchMoviesForGroup, selectedGroup} = useSelectedGroup();
 
 
-    // Recharger les films si `groupId` ou `type` change
     useEffect(() => {
-        // Réinitialiser les films lorsque le groupe change
         setMovies([]);
-        if (type === "group" && !groupId) {
-            console.error("groupId est requis pour un groupe.");
-            return;
-        }
-        fetchMovies();
-    }, [groupId, type]);
+        fetchMovies([]);
+    }, [selectedGroup]);
 
-    const requestMovies = (excludedIds: number[]) => {
-        if (type === "user") {
-            return axiosWithAuth.post<MovieResponse>("movie/protected/getMovie", {
-                listExcluedIds: excludedIds,
-            });
-        } else if (type === "group") {
-            if (!groupId) {
-                throw new Error("groupId est requis pour récupérer les films d'un groupe.");
-            }
-            return axiosWithAuth.post<MovieResponse>("movie/protected/getGroupMovie", {
-                listExcluedIds: excludedIds,
-                groupId,
-            });
-        } else {
-            throw new Error("Type invalide");
-        }
+    const fetchMovies = async (excludedIds: number[]) => {
+        if (loading) return; // Éviter les appels multiples en cas de chargement en cours
+        setLoading(true);
+        const newMovies = await fetchMoviesForGroup(excludedIds);
+        setMovies((prevMovies) => [...prevMovies, ...newMovies]);
+        setLoading(false);
     };
-
-    async function fetchMovies(): Promise<void> {
-        try {
-            if (loading) return;
-            setLoading(true);
-
-            console.log("Je vais demander des films voici la liste actuel");
-            console.log(movies);
-
-            const excludedIds = movies.map((movie) => movie.id);
-            // const params = moviesIds.length > 0 ? { excludeIds: moviesIds.join(',') } : {};
-
-            const response = await requestMovies(excludedIds);
-            console.log("REPONSE :", response);
-            if (response.data.movies && response.data.movies.length > 0) {
-                setMovies((prevMovies) => [...prevMovies, ...response.data.movies]); // Ajout des nouveaux films à la liste existante
-            } else {
-                console.log("Aucun film reçu");
-            }
-        } catch (error) {
-            console.error("Erreur lors de la récupération du film :", error);
-        } finally {
-            setLoading(false);
-        }
-    }
 
     const sendSwipeResponse = async (movie: number, liked: boolean) => {
         try {
@@ -126,7 +87,7 @@ const MiddleMainPage: React.FC = () => {
             setMovies((prevMovies) => prevMovies.slice(1)); // Crée une nouvelle liste sans le premier élément
 
             if (movies.length <= 19 && !loading) {
-                await fetchMovies();
+                await fetchMovies(movies.map((movie) => movie.id));
             }
         }
     };
@@ -163,7 +124,7 @@ const MiddleMainPage: React.FC = () => {
                     <div className='synopsis'>{movies[0].synopsis}</div>
                 </div>
                 <div className="providersContainer">
-                    {movies[0].providers.map((provider) => (
+                    {movies[0].providers.map((provider: Provider) => (
                         <div key={provider.id} className="provider">
                             <img src={provider.logoPath} alt={provider.name} className="providerLogo"/>
                         </div>
