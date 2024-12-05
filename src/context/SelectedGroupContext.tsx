@@ -75,7 +75,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const navigateToPreferences = () => {
-        navigate(selectedGroup === "me" ? "/protected/preferences" : `/protected/groupPreferences/${selectedGroup}`);
+        navigate("/protected/preference");
     }
 
     // Logique pour récupérer les films en fonction du groupe sélectionné

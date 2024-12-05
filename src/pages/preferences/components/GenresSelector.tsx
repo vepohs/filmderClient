@@ -1,6 +1,7 @@
 import React from "react";
+
 // @ts-ignore
-import "../_UserPreferences.sass";
+import "../_PreferencesPage.sass";
 
 interface GenreSelectorProps {
     genres: { id: number; name: string }[];

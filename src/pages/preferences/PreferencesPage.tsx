@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import GenresSelector from "./components/GenresSelector.tsx";
 import ReWatchCheckBox from "./components/ReWatchCheckBox.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
+import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 
-interface PreferencesFormProps {
-    type: string;
-}
+// @ts-ignore
+import "./_PreferencesPage.sass"
 
 interface PreferencesData {
     genrePreferenceIds: number[];
@@ -16,21 +16,20 @@ interface PreferencesData {
     rewatchPreference: boolean;
 }
 
-const PreferencesForm: React.FC<PreferencesFormProps> = ({
-                                                             type
-                                                         }) => {
+const PreferencesForm: React.FC = () => {
 
     const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
     const [providers, setProviders] = useState<{ id: number; name: string }[]>([]);
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
     const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
     const [isRewatchChecked, setIsRewatchChecked] = useState<boolean>(false);
-
-    const {groupId} = useParams();
+    const {selectedGroup} = useSelectedGroup();
 
     const navigate = useNavigate();
 
     const askForAllPreferences = async () => {
+        console.log("SELECTDSGROUP ")
+        console.log(selectedGroup)
         try {
             const response = await axiosWithAuth.get("users/protected/getPreferences");
             console.log("response", response);
@@ -59,32 +58,24 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({
 
 
     const requestPreferences = () => {
-        if (type === "user") {
+        if (selectedGroup === "me") {
             return axiosWithAuth.get("users/protected/getUserPreferences");
-        } else if (type === "group") {
-            if (!groupId) {
-                throw new Error("groupId est requis pour récupérer les préférences du groupe.");
-            }
-            return axiosWithAuth.get(`group/protected/getGroupPreference`, {
-                params: {groupId},
-            });
         } else {
-            throw new Error("Type invalide");
+            return axiosWithAuth.get(`group/protected/getGroupPreference`, {
+                params: {groupId: selectedGroup},
+            });
         }
     };
 
     const submitPreferencesRequest = (data: PreferencesData) => {
-        if (type === "user") {
+        if (selectedGroup === "me") {
             return axiosWithAuth.post("users/protected/setPreferences", data);
-        } else if (type === "group") {
+        } else {
             const groupData = {
                 ...data,
-                groupId,
+                groupId: selectedGroup,
             };
             return axiosWithAuth.post("group/protected/setGroupPreference", groupData);
-
-        } else {
-            throw new Error("Type invalide");
         }
     };
 
