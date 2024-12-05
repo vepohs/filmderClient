@@ -30,7 +30,7 @@ const MiddleMainPage: React.FC = () => {
 
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
-    const containerRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
 
     const {fetchMoviesForGroup, selectedGroup} = useSelectedGroup();
