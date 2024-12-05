@@ -60,21 +60,10 @@ const MiddleMainPage: React.FC = () => {
         }
     };
 
-    const handleLike = () => {
-        console.log("j'ai appuye sur like c est comment les films")
-        console.log(movies)
+    const handleSwipe = (liked: boolean) => {
+        console.log(liked)
         if (movies.length > 0) {
-            sendSwipeResponse(movies[0].id, true);
-            handleNextImage();
-            if (containerRef.current) {
-                containerRef.current.scrollTo(0, 0);
-            }
-        }
-    };
-
-    const handleDislike = () => {
-        if (movies.length > 0) {
-            sendSwipeResponse(movies[0].id, false);
+            sendSwipeResponse(movies[0].id, liked); // "liked" indique si c'est un like ou un dislike
             handleNextImage();
             if (containerRef.current) {
                 containerRef.current.scrollTo(0, 0);
@@ -104,10 +93,8 @@ const MiddleMainPage: React.FC = () => {
         <div className="middleMainPage" ref={containerRef}>
             <div className="imageContainer">
                 <img src={movies[0].imagePath} alt="Image description"/>
-                <SvgLike onClick={handleLike}>
-                </SvgLike>
-                <SvgDislike onClick={handleDislike}>
-                </SvgDislike>
+                <SvgLike onClick={() => handleSwipe(true)}/>
+                <SvgDislike onClick={() => handleSwipe(false)}/>
             </div>
             <div className="detailContainer">
                 <div className='title_duration_container'>

@@ -16,7 +16,7 @@ export function GroupLike() {
     async function hello() {
         try {
             const response = await axiosWithAuth.post("group/protected/getGroupMoviesCommon", {
-                groupId: "zp4tox15cw6138aicb8cq"
+                groupId: "24dup0huucsvzko5ei2lnd"
             });
             console.log("AAAAAAAA")
             console.log(response);

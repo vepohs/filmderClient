@@ -78,7 +78,6 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
         navigate(selectedGroup === "me" ? "/protected/preferences" : `/protected/groupPreferences/${selectedGroup}`);
     }
 
-
     // Logique pour récupérer les films en fonction du groupe sélectionné
     const fetchMoviesForGroup = async (excludedIds: number[]): Promise<Movie[]> => {
         const endpoint =
