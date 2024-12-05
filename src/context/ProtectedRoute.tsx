@@ -2,7 +2,6 @@
 import {Navigate, Outlet} from 'react-router-dom';
 import {useAuth} from './AuthContext';
 import {useEffect} from "react";
-import {SelectedGroupProvider} from "./SelectedGroupContext.tsx";
 
 const ProtectedRoute = () => {
     const {isAuthenticated, loading, verifyToken} = useAuth() || {};
@@ -18,9 +17,7 @@ const ProtectedRoute = () => {
     }
 
     return isAuthenticated ? (
-        <SelectedGroupProvider>
-            <Outlet/>
-        </SelectedGroupProvider>
+        <Outlet/>
     ) : (
         <Navigate to="/login" replace/>
     );

@@ -11,6 +11,7 @@ import "./App.sass"
 import _MainPage from "./pages/mainPage/_MainPage.tsx";
 import {GroupLike} from "./_GroupLike.tsx";
 import PreferencesForm from "./pages/preferences/PreferencesPage.tsx";
+import SelectedGroupRoute from "./context/SelectedGroupRoute.tsx";
 
 function App() {
     return (
@@ -27,22 +28,22 @@ function App() {
 
 
                 <Route path="/protected" element={<ProtectedRoute/>}>
+                    <Route element={<SelectedGroupRoute/>}>
+                        <Route path="preference" element={<PreferencesForm/>}/>
+                        <Route index
+                               element={
+                                   <PreferencesProtected>
+                                       <_MainPage/>
+                                   </PreferencesProtected>
+                               }
+                        />
 
-                    <Route path="preference" element={<PreferencesForm/>}/>
-                    <Route index
-                           element={
-                               <PreferencesProtected>
-                                   <_MainPage/>
-                               </PreferencesProtected>
-                           }
-                    />
+                        <Route path="groupPage" element={<_GroupPage/>}/>
 
-                    <Route path="groupPage" element={<_GroupPage/>}/>
-
-                    <Route path="*" element="erreur 404"/>
-                    <Route path="groupLike" element={<GroupLike/>}/>
+                        <Route path="*" element="erreur 404"/>
+                        <Route path="groupLike" element={<GroupLike/>}/>
+                    </Route>
                 </Route>
-
 
                 <Route path="*" element="erreur 404"/>
             </Routes>
