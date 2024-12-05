@@ -44,17 +44,11 @@ interface Provider {
 export const SelectedGroupContext = createContext<SelectedGroupContextProps | undefined>(undefined);
 
 export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const [selectedGroup, setSelectedGroup] = useState<string>("me");
+    const [selectedGroup, setSelectedGroup] = useState<string>(() => {
+        return localStorage.getItem("selectedGroup") || "me";
+    });
     const [userGroups, setUserGroups] = useState<Group[]>([]);
     const navigate = useNavigate();
-
-    // Persistance, quand on reload la page, on garde le groupe sélectionné
-    useEffect(() => {
-        const storedGroup = localStorage.getItem("selectedGroup");
-        if (storedGroup) {
-            setSelectedGroup(storedGroup);
-        }
-    }, []);
 
     useEffect(() => {
         localStorage.setItem("selectedGroup", selectedGroup);
@@ -75,7 +69,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const navigateToPreferences = () => {
-        navigate("/protected/preference");
+        navigate("/protected/preferences");
     }
 
     // Logique pour récupérer les films en fonction du groupe sélectionné

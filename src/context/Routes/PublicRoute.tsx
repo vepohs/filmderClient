@@ -1,6 +1,6 @@
 // src/context/PublicRoute.tsx
 import {Navigate, Outlet} from 'react-router-dom';
-import {useAuth} from './AuthContext';
+import {useAuth} from '../AuthContext.tsx';
 import {useEffect} from "react";
 
 const PublicRoute = () => {

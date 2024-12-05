@@ -1,10 +1,10 @@
 // src/ProtectedRoute.tsx
 import {Navigate, Outlet} from 'react-router-dom';
-import {useAuth} from './AuthContext';
+import {useAuth} from '../AuthContext.tsx';
 import {useEffect} from "react";
 
 const ProtectedRoute = () => {
-    const {isAuthenticated, loading, verifyToken} = useAuth() || {};
+    const {isAuthenticated, loading, verifyToken} = useAuth();
 
     // Verif a chaque fois que le user veut une page si il est bien autentifier
     useEffect(() => {

@@ -1,5 +1,5 @@
 import {Navigate} from "react-router-dom";
-import {usePreferences} from "./PreferenceProvider";
+import {usePreferences} from "../PreferenceContext.tsx";
 import {useEffect} from "react";
 
 const PreferencesProtected: React.FC<{ children: React.ReactNode }> = ({children}) => {

@@ -9,6 +9,7 @@ import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 
 // @ts-ignore
 import "./_PreferencesPage.sass"
+import {usePreferences} from "../../context/PreferenceContext.tsx";
 
 interface PreferencesData {
     genrePreferenceIds: number[];
@@ -23,7 +24,9 @@ const PreferencesForm: React.FC = () => {
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
     const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
     const [isRewatchChecked, setIsRewatchChecked] = useState<boolean>(false);
+
     const {selectedGroup} = useSelectedGroup();
+    const {getPreferences} = usePreferences();
 
     const navigate = useNavigate();
 
@@ -81,10 +84,7 @@ const PreferencesForm: React.FC = () => {
 
     const askForPreferences = async () => {
         try {
-            console.log("getPreferencesUrl", requestPreferences());
             const response = await requestPreferences()
-            console.log("UUUUUUUUUUUUUUUUUUUUU", response);
-            // Extraction et mise à jour des préférences utilisateur
             const userGenrePreferences = response.data.genrePreference.map((genre: {
                 id: number;
                 name: string
@@ -110,17 +110,12 @@ const PreferencesForm: React.FC = () => {
                 providerPreferenceIds: selectedProviders,
                 rewatchPreference: isRewatchChecked,
             };
-            console.log("ICIII", data);
             await submitPreferencesRequest(data);
 
-            // Sans ca y a pas de vérif de préférences donc
-            // Soit le gars peut tt retirer et ca marche
-            // Soit a la création du compte hasPreferences reste a faux et ca redirige pas vers /protected
-            // Au pire on enmpec
-            // getPreferences();
+            // Met correctement a jour les préferences
+            getPreferences();
             alert("Préférences enregistrées avec succès !");
             navigate("/protected");
-
         } catch (error) {
             console.error("Erreur lors de l'envoi des préférences:", error);
             alert("Une erreur s'est produite lors de l'enregistrement des préférences.");

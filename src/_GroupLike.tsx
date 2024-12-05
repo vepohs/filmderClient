@@ -1,6 +1,6 @@
 import axiosWithAuth from "./axiosUtils/axiosConfig.ts";
 import {useContext} from "react";
-import {SelectedGroupContext} from "./context/SelectedGroupContext.tsx";
+import {SelectedGroupContext, useSelectedGroup} from "./context/SelectedGroupContext.tsx";
 
 // Renommez la fonction pour qu'elle commence par une majuscule et respecte les conventions React
 export function GroupLike() {
@@ -13,10 +13,14 @@ export function GroupLike() {
 //    const {selectedGroup} = selectedGroupContext;
 //    console.log(selectedGroup)
 
+    const {selectedGroup} = useSelectedGroup();
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    console.log(selectedGroup)
+
     async function hello() {
         try {
             const response = await axiosWithAuth.post("group/protected/getGroupMoviesCommon", {
-                groupId: "24dup0huucsvzko5ei2lnd"
+                groupId: {selectedGroup}
             });
             console.log("AAAAAAAA")
             console.log(response);

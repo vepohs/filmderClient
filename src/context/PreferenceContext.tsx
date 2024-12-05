@@ -1,4 +1,4 @@
-// src/context/PreferenceProvider.tsx
+// src/context/PreferenceContext.tsx
 import React, {createContext, useContext, useEffect, useState} from "react";
 import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 

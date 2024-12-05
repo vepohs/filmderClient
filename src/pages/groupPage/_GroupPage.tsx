@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 // @ts-ignore
 import "./_GroupPage.sass";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
 import GroupList from "./components/GroupList.tsx";
 import ActionButtons from "./components/ActionButtons.tsx";
 import Popup from "./components/Popup.tsx";
-import {SelectedGroupContext} from "../../context/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 
 export type Group = {
     groupId: number;
@@ -18,13 +18,8 @@ const GroupPage: React.FC = () => {
     const [popupMode, setPopupMode] = useState<"create" | "join">("create");
     const [popUpText, setpopUpText] = useState("");
 
-    const selectedGroupContext = useContext(SelectedGroupContext);
 
-    if (!selectedGroupContext) {
-        throw new Error("MiddleMainPage must be used within a SelectedGroupProvider");
-    }
-
-    const {getGroupsForUser} = selectedGroupContext;
+    const {getGroupsForUser} = useSelectedGroup();
 
     const handleOpenPopup = (mode: "create" | "join") => {
         setPopupMode(mode);

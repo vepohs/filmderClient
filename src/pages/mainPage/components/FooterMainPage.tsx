@@ -25,6 +25,7 @@ export function FooterMainPage() {
         <div className="footerPrefer">
             <button onClick={navigateToGroupPage}>Groupe</button>
             <button onClick={navigateToPreferences}>Parametre</button>
+            <button onClick={() => navigate("/protected/groupLike")}>LES LIKES</button>
             <label htmlFor="group-select">Mes Groupes:</label>
             <select
                 id="group-select"
