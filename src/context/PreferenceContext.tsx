@@ -19,7 +19,6 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
         try {
             const response = await axiosWithAuth.get("/users/protected/getUserPreferences");
             setHasPreferences(response.data.genrePreference.length > 0 && response.data.providerPreference.length > 0);
-
         } catch (error) {
             console.error("Erreur lors de la récupération des préférences:", error);
         } finally {
@@ -40,12 +39,8 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
 
 export const usePreferences = () => {
     const context = useContext(PreferenceContext);
-
-    if (!context) {
-        throw new Error(
-            "usePreferences must be used within a PreferenceProvider"
-        );
-    }
+    if (!context)
+        throw new Error("usePreferences must be used within a PreferenceProvider");
     return context;
 
 };

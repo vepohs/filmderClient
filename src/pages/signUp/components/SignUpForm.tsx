@@ -26,6 +26,7 @@ export function SignUpForm() {
     });
 
     const navigate = useNavigate();
+
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
 
         try {

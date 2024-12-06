@@ -21,11 +21,11 @@ export function LoginForm() {
         mode: 'onBlur',
     });
 
-    const auth = useAuth();
+    const {login} = useAuth()
 
     const tryLogin = async (data: LoginFormInputs) => {
         try {
-            await auth?.login(data);
+            login(data);
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {

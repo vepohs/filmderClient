@@ -31,8 +31,6 @@ const PreferencesForm: React.FC = () => {
     const navigate = useNavigate();
 
     const askForAllPreferences = async () => {
-        console.log("SELECTDSGROUP ")
-        console.log(selectedGroup)
         try {
             const response = await axiosWithAuth.get("users/protected/getPreferences");
             console.log("response", response);
@@ -122,13 +120,9 @@ const PreferencesForm: React.FC = () => {
         }
     };
 
-
     useEffect(() => {
-        const fetchData = async () => {
-            await askForAllPreferences();
-            await askForPreferences();
-        };
-        fetchData();
+        askForAllPreferences();
+        askForPreferences();
     }, []);
 
     return (

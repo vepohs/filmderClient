@@ -10,7 +10,6 @@ interface AuthContextType {
     loading: boolean;
     login: (credentials: LoginFormInputs) => void;
     logout: () => void;
-    verifyToken: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -20,8 +19,7 @@ const AuthContext = createContext<AuthContextType>({
     },
     logout: () => {
     },
-    verifyToken: async () => {
-    },
+
 });
 
 export const AuthProvider = ({children}: { children: React.ReactNode }) => {
@@ -46,10 +44,8 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     };
 
     const login = async (credentials: LoginFormInputs) => {
-        //TODO peut etre faire la connextion dans AuthContext non ?
+        // TODO : handle error et averir l'utilisateur
         const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
-        console.log("QUIJESUISLA");
-        console.log(response)
         const accesToken = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
         localStorage.setItem('accessToken', accesToken);
@@ -57,22 +53,28 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
         setIsAuthenticated(true);
     };
 
-    useEffect(() => {
-        console.log("isAuthenticated a changé :", isAuthenticated);
-    }, [isAuthenticated]);
-
     const logout = () => {
         setIsAuthenticated(false);
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        // TODO renvoyer a la page de login
     };
 
+    // Permet de vérifier a chaque fois qu'on change de page ou qu'on reload la page si le token est toujours valide
+    useEffect(() => {
+        verifyToken();
+    }, []);
+
     return (
-        <AuthContext.Provider value={{isAuthenticated, loading, verifyToken, login, logout}}>
+        <AuthContext.Provider value={{isAuthenticated, loading, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
 };
 
 export const useAuth = () => {
-    return useContext(AuthContext);
+    const context = useContext(AuthContext);
+    if (!context)
+        throw new Error('useAuth must be used within a AuthProvider');
+    return context;
 };

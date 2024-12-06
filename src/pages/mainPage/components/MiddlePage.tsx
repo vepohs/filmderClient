@@ -25,7 +25,6 @@ interface Provider {
     logoPath: string;
 }
 
-
 const MiddleMainPage: React.FC = () => {
 
     const [movies, setMovies] = useState<Movie[]>([]);
