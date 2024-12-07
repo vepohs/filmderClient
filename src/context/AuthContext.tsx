@@ -76,6 +76,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
             );
 
             if (response.status === 200) {
+                //TODO delete les autres trucs dans le local storage
                 localStorage.removeItem("accessToken");
                 localStorage.removeItem("refreshToken");
                 setIsAuthenticated(false)

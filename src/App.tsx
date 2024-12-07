@@ -8,11 +8,11 @@ import _GroupPage from "./pages/groupPage/_GroupPage.tsx";
 // @ts-ignore
 import "./App.sass"
 import _MainPage from "./pages/mainPage/_MainPage.tsx";
-import {GroupLike} from "./pages/groupLike/_GroupLike.tsx";
 import PreferencesForm from "./pages/preferences/PreferencesPage.tsx";
 import SelectedGroupRoute from "./context/Routes/SelectedGroupRoute.tsx";
 import PreferenceRoute from "./context/Routes/PreferenceRoute.tsx";
 import {AuthProvider} from "./context/AuthContext.tsx";
+import _GroupLike from "./pages/groupLike/_GroupLike.tsx";
 
 function App() {
     return (
@@ -39,7 +39,7 @@ function App() {
                         </Route>
 
                         <Route path="groupPage" element={<_GroupPage/>}/>
-                        <Route path="groupLike" element={<GroupLike/>}/>
+                        <Route path="groupLike" element={<_GroupLike/>}/>
 
                         <Route path="*" element="erreur 404"/>
                     </Route>
