@@ -55,13 +55,38 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
         setIsAuthenticated(true);
     };
 
-    const logout = () => {
-        setIsAuthenticated(false);
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        navigate('/login');
-    };
+    const logout = async () => {
+        try {
 
+            // Récupération du refreshToken depuis localStorage
+            const refreshToken = localStorage.getItem('refreshToken');
+            if (!refreshToken) {
+                throw new Error("No refresh token available in localStorage");
+            }
+
+            // Appel de l'API pour rafraîchir le token
+            const response = await axiosWithAuth.post(
+                `${API_BASE_URL}/api/auth/refreshToken`,
+                {}, // Corps de requête vide
+                {
+                    headers: {
+                        'refreshtoken': refreshToken, // Ajout du refreshToken dans les headers
+                    },
+                }
+            );
+
+            if (response.status === 200) {
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                setIsAuthenticated(false)
+                navigate("/login");
+            } else {
+                console.error("Failed to refresh token. Logging out...");
+            }
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
     // Permet de vérifier a chaque fois qu'on change de page ou qu'on reload la page si le token est toujours valide
     useEffect(() => {
         verifyToken();
