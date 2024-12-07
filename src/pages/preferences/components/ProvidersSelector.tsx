@@ -1,14 +1,13 @@
 import React from "react";
 // @ts-ignore
 import "../_PreferencesPage.sass";
+import {usePreferences} from "../../../context/PreferenceContext.tsx";
 
-interface ProviderSelectorProps {
-    providers: { id: number; name: string }[];
-    selectedProviders: number[];
-    setSelectedProviders: React.Dispatch<React.SetStateAction<number[]>>;
-}
 
-const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers, selectedProviders, setSelectedProviders}) => {
+const ProviderSelector: React.FC = () => {
+
+    const {setSelectedProviders, selectedProviders, allProviders} = usePreferences();
+
     const toggleProvider = (providerId: number) => {
         setSelectedProviders((prevSelected) =>
             prevSelected.includes(providerId)
@@ -20,7 +19,7 @@ const ProviderSelector: React.FC<ProviderSelectorProps> = ({providers, selectedP
     console.log("selectedProviders", selectedProviders);
     return (
         <div className="providerContainer">
-            {providers.map((provider) => (
+            {allProviders.map((provider) => (
                 <button
                     key={provider.id}
                     onClick={() => toggleProvider(provider.id)}
