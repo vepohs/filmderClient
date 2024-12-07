@@ -14,6 +14,7 @@ interface PreferenceContextType {
     setSelectedGenres: React.Dispatch<React.SetStateAction<number[]>>;
     setSelectedProviders: React.Dispatch<React.SetStateAction<number[]>>;
     submitPreferences: () => void;
+    askForPreferences: () => void;
 }
 
 interface PreferencesData {
@@ -62,9 +63,6 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
         }
     }
 
-    useEffect(() => {
-        askForAllPreferences();
-    }, []);
 
     const requestPreferences = () => {
         if (selectedGroup === "me") {
@@ -77,14 +75,10 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     };
 
     const askForPreferences = async () => {
-        console.log("askForPreferences");
         setLoading(true);
-
         try {
 
             const response = await requestPreferences()
-            console.log("response", response);
-            console.log(selectedGroup)
             const userGenrePreferences = response.data.genrePreference.map((genre: {
                 id: number;
                 name: string
@@ -142,9 +136,12 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     // Si le groupe n'a pas de préférences, on redirige vers la page de préférences
     useEffect(() => {
         askForPreferences();
-
     }, [selectedGroup]);
 
+    useEffect(() => {
+        askForAllPreferences();
+    }, []);
+    
     return (
         <PreferenceContext.Provider value={{
             hasPreferences,
@@ -156,6 +153,7 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             setSelectedGenres,
             setSelectedProviders,
             submitPreferences,
+            askForPreferences
         }}>
             {children}
         </PreferenceContext.Provider>

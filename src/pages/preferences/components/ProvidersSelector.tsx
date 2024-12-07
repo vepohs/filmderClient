@@ -16,7 +16,6 @@ const ProviderSelector: React.FC = () => {
         );
     };
 
-    console.log("selectedProviders", selectedProviders);
     return (
         <div className="providerContainer">
             {allProviders.map((provider) => (

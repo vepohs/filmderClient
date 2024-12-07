@@ -11,7 +11,6 @@ const ReWatchCheckBox: React.FC<CheckboxProps> = ({label, isChecked, setIsChecke
         setIsChecked(!isChecked);
     };
 
-    console.log("isChecked", isChecked);
     return (
         <label style={{display: "flex", alignItems: "center", cursor: "pointer"}}>
             <input
