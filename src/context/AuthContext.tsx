@@ -4,6 +4,7 @@ import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 import axios from "axios";
 import {LoginFormInputs} from "../types/formInputsTypes.ts";
 import {API_BASE_URL} from "../config/constants.ts";
+import {useNavigate} from "react-router-dom";
 
 interface AuthContextType {
     isAuthenticated: boolean | null;
@@ -25,6 +26,7 @@ const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const verifyToken = async () => {
         try {
@@ -57,7 +59,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
         setIsAuthenticated(false);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        // TODO renvoyer a la page de login
+        navigate('/login');
     };
 
     // Permet de vérifier a chaque fois qu'on change de page ou qu'on reload la page si le token est toujours valide

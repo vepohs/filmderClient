@@ -1,8 +1,8 @@
-// src/context/PublicRoute.tsx
+// src/context/PublicGuard.tsx
 import {Navigate, Outlet} from 'react-router-dom';
 import {useAuth} from '../AuthContext.tsx';
 
-const PublicRoute = () => {
+const PublicGuard = () => {
     const {isAuthenticated, loading} = useAuth();
 
 // La vérif de la validiter du token ce fait dans le useEffect dans AuthContext
@@ -15,4 +15,4 @@ const PublicRoute = () => {
     return !isAuthenticated ? <Outlet/> : <Navigate to="/protected"/>;
 };
 
-export default PublicRoute;
+export default PublicGuard;

@@ -1,8 +1,8 @@
-// src/ProtectedRoute.tsx
+// src/AuthenticatedGuard.tsx
 import {Navigate, Outlet} from 'react-router-dom';
 import {useAuth} from '../AuthContext.tsx';
 
-const ProtectedRoute = () => {
+const AuthenticatedGuard = () => {
     const {isAuthenticated, loading} = useAuth();
 
 // La vérif de la validiter du token ce fait dans le useEffect dans AuthContext
@@ -18,4 +18,4 @@ const ProtectedRoute = () => {
         <Navigate to="/login" replace/>
     );
 };
-export default ProtectedRoute;
+export default AuthenticatedGuard;

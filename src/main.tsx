@@ -5,14 +5,11 @@ import App from "./App.tsx";
 import "./axiosUtils/axiosConfig.ts"
 // @ts-ignore
 import "./App.sass"
-import {AuthProvider} from "./context/AuthContext.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <AuthProvider>
-            <BrowserRouter>
-                <App/>
-            </BrowserRouter>
-        </AuthProvider>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </StrictMode>
 )

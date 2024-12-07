@@ -1,7 +1,7 @@
 import {Navigate} from "react-router-dom";
 import {usePreferences} from "../PreferenceContext.tsx";
 
-const PreferencesProtected: React.FC<{ children: React.ReactNode }> = ({children}) => {
+const PreferencesGuard: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const {hasPreferences, loading} = usePreferences();
 
     if (loading || hasPreferences === null) {
@@ -11,4 +11,4 @@ const PreferencesProtected: React.FC<{ children: React.ReactNode }> = ({children
     return hasPreferences ? <>{children}</> : <Navigate to="/protected/preferences" replace/>;
 };
 
-export default PreferencesProtected;
+export default PreferencesGuard;
