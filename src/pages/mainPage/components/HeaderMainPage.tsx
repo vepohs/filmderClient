@@ -1,3 +1,4 @@
+// @ts-ignore
 import "../style/HeaderMainPage.sass";
 import MyLogo from "../../../common/icons/filmderIcon.tsx";
 import {SvgLogout} from "./icons/SvgLogout.tsx";
