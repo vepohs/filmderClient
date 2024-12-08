@@ -1,0 +1,48 @@
+.groupLikePage
+  padding: 20px
+
+  h1, h2
+    margin-bottom: 10px
+
+  .sectionItem
+    margin-bottom: 20px
+
+    h2
+      display: flex
+      align-items: center
+      gap: 5px
+
+  ul
+    display: flex
+    gap: 10px
+    flex-wrap: wrap
+
+  .movieItem
+    list-style: none
+
+    img
+      width: 100px
+      height: 150px
+      border-radius: 8px
+      object-fit: cover
+
+
+.popupOverlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 50%
+  height: 50%
+  background: rgba(0, 0, 0, 0.7)
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 1000
+
+.popupContent
+  background: white
+  padding: 20px
+  border-radius: 10px
+  max-width: 600px
+  width: 50%
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)

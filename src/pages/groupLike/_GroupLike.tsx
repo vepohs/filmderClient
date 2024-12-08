@@ -3,6 +3,10 @@ import UserList from "./components/UserList.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
 import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 
+import MovieDisplay from "../mainPage/components/MovieDisplay.tsx"; // Import du style
+// @ts-ignore
+import "./_GroupKike.sass"
+
 // Fonction utilitaire pour mapper un film
 const mapMovie = (item: any) => ({
     id: item.movie.id,
@@ -45,12 +49,11 @@ const GroupLike: React.FC = () => {
     const [users, setUsers] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
     const [movies, setMovies] = useState<Movie[]>([]);
+    const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null); // État pour la popup
 
     const fetchGroupUsers = async () => {
         try {
             const response = await axiosWithAuth.post("group/protected/getGroupUsers", selectedGroup);
-            console.log("les usersssssss")
-            console.log(response.data)
             setUsers(response.data);
             setSelectedUsers(response.data.map((user: { id: string }) => user.id));
         } catch (error) {
@@ -79,6 +82,14 @@ const GroupLike: React.FC = () => {
         );
     };
 
+    const openMoviePopup = (movie: Movie) => {
+        setSelectedMovie(movie);
+    };
+
+    const closeMoviePopup = () => {
+        setSelectedMovie(null);
+    };
+
     useEffect(() => {
         fetchGroupUsers();
     }, []);
@@ -102,42 +113,47 @@ const GroupLike: React.FC = () => {
     }, {} as Record<number, Movie[]>);
 
     return (
-        <div style={{padding: "20px"}}>
+        <div className="groupLikePage">
             <h1>Group Users</h1>
             <UserList users={users} toggleUserSelection={toggleUserSelection} selectedUsers={selectedUsers}/>
 
             <h2>Films et likes du groupe</h2>
-            <div className="groupLikePage">
-                <ul>
-                    {Object.entries(groupedMovies)
-                        .sort(([a], [b]) => parseInt(b) - parseInt(a)) // Trier les sections par likes décroissants
-                        .map(([count, movies]) => (
-                            <li key={count} className="sectionItem">
-                                <h2>
-                                    {Array.from({length: parseInt(count)}).map((_, index) => (
-                                        <span key={index}>❤️</span>
-                                    ))}
-                                </h2>
-                                <ul style={{display: "flex", gap: "10px", flexWrap: "wrap"}}>
-                                    {movies.map((movie) => (
-                                        <li key={movie.id} style={{listStyle: "none"}}>
-                                            <img
-                                                src={movie.imagePath}
-                                                alt={movie.title}
-                                                style={{
-                                                    width: "100px",
-                                                    height: "150px",
-                                                    borderRadius: "8px",
-                                                    objectFit: "cover",
-                                                }}
-                                            />
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                        ))}
-                </ul>
-            </div>
+            <ul>
+                {Object.entries(groupedMovies)
+                    .sort(([a], [b]) => parseInt(b) - parseInt(a)) // Trier les sections par likes décroissants
+                    .map(([count, movies]) => (
+                        <li key={count} className="sectionItem">
+                            <h2>
+                                {Array.from({length: parseInt(count)}).map((_, index) => (
+                                    <span key={index}>❤️</span>
+                                ))}
+                            </h2>
+                            <ul>
+                                {movies.map((movie) => (
+                                    <li key={movie.id} className="movieItem">
+                                        <img
+                                            src={movie.imagePath}
+                                            alt={movie.title}
+                                            onClick={() => openMoviePopup(movie)} // Affiche la popup
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    ))}
+            </ul>
+
+            {selectedMovie && ( // Affiche la popup si un film est sélectionné
+                <div className="popupOverlay" onClick={closeMoviePopup}>
+                    <div className="popupContent" onClick={(e) => e.stopPropagation()}>
+                        <MovieDisplay
+                            movie={selectedMovie}
+                            onLike={() => console.log("Like")}
+                            onDislike={() => console.log("Dislike")}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
