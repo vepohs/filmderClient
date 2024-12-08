@@ -8,10 +8,6 @@ export function FooterMainPage() {
 
     const {selectedGroup, setSelectedGroup, userGroups, navigateToPreferences} = useSelectedGroup();
 
-    const navigateToGroupPage = () => {
-        navigate("/protected/groupPage"); // Redirige vers la route groupPage
-    };
-
     const handleComboBoxChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
         const selectedGroup = e.target.value;
