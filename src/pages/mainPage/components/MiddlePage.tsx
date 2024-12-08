@@ -1,13 +1,15 @@
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
-import React, {useEffect, useRef, useState} from "react";
+import  {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import {SvgLike} from "./icons/SvgLike.tsx";
 import {SvgDislike} from "./icons/SvgDislike.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {CardContainer} from "./CardContainer.tsx";
+
 
 interface Movie {
-    // TODO je sais pas trop le type qu'on doit mettre 
+    // TODO je sais pas trop le type qu'on doit mettre
     providers: Provider[];
     synopsis: string;
     averageGrade: number;
@@ -25,7 +27,7 @@ interface Provider {
     logoPath: string;
 }
 
-const MiddleMainPage: React.FC = () => {
+export function MiddleMainPage() {
 
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -86,14 +88,17 @@ const MiddleMainPage: React.FC = () => {
             <h1>Aucun film à afficher pour le moment. Veuillez réessayer plus tard.</h1>
         );
     }
-
+    const swiped = (direction) => {
+        if (direction === 'like') handleSwipe(true)
+        if (direction === 'dislike') handleSwipe(false)
+    };
 
     return (
         <div className="middleMainPage" ref={containerRef}>
             <div className="imageContainer">
-                <img src={movies[0].imagePath} alt="Image description"/>
-                <SvgLike onClick={() => handleSwipe(true)}/>
+                <CardContainer onSwipe={swiped} backgroundImage1={movies[0].imagePath} backgroundImage2={movies[1].imagePath}/>
                 <SvgDislike onClick={() => handleSwipe(false)}/>
+                <SvgLike onClick={() => handleSwipe(true)}/>
             </div>
             <div className="detailContainer">
                 <div className='title_duration_container'>
@@ -120,4 +125,3 @@ const MiddleMainPage: React.FC = () => {
         </div>
     );
 }
-export default MiddleMainPage;
