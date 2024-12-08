@@ -115,6 +115,7 @@ const GroupLike: React.FC = () => {
     return (
         <div className="groupLikePage">
             <h1>Group Users</h1>
+            <h1> le code pour rejoindre le groupe est <br/> {selectedGroup}</h1>
             <UserList users={users} toggleUserSelection={toggleUserSelection} selectedUsers={selectedUsers}/>
 
             <h2>Films et likes du groupe</h2>

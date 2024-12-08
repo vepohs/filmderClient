@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 // @ts-ignore
-import "./_GroupPage.sass";
-import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
-import GroupList from "./components/GroupList.tsx";
-import ActionButtons from "./components/ActionButtons.tsx";
-import Popup from "./components/Popup.tsx";
-import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
+import "../style/groupManagement.sass";
+import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
+import ActionButtons from "./ActionButtons.tsx";
+import Popup from "./Popup.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 
 export type Group = {
     groupId: number;
@@ -33,12 +32,9 @@ const GroupPage: React.FC = () => {
 
     const handleCreateGroupSubmit = async () => {
         if (popUpText.trim()) {
-
-            console.log("LE NOM DU GROUPE C", popUpText);
-            const response = await axiosWithAuth.post("/group/protected/groupAdd", {
+            await axiosWithAuth.post("/group/protected/groupAdd", {
                 name: popUpText,
             });
-            console.log("LA REPONSE RECU C :", response);
             await getGroupsForUser()
             handlePopupClose();
         } else {
@@ -49,10 +45,9 @@ const GroupPage: React.FC = () => {
     const handleJoinGroupSubmit = async () => {
         if (popUpText.trim()) {
             try {
-                const response = await axiosWithAuth.post("/group/protected/groupJoin", {
+                await axiosWithAuth.post("/group/protected/groupJoin", {
                     groupId: popUpText,
                 });
-                console.log("Joining group response:", response);
                 alert("You successfully joined the group!");
                 getGroupsForUser();
                 handlePopupClose();
@@ -82,7 +77,7 @@ const GroupPage: React.FC = () => {
         <div className="group-page">
             <h1>Group Page</h1>
             <ActionButtons onOpenPopup={handleOpenPopup}/>
-            <GroupList/>
+            { /* <GroupList/> */}
             {isPopupOpen && (
                 <Popup
                     mode={popupMode}

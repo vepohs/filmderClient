@@ -4,7 +4,7 @@ import {Route, Routes} from "react-router-dom";
 import AuthenticatedGuard from "./context/Guard/AuthenticatedGuard.tsx";
 import PublicGuard from "./context/Guard/PublicGuard.tsx";
 import PreferencesGuard from "./context/Guard/PreferencesGuard.tsx";
-import _GroupPage from "./pages/groupPage/_GroupPage.tsx";
+import _GroupPage from "./pages/mainPage/components/groupManagement.tsx";
 // @ts-ignore
 import "./App.sass"
 import _MainPage from "./pages/mainPage/_MainPage.tsx";
@@ -13,6 +13,7 @@ import SelectedGroupRoute from "./context/Routes/SelectedGroupRoute.tsx";
 import PreferenceRoute from "./context/Routes/PreferenceRoute.tsx";
 import {AuthProvider} from "./context/AuthContext.tsx";
 import _GroupLike from "./pages/groupLike/_GroupLike.tsx";
+import SelectedGroupGuard from "./context/Guard/SelectedGroupGuard.tsx";
 
 function App() {
     return (
@@ -38,9 +39,11 @@ function App() {
                             />
                         </Route>
 
-                        <Route path="groupPage" element={<_GroupPage/>}/>
-                        <Route path="groupLike" element={<_GroupLike/>}/>
 
+                        <Route path="groupPage" element={<_GroupPage/>}/>
+                        <Route element={<SelectedGroupGuard/>}>
+                            <Route path="groupLike" element={<_GroupLike/>}/>
+                        </Route>
                         <Route path="*" element="erreur 404"/>
                     </Route>
                 </Route>

@@ -1,6 +1,6 @@
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
-import  {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import {SvgLike} from "./icons/SvgLike.tsx";
 import {SvgDislike} from "./icons/SvgDislike.tsx";
@@ -62,7 +62,7 @@ export function MiddleMainPage() {
     };
 
     const handleSwipe = (liked: boolean) => {
-        console.log(liked)
+        console.log(movies)
         if (movies.length > 0) {
             sendSwipeResponse(movies[0].id, liked); // "liked" indique si c'est un like ou un dislike
             handleNextImage();
@@ -96,7 +96,8 @@ export function MiddleMainPage() {
     return (
         <div className="middleMainPage" ref={containerRef}>
             <div className="imageContainer">
-                <CardContainer onSwipe={swiped} backgroundImage1={movies[0].imagePath} backgroundImage2={movies[1].imagePath}/>
+                <CardContainer onSwipe={swiped} backgroundImage1={movies[0].imagePath}
+                               backgroundImage2={movies[1].imagePath}/>
                 <SvgDislike onClick={() => handleSwipe(false)}/>
                 <SvgLike onClick={() => handleSwipe(true)}/>
             </div>
