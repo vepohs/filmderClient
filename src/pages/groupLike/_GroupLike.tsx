@@ -3,9 +3,10 @@ import UserList from "./components/UserList.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
 import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 
-import MovieDisplay from "../mainPage/components/MovieDisplay.tsx"; // Import du style
+
 // @ts-ignore
 import "./_GroupKike.sass"
+import {MovieDisplay} from "../mainPage/components/MovieDisplay.tsx";
 
 // Fonction utilitaire pour mapper un film
 const mapMovie = (item: any) => ({
@@ -148,9 +149,8 @@ const GroupLike: React.FC = () => {
                 <div className="popupOverlay" onClick={closeMoviePopup}>
                     <div className="popupContent" onClick={(e) => e.stopPropagation()}>
                         <MovieDisplay
-                            movie={selectedMovie}
-                            onLike={() => console.log("Like")}
-                            onDislike={() => console.log("Dislike")}
+                            movie1={selectedMovie}
+                            onSwipe={() => {console.log("swipe")}}
                         />
                     </div>
                 </div>

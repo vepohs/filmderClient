@@ -6,7 +6,27 @@ import {
     AnimatePresence
 } from "framer-motion";
 
-function Card(props) {
+interface CardContainerProps {
+    firstBackgroundImage: string;
+    secondBackgroundImage?: string;
+    onSwipe: (like: boolean) => void;
+}
+interface CardProps {
+    backgroundImage: string;
+    onSwipe?: (like: boolean) => void;
+    index?: number;
+    setIndex?: (index: number) => void;
+    drag?: "x" | "y" | boolean;
+}
+
+
+function Card({
+                  backgroundImage,
+                  onSwipe,
+                  index,
+                  setIndex,
+                  drag
+              }: CardProps) {
     const [exitX, setExitX] = useState(0);
 
     const x = useMotionValue(0);
@@ -17,7 +37,7 @@ function Card(props) {
 
     const variantsFrontCard = {
         animate: { scale: 1, y: 0, opacity: 1 },
-        exit: (custom) => ({
+        exit: (custom: number) => ({
             x: custom,
             opacity: 0,
             scale: 1.05,
@@ -25,16 +45,16 @@ function Card(props) {
         })
     };
 
-    function handleDragEnd(_, info) {
+    function handleDragEnd(_: any, info: any) {
         if (info.offset.x < -100) {
             setExitX(-250);
-            props.setIndex(props.index + 1);
-            props.onSwipe("dislike");
+            setIndex?.(index! + 1);
+            onSwipe?.(false);
         }
         if (info.offset.x > 100) {
             setExitX(250);
-            props.setIndex(props.index + 1);
-            props.onSwipe("like");
+            setIndex?.(index! + 1);
+            onSwipe?.(true);
         }
     }
 
@@ -47,7 +67,7 @@ function Card(props) {
                 cursor: "grab"
             }}
             whileTap={{ cursor: "grabbing" }}
-            drag={props.drag}
+            drag={drag}
             dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
             onDragEnd={handleDragEnd}
             variants={variantsFrontCard}
@@ -65,35 +85,38 @@ function Card(props) {
                 className="card"
                 style={{
                     scale,
-                    backgroundImage: `url(${props.backgroundImage})`, // Utilisation correcte des backticks
-                    backgroundSize: "contain", // Assure que l'image est entièrement visible
-                    backgroundRepeat: "no-repeat", // Évite la répétition de l'image
-                    backgroundPosition: "center", // Centre l'image dans l'élément
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
                 }}
             />
         </motion.div>
     );
 }
 
-export function CardContainer(props) {
+
+export function CardContainer({
+                                  onSwipe,
+                                  firstBackgroundImage,
+                                  secondBackgroundImage
+                              }: CardContainerProps) {
     const [index, setIndex] = useState(0);
 
     return (
         <motion.div className="draggableContainer">
             <AnimatePresence initial={false}>
+                {secondBackgroundImage && (
+                    <Card backgroundImage={secondBackgroundImage} />
+                )}
                 <Card
-                    backgroundImage={props.backgroundImage2}
-                />
-                <Card
-                    onSwipe={props.onSwipe}
+                    onSwipe={onSwipe}
                     key={index}
-                    frontCard={true}
                     index={index}
                     setIndex={setIndex}
                     drag="x"
-                    backgroundImage={props.backgroundImage1}
+                    backgroundImage={firstBackgroundImage}
                 />
-
             </AnimatePresence>
         </motion.div>
     );

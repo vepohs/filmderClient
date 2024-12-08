@@ -1,12 +1,10 @@
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import "../style/MiddleMainPage.sass";
 import {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {SvgLike} from "./icons/SvgLike.tsx";
-import {SvgDislike} from "./icons/SvgDislike.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
-import {CardContainer} from "./CardContainer.tsx";
-
+import {MovieDisplay} from "./MovieDisplay.tsx";
 
 interface Movie {
     // TODO je sais pas trop le type qu'on doit mettre
@@ -62,7 +60,7 @@ export function MiddleMainPage() {
     };
 
     const handleSwipe = (liked: boolean) => {
-        console.log(movies)
+        console.log(liked)
         if (movies.length > 0) {
             sendSwipeResponse(movies[0].id, liked); // "liked" indique si c'est un like ou un dislike
             handleNextImage();
@@ -81,48 +79,23 @@ export function MiddleMainPage() {
             }
         }
     };
-
-    if (!movies.length) {
-        return (
-            //TODO mettre une animation de login
-            <h1>Aucun film à afficher pour le moment. Veuillez réessayer plus tard.</h1>
-        );
-    }
-    const swiped = (direction) => {
-        if (direction === 'like') handleSwipe(true)
-        if (direction === 'dislike') handleSwipe(false)
+    const swiped = (liked: boolean) => {
+        handleSwipe(liked);
     };
+
 
     return (
         <div className="middleMainPage" ref={containerRef}>
-            <div className="imageContainer">
-                <CardContainer onSwipe={swiped} backgroundImage1={movies[0].imagePath}
-                               backgroundImage2={movies[1].imagePath}/>
-                <SvgDislike onClick={() => handleSwipe(false)}/>
-                <SvgLike onClick={() => handleSwipe(true)}/>
-            </div>
-            <div className="detailContainer">
-                <div className='title_duration_container'>
-                    <div className='title'>{movies[0].title}</div>
-                    <div className='duration'>{movies[0].duration} min</div>
-                </div>
-                <div className='releaseDate'>{movies[0].releaseDate}</div>
-                <div className='grade_votes_container'>
-                    <div className='votes'> Votes: {movies[0].votes} </div>
-                    <div className='averageGrade'>{movies[0].averageGrade.toFixed(1)}/10</div>
-                </div>
-
-                <div className='synopsisContainer'>
-                    <div className='synopsis'>{movies[0].synopsis}</div>
-                </div>
-                <div className="providersContainer">
-                    {movies[0].providers.map((provider: Provider) => (
-                        <div key={provider.id} className="provider">
-                            <img src={provider.logoPath} alt={provider.name} className="providerLogo"/>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            {!movies.length ? (
+                <div className="spinner"></div>
+            ) : (
+                <MovieDisplay
+                    movie1={movies[0]}
+                    movie2={movies[1]}
+                    onSwipe={swiped}
+                />
+            )}
         </div>
     );
+
 }

@@ -1,9 +1,37 @@
 
+
+
+
+.spinner
+  position: absolute
+  top: 47%
+  left: 42%
+  border: 8px solid rgb(64, 3, 3)
+  border-top: 8px solid #ffffff
+  border-radius: 50%
+  width: 60px
+  height: 60px
+  animation: spin 1s linear infinite
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.imageContainer
+      height: 100%
+      width: 100%
+      position: relative
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
 .middleMainPage
   height: 78%
   width: 100%
   overflow: scroll
   scroll-behavior: smooth
+
 
 
   .imageContainer
