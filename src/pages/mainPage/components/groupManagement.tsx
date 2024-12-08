@@ -75,7 +75,7 @@ const GroupPage: React.FC = () => {
 
     return (
         <div className="group-page">
-            <h1>Group Page</h1>
+
             <ActionButtons onOpenPopup={handleOpenPopup}/>
             { /* <GroupList/> */}
             {isPopupOpen && (

@@ -1,4 +1,92 @@
+// Variables Sass
+$border-color: #ccc
+$border-radius: 8px
+$padding: 10px
+$background-color: #f9f9f9
+$active-background-color: #e0f7fa
+$text-color: #555
+$hover-color: #007bff
+
+// Footer principal
 .footerPrefer
   width: 100%
   height: 20%
   flex-shrink: 0
+
+// Combo Box personnalisé
+.customComboBox
+  margin-top: 10px
+  position: relative
+  width: 60%
+
+  // Groupe sélectionné
+  .selectedGroup
+    border: 1px solid $border-color
+    border-radius: $border-radius
+    padding: $padding
+    background-color: $background-color
+    cursor: pointer
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    .groupName
+      flex: 1
+      text-align: left
+      margin-right: 10px
+
+    .iconsContainer
+      display: flex
+      align-items: center
+      gap: 5px
+
+    .dropdownIcon
+      margin-left: 10px
+      font-size: 1.5rem
+      color: $text-color
+
+  // Liste des groupes
+  .groupList
+    list-style: none
+    margin: 0
+    padding: 0
+    border: 1px solid $border-color
+    border-radius: $border-radius
+    background-color: $background-color
+    position: absolute
+    width: 100%
+    top: 100%
+    // Positionné juste sous l'élément sélectionné
+    left: 0
+    z-index: 10
+
+    .groupItem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      padding: 8px
+      cursor: pointer
+      border-bottom: 1px solid lighten($border-color, 30%)
+
+      &:last-child
+        border-bottom: none
+      // Supprime la bordure pour le dernier élément
+
+      &:hover
+        background-color: lighten($background-color, 10%)
+
+      &.active
+        background-color: $active-background-color
+        font-weight: bold
+
+
+.groupSettingsIcon
+  cursor: pointer
+  color: $text-color
+  height: 20px
+  width: 20px
+  margin-left: 10px
+  // Taille ajustée pour réduire la hauteur
+
+  &:hover
+    color: $hover-color

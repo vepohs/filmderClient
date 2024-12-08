@@ -75,10 +75,14 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     };
 
     const askForPreferences = async () => {
+        console.log("askForPreferences de")
+        console.log(selectedGroup)
         setLoading(true);
         try {
 
             const response = await requestPreferences()
+            console.log("voici les preference")
+            console.log(response)
             const userGenrePreferences = response.data.genrePreference.map((genre: {
                 id: number;
                 name: string
@@ -113,16 +117,21 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
 
     const submitPreferences = async () => {
         try {
-
+            console.log("submitPreferences")
+            console.log(selectedGroup)
+            console.log(selectedGenres)
+            console.log(selectedProviders)
             const data: PreferencesData = {
                 genrePreferenceIds: selectedGenres,
                 providerPreferenceIds: selectedProviders,
                 // rewatchPreference: isRewatchChecked,
             };
+            console.log("c est la data que j'envoie")
+            console.log(data)
             await submitPreferencesRequest(data);
 
             // Met correctement a jour les préferences
-            askForPreferences();
+            await askForPreferences();
             alert("Préférences enregistrées avec succès !");
             navigate("/protected");
         } catch (error) {
@@ -131,17 +140,19 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
         }
     };
 
-
     // Verif que a chaque fois qu'un groupe est selectionné, ce groupe a des préférences
     // Si le groupe n'a pas de préférences, on redirige vers la page de préférences
     useEffect(() => {
+        console.log("G CHANGE DE GROUP")
+        console.log(selectedGroup)
         askForPreferences();
     }, [selectedGroup]);
 
     useEffect(() => {
+        console.log("JE SUIS DANS LE USE EFFECT")
         askForAllPreferences();
     }, []);
-    
+
     return (
         <PreferenceContext.Provider value={{
             hasPreferences,

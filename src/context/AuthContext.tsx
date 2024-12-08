@@ -48,6 +48,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const login = async (credentials: LoginFormInputs) => {
         // TODO : handle error et averir l'utilisateur
         const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
+        console.log(response)
         const accesToken = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
         localStorage.setItem('accessToken', accesToken);
