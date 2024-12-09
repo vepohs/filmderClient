@@ -5,25 +5,8 @@ import {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {MovieDisplay} from "./MovieDisplay.tsx";
+import {Movie} from "../../../types/MovieAndProviders.ts";
 
-interface Movie {
-    // TODO je sais pas trop le type qu'on doit mettre
-    providers: Provider[];
-    synopsis: string;
-    averageGrade: number;
-    duration: number;
-    id: number;
-    imagePath: string;
-    releaseDate: string;
-    title?: string;
-    votes: number;
-}
-
-interface Provider {
-    id: number;
-    name: string;
-    logoPath: string;
-}
 
 export function MiddleMainPage() {
 

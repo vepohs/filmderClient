@@ -2,6 +2,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import axiosWithAuth from "../axiosUtils/axiosConfig";
 import {useNavigate} from "react-router-dom";
+import {Movie} from "../types/MovieAndProviders.ts";
 
 interface Group {
     groupId: string;
@@ -15,31 +16,12 @@ interface SelectedGroupContextProps {
     getGroupsForUser: () => Promise<void>; // Exposition de la fonction dans le contexte
     navigateToPreferences: () => void;
     fetchMoviesForGroup: (excludedIds: number[]) => Promise<Movie[]>;
-
 }
 
 interface MovieResponse {
     movies: Movie[];
 }
 
-interface Movie {
-    // TODO je sais pas trop le type qu'on doit mettre
-    providers: Provider[];
-    synopsis: string;
-    averageGrade: number;
-    duration: number;
-    id: number;
-    imagePath: string;
-    releaseDate: string;
-    title?: string;
-    votes: number;
-}
-
-interface Provider {
-    id: number;
-    name: string;
-    logoPath: string;
-}
 
 export const SelectedGroupContext = createContext<SelectedGroupContextProps | undefined>(undefined);
 
@@ -61,6 +43,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
     async function getGroupsForUser(): Promise<void> {
         try {
             const response = await axiosWithAuth.get("/users/protected/getGroup");
+            console.log("ZINZIN")
             console.log(response)
             setUserGroups(response.data.group);
         } catch (error) {

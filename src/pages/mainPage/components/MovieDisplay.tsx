@@ -5,24 +5,8 @@ import {SvgDislike} from "./icons/SvgDislike.tsx";
 // @ts-expect-error
 import "../style/MovieDisplay.sass";
 import {CardContainer} from "./CardContainer.tsx";
+import {Movie} from "../../../types/MovieAndProviders.ts";
 
-interface Movie {
-    providers: Provider[];
-    synopsis: string;
-    averageGrade: number;
-    duration: number;
-    id: number;
-    imagePath: string;
-    releaseDate: string;
-    title?: string;
-    votes: number;
-}
-
-interface Provider {
-    id: number;
-    name: string;
-    logoPath: string;
-}
 
 interface MovieDisplayProps {
     movie1: Movie;
@@ -37,7 +21,7 @@ export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
                 <CardContainer
                     onSwipe={onSwipe}
                     firstBackgroundImage={movie1.imagePath}
-                    {...(movie2?.imagePath ? { secondBackgroundImage: movie2.imagePath } : {})}
+                    {...(movie2?.imagePath ? {secondBackgroundImage: movie2.imagePath} : {})}
                 />
 
                 <SvgDislike onClick={() => onSwipe(false)}/>
@@ -66,6 +50,6 @@ export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
             </div>
         </>
     );
-};
+}
 
 
