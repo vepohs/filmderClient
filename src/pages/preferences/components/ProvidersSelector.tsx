@@ -1,7 +1,7 @@
 import React from "react";
 // @ts-ignore
 import "../_PreferencesPage.sass";
-import {usePreferences} from "../../../context/PreferenceContext.tsx";
+import {usePreferences} from "../../../context/preferencesContext/PreferenceContext.tsx";
 
 
 const ProviderSelector: React.FC = () => {

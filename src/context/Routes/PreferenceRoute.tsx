@@ -1,7 +1,7 @@
 // src/context/Routes/PreferenceRoute.tsx
 import React from "react";
 import {Outlet} from "react-router-dom";
-import {PreferenceProvider} from "../PreferenceContext";
+import {PreferenceProvider} from "../preferencesContext/PreferenceContext.tsx";
 
 const PreferenceRoute: React.FC = () => {
     return (

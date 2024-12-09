@@ -1,5 +1,5 @@
 import {Navigate} from "react-router-dom";
-import {usePreferences} from "../PreferenceContext.tsx";
+import {usePreferences} from "../preferencesContext/PreferenceContext.tsx";
 
 const PreferencesGuard: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const {hasPreferences, loading} = usePreferences();
