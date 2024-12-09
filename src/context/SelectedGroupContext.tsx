@@ -61,6 +61,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
     async function getGroupsForUser(): Promise<void> {
         try {
             const response = await axiosWithAuth.get("/users/protected/getGroup");
+            console.log("ZINZIN")
             console.log(response)
             setUserGroups(response.data.group);
         } catch (error) {
