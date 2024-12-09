@@ -4,7 +4,7 @@ import {Route, Routes} from "react-router-dom";
 import AuthenticatedGuard from "./context/Guard/AuthenticatedGuard.tsx";
 import PublicGuard from "./context/Guard/PublicGuard.tsx";
 import PreferencesGuard from "./context/Guard/PreferencesGuard.tsx";
-import _GroupPage from "./pages/mainPage/components/groupManagement.tsx";
+import _GroupPage from "./pages/mainPage/Header/groupManagement.tsx";
 // @ts-ignore
 import "./App.sass"
 import _MainPage from "./pages/mainPage/_MainPage.tsx";

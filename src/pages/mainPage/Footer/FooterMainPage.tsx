@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
-import {Params} from "./icons/Params.tsx";
+import {Params} from "../components/icons/Params.tsx";
+import {Heart} from "../components/icons/Heart.tsx";
+// @ts-ignore
 import "../style/FooterMainPage.sass";
-import {Heart} from "./icons/Heart.tsx";
 
 export function FooterMainPage() {
     const navigate = useNavigate();

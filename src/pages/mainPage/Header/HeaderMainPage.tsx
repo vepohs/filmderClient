@@ -1,7 +1,7 @@
 // @ts-ignore
 import "../style/HeaderMainPage.sass";
 import MyLogo from "../../../common/icons/filmderIcon.tsx";
-import {SvgLogout} from "./icons/SvgLogout.tsx";
+import {SvgLogout} from "../components/icons/SvgLogout.tsx";
 import {useAuth} from "../../../context/AuthContext.tsx";
 import _GroupPage from "./groupManagement.tsx";
 

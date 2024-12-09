@@ -1,7 +1,7 @@
 // @ts-ignore
 import './_MainPageStyle.sass'
-import {HeaderMainPage} from "./components/HeaderMainPage.tsx";
-import {FooterMainPage} from "./components/FooterMainPage.tsx";
+import {HeaderMainPage} from "./Header/HeaderMainPage.tsx";
+import {FooterMainPage} from "./Footer/FooterMainPage.tsx";
 import {MiddleMainPage} from "./components/MiddlePage.tsx";
 
 
