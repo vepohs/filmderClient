@@ -114,6 +114,24 @@ const GroupLike: React.FC = () => {
         return acc;
     }, {} as Record<number, Movie[]>);
 
+    async function  sendSwipeResponse  (movieId: number, liked: boolean) {
+        try {
+            await axiosWithAuth.post("group/protected/swipeMovieGroup", {
+                movieId,
+                liked,
+               group : selectedGroup
+            });
+        } catch (error) {
+            console.error("Erreur lors de l'envoi de la réponse :", error);
+        }
+    }
+
+    function swiped(liked: boolean, movieId: number) {
+        sendSwipeResponse(movieId, liked).then(() => {
+             setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== movieId));
+        });
+    }
+
     return (
         <div className="groupLikePage">
             <h1>Group Users</h1>
@@ -155,6 +173,7 @@ const GroupLike: React.FC = () => {
                             movie1={selectedMovie}
                             onSwipe={(liked) => {
                                  swiped(liked,selectedMovie.id)
+                                closeMoviePopup();
                             }}
                         />
                     </div>
