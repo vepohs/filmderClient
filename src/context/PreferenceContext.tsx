@@ -1,26 +1,15 @@
 // src/context/PreferenceContext.tsx
 import React, {createContext, useContext, useEffect, useState} from "react";
-import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 import {useSelectedGroup} from "./SelectedGroupContext.tsx";
 import {useNavigate} from "react-router-dom";
+import {PreferenceContextType, PreferencesData} from "../types/PreferencesType.ts";
+import {fetchGroupPreferences, fetchUserPreferences, setGroupPreferences, setUserPreferences} from "./preferenceApi.ts";
+import {Genre, Provider} from "../types/GenresAndProviders.ts";
+import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
 
-interface PreferenceContextType {
-    hasPreferences: boolean | null;
-    loading: boolean;
-    allGenres: { id: number; name: string }[];
-    allProviders: { id: number; name: string }[];
-    selectedGenres: number[];
-    selectedProviders: number[];
-    setSelectedGenres: React.Dispatch<React.SetStateAction<number[]>>;
-    setSelectedProviders: React.Dispatch<React.SetStateAction<number[]>>;
-    submitPreferences: () => void;
-    askForPreferences: () => void;
-}
-
-interface PreferencesData {
-    genrePreferenceIds: number[];
-    providerPreferenceIds: number[];
-    // rewatchPreference: boolean;
+export interface PreferencesResponse {
+    genrePreference: Genre[];
+    providerPreference: Provider[];
 }
 
 const PreferenceContext = createContext<PreferenceContextType | undefined>(undefined);
@@ -29,8 +18,8 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     const [hasPreferences, setHasPreferences] = useState<boolean | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const [allGenres, setAllGenres] = useState<{ id: number; name: string }[]>([]);
-    const [allProviders, setallProviders] = useState<{ id: number; name: string }[]>([]);
+    const [allGenres, setAllGenres] = useState<Genre[]>([]);
+    const [allProviders, setallProviders] = useState<Provider[]>([]);
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
     const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
@@ -38,26 +27,29 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     const {selectedGroup} = useSelectedGroup();
     const navigate = useNavigate();
 
+    const transformPreferencesToIds = (data: PreferencesResponse) => ({
+        genres: data.genrePreference.map((genre: Genre) => genre.id),
+        providers: data.providerPreference.map((provider: Provider) => provider.id),
+    });
+
+    const transformPreferencesToObjects = (data: PreferencesResponse) => ({
+        genres: data.genrePreference.map((genre: Genre) => ({
+            id: genre.id,
+            name: genre.name,
+        })),
+        providers: data.providerPreference.map((provider: Provider) => ({
+            id: provider.id,
+            name: provider.name,
+        })),
+    });
+
     const askForAllPreferences = async () => {
+
         try {
             const response = await axiosWithAuth.get("users/protected/getPreferences");
-            const fetchedGenres = response.data.genrePreference.map((genre: { id: number; name: string }) => ({
-                id: genre.id,
-                name: genre.name,
-            }));
-
-            const fetchedProviders = response.data.providerPreference.map((provider: {
-                id: number;
-                name: string;
-                logoPath: string;
-            }) => ({
-                id: provider.id,
-                name: provider.name,
-                logoPath: provider.logoPath,
-            }));
-
-            setAllGenres(fetchedGenres);
-            setallProviders(fetchedProviders);
+            const {genres, providers} = transformPreferencesToObjects(response.data);
+            setAllGenres(genres);
+            setallProviders(providers);
         } catch (error) {
             console.error(error);
         }
@@ -66,34 +58,20 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
 
     const requestPreferences = () => {
         if (selectedGroup === "me") {
-            return axiosWithAuth.get("users/protected/getUserPreferences");
+            return fetchUserPreferences();
         } else {
-            return axiosWithAuth.get(`group/protected/getGroupPreference`, {
-                params: {groupId: selectedGroup},
-            });
+            return fetchGroupPreferences(selectedGroup);
         }
     };
 
     const askForPreferences = async () => {
-        console.log("askForPreferences de")
-        console.log(selectedGroup)
         setLoading(true);
         try {
-
             const response = await requestPreferences()
-            console.log("voici les preference")
-            console.log(response)
-            const userGenrePreferences = response.data.genrePreference.map((genre: {
-                id: number;
-                name: string
-            }) => genre.id);
-            const userProviderPreferences = response.data.providerPreference.map((provider: {
-                id: number;
-                name: string
-            }) => provider.id);
-            setHasPreferences(userGenrePreferences.length > 0 && userProviderPreferences.length > 0);
-            setSelectedGenres(userGenrePreferences);
-            setSelectedProviders(userProviderPreferences);
+            const {genres, providers} = transformPreferencesToIds(response.data);
+            setHasPreferences(genres.length > 0 && providers.length > 0);
+            setSelectedGenres(genres);
+            setSelectedProviders(providers);
         } catch (error) {
             console.error("Erreur lors de la récupération des préférences utilisateur:", error);
             alert("Impossible de récupérer les préférences utilisateur. Veuillez réessayer.");
@@ -104,30 +82,19 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
 
     const submitPreferencesRequest = (data: PreferencesData) => {
         if (selectedGroup === "me") {
-            return axiosWithAuth.post("users/protected/setPreferences", data);
+            return setUserPreferences(data);
         } else {
-            const groupData = {
-                ...data,
-                groupId: selectedGroup,
-            };
-            return axiosWithAuth.post("group/protected/setGroupPreference", groupData);
+            return setGroupPreferences(selectedGroup, data);
         }
-    };
-
+    }
 
     const submitPreferences = async () => {
         try {
-            console.log("submitPreferences")
-            console.log(selectedGroup)
-            console.log(selectedGenres)
-            console.log(selectedProviders)
             const data: PreferencesData = {
                 genrePreferenceIds: selectedGenres,
                 providerPreferenceIds: selectedProviders,
                 // rewatchPreference: isRewatchChecked,
             };
-            console.log("c est la data que j'envoie")
-            console.log(data)
             await submitPreferencesRequest(data);
 
             // Met correctement a jour les préferences
@@ -143,13 +110,10 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     // Verif que a chaque fois qu'un groupe est selectionné, ce groupe a des préférences
     // Si le groupe n'a pas de préférences, on redirige vers la page de préférences
     useEffect(() => {
-        console.log("G CHANGE DE GROUP")
-        console.log(selectedGroup)
         askForPreferences();
     }, [selectedGroup]);
 
     useEffect(() => {
-        console.log("JE SUIS DANS LE USE EFFECT")
         askForAllPreferences();
     }, []);
 

@@ -53,6 +53,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
         const refreshToken = response.data.refreshToken;
         localStorage.setItem('accessToken', accesToken);
         localStorage.setItem('refreshToken', refreshToken);
+
         // S'assure que le groupe me est selectionné par défaut
         // Il peut avoir des pb si jamais le selectedGroup est un group dans lequel le user n est pas
         localStorage.setItem('selectedGroup', "me")
