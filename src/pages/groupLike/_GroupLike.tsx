@@ -48,7 +48,7 @@ const GroupLike: React.FC = () => {
 
     const fetchGroupUsers = async () => {
         try {
-            const response = await axiosWithAuth.post("group/protected/getGroupUsers", selectedGroup);
+            const response = await axiosWithAuth.post("group/protected/getGroupUsers", {groupId: selectedGroup});
             setUsers(response.data);
             setSelectedUsers(response.data.map((user: { id: string }) => user.id));
         } catch (error) {
