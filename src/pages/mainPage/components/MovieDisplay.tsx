@@ -3,7 +3,7 @@ import {SvgDislike} from "./icons/SvgDislike.tsx";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import "../style/MiddleMainPage.sass"; 
+import "../style/MovieDisplay.sass";
 import {CardContainer} from "./CardContainer.tsx";
 
 interface Movie {

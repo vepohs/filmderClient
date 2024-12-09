@@ -7,6 +7,7 @@ import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 // @ts-ignore
 import "./_GroupKike.sass"
 import {MovieDisplay} from "../mainPage/components/MovieDisplay.tsx";
+import {CardContainer} from "../mainPage/components/CardContainer.tsx";
 
 // Fonction utilitaire pour mapper un film
 const mapMovie = (item: any) => ({
@@ -133,11 +134,11 @@ const GroupLike: React.FC = () => {
                             <ul>
                                 {movies.map((movie) => (
                                     <li key={movie.id} className="movieItem">
-                                        <img
-                                            src={movie.imagePath}
-                                            alt={movie.title}
-                                            onClick={() => openMoviePopup(movie)} // Affiche la popup
-                                        />
+                                        <CardContainer
+                                            firstBackgroundImage={movie.imagePath}
+                                            onSwipe={() => {console.log("swipe")}}
+                                            onClick={() => openMoviePopup(movie)}>
+                                        </CardContainer>
                                     </li>
                                 ))}
                             </ul>
@@ -147,7 +148,7 @@ const GroupLike: React.FC = () => {
 
             {selectedMovie && ( // Affiche la popup si un film est sélectionné
                 <div className="popupOverlay" onClick={closeMoviePopup}>
-                    <div className="popupContent" onClick={(e) => e.stopPropagation()}>
+                    <div className="popupContent">
                         <MovieDisplay
                             movie1={selectedMovie}
                             onSwipe={() => {console.log("swipe")}}

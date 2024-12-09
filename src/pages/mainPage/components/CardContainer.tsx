@@ -9,11 +9,13 @@ import {
 interface CardContainerProps {
     firstBackgroundImage: string;
     secondBackgroundImage?: string;
+    onClick?: () => void;
     onSwipe: (like: boolean) => void;
 }
 interface CardProps {
     backgroundImage: string;
     onSwipe?: (like: boolean) => void;
+    onClick?: () => void;
     index?: number;
     setIndex?: (index: number) => void;
     drag?: "x" | "y" | boolean;
@@ -22,6 +24,7 @@ interface CardProps {
 
 function Card({
                   backgroundImage,
+                  onClick,
                   onSwipe,
                   index,
                   setIndex,
@@ -60,6 +63,7 @@ function Card({
 
     return (
         <motion.div
+            onClick={onClick}
             className="cardContainer"
             style={{
                 x,
@@ -98,6 +102,7 @@ function Card({
 
 export function CardContainer({
                                   onSwipe,
+                                  onClick,
                                   firstBackgroundImage,
                                   secondBackgroundImage
                               }: CardContainerProps) {
@@ -110,6 +115,7 @@ export function CardContainer({
                     <Card backgroundImage={secondBackgroundImage} />
                 )}
                 <Card
+                    onClick={onClick}
                     onSwipe={onSwipe}
                     key={index}
                     index={index}
