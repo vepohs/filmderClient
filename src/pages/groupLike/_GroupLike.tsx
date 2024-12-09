@@ -8,7 +8,8 @@ import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 import "./_GroupKike.sass"
 import {MovieDisplay} from "../mainPage/components/MovieDisplay.tsx";
 import {CardContainer} from "../mainPage/components/CardContainer.tsx";
-import {Genre, Movie, Provider} from "../../types/MovieAndProviders.ts";
+import {Movie} from "../../types/MovieAndProviders.ts";
+import {Genre, Provider} from "../../types/GenresAndProviders.ts";
 
 export interface MovieWithCount extends Movie {
     count: number;
@@ -29,12 +30,10 @@ const mapMovie = (item: any): MovieWithCount => ({
     providers: item.movie.providers.map((provider: Provider) => ({
         id: provider.id,
         name: provider.name,
-        logoPath: provider.logoPath,
     })),
     genres: item.movie.genres.map((genre: Genre) => ({
         id: genre.id,
         name: genre.name,
-        imagePath: genre.imagePath,
     })),
 });
 

@@ -19,3 +19,8 @@ export interface PreferencesData {
     providerPreferenceIds: number[];
     // rewatchPreference: boolean;
 }
+
+export interface PreferencesResponse {
+    genrePreference: Genre[];
+    providerPreference: Provider[];
+}
