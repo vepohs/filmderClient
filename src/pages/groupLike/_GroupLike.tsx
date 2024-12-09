@@ -8,9 +8,15 @@ import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
 import "./_GroupKike.sass"
 import {MovieDisplay} from "../mainPage/components/MovieDisplay.tsx";
 import {CardContainer} from "../mainPage/components/CardContainer.tsx";
+import {Genre, Movie, Provider} from "../../types/MovieAndProviders.ts";
+
+export interface MovieWithCount extends Movie {
+    count: number;
+}
+
 
 // Fonction utilitaire pour mapper un film
-const mapMovie = (item: any) => ({
+const mapMovie = (item: any): MovieWithCount => ({
     id: item.movie.id,
     title: item.movie.title,
     imagePath: item.movie.imagePath,
@@ -20,38 +26,25 @@ const mapMovie = (item: any) => ({
     duration: item.movie.duration,
     releaseDate: item.movie.releaseDate,
     votes: item.movie.votes,
-    providers: item.movie.providers.map((provider: any) => ({
+    providers: item.movie.providers.map((provider: Provider) => ({
         id: provider.id,
         name: provider.name,
         logoPath: provider.logoPath,
     })),
-    genres: item.movie.genres.map((genre: any) => ({
+    genres: item.movie.genres.map((genre: Genre) => ({
         id: genre.id,
         name: genre.name,
         imagePath: genre.imagePath,
     })),
 });
 
-interface Movie {
-    id: number;
-    title: string;
-    imagePath: string;
-    count: number;
-    synopsis: string;
-    averageGrade: number;
-    duration: number;
-    releaseDate: string;
-    votes: number;
-    providers: { id: number; name: string; logoPath: string }[];
-    genres: { id: number; name: string; imagePath: string }[];
-}
 
 const GroupLike: React.FC = () => {
     const {selectedGroup} = useSelectedGroup();
     const [users, setUsers] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-    const [movies, setMovies] = useState<Movie[]>([]);
-    const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null); // État pour la popup
+    const [movies, setMovies] = useState<MovieWithCount[]>([]);
+    const [selectedMovie, setSelectedMovie] = useState<MovieWithCount | null>(null); // État pour la popup
 
     const fetchGroupUsers = async () => {
         try {
@@ -84,7 +77,7 @@ const GroupLike: React.FC = () => {
         );
     };
 
-    const openMoviePopup = (movie: Movie) => {
+    const openMoviePopup = (movie: MovieWithCount) => {
         setSelectedMovie(movie);
     };
 
@@ -112,7 +105,7 @@ const GroupLike: React.FC = () => {
         }
         acc[movie.count].push(movie);
         return acc;
-    }, {} as Record<number, Movie[]>);
+    }, {} as Record<number, MovieWithCount[]>);
 
     return (
         <div className="groupLikePage">
@@ -136,7 +129,9 @@ const GroupLike: React.FC = () => {
                                     <li key={movie.id} className="movieItem">
                                         <CardContainer
                                             firstBackgroundImage={movie.imagePath}
-                                            onSwipe={() => {console.log("swipe")}}
+                                            onSwipe={() => {
+                                                console.log("swipe")
+                                            }}
                                             onClick={() => openMoviePopup(movie)}>
                                         </CardContainer>
                                     </li>
@@ -151,7 +146,9 @@ const GroupLike: React.FC = () => {
                     <div className="popupContent">
                         <MovieDisplay
                             movie1={selectedMovie}
-                            onSwipe={() => {console.log("swipe")}}
+                            onSwipe={() => {
+                                console.log("swipe")
+                            }}
                         />
                     </div>
                 </div>
