@@ -10,6 +10,7 @@ export const SelectedGroupControl: React.FC = () => {
     const {selectedGroup, userGroups} = useSelectedGroup();
     const {navigateToGroupSettings, navigateToLikePage} = useGroupActions();
 
+
     const groupName =
         selectedGroup === "me"
             ? "Moi"

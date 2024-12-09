@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 
 // @ts-ignore
 import "../style/FooterMainPage.sass";
