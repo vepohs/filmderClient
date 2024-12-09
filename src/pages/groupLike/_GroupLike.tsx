@@ -107,12 +107,12 @@ const GroupLike: React.FC = () => {
         return acc;
     }, {} as Record<number, MovieWithCount[]>);
 
-    async function  sendSwipeResponse  (movieId: number, liked: boolean) {
+    async function sendSwipeResponse(movieId: number, liked: boolean) {
         try {
             await axiosWithAuth.post("group/protected/swipeMovieGroup", {
                 movieId,
                 liked,
-               group : selectedGroup
+                group: selectedGroup
             });
         } catch (error) {
             console.error("Erreur lors de l'envoi de la réponse :", error);
@@ -121,7 +121,7 @@ const GroupLike: React.FC = () => {
 
     function swiped(liked: boolean, movieId: number) {
         sendSwipeResponse(movieId, liked).then(() => {
-             setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== movieId));
+            setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== movieId));
         });
     }
 
@@ -148,7 +148,7 @@ const GroupLike: React.FC = () => {
                                         <CardContainer
                                             firstBackgroundImage={movie.imagePath}
                                             onSwipe={(liked) => {
-                                               swiped(liked,movie.id)
+                                                swiped(liked, movie.id)
                                             }}
                                             onClick={() => openMoviePopup(movie)}>
                                         </CardContainer>
@@ -165,7 +165,7 @@ const GroupLike: React.FC = () => {
                         <MovieDisplay
                             movie1={selectedMovie}
                             onSwipe={(liked) => {
-                                 swiped(liked,selectedMovie.id)
+                                swiped(liked, selectedMovie.id)
                                 closeMoviePopup();
                             }}
                         />
