@@ -136,7 +136,9 @@ const GroupLike: React.FC = () => {
                                     <li key={movie.id} className="movieItem">
                                         <CardContainer
                                             firstBackgroundImage={movie.imagePath}
-                                            onSwipe={() => {console.log("swipe")}}
+                                            onSwipe={(liked) => {
+                                               swiped(liked,movie.id)
+                                            }}
                                             onClick={() => openMoviePopup(movie)}>
                                         </CardContainer>
                                     </li>
@@ -151,7 +153,9 @@ const GroupLike: React.FC = () => {
                     <div className="popupContent">
                         <MovieDisplay
                             movie1={selectedMovie}
-                            onSwipe={() => {console.log("swipe")}}
+                            onSwipe={(liked) => {
+                                 swiped(liked,selectedMovie.id)
+                            }}
                         />
                     </div>
                 </div>
