@@ -4,7 +4,7 @@ import "../style/groupManagement.sass";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import ActionButtons from "./ActionButtons.tsx";
 import Popup from "./Popup.tsx";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 
 export type Group = {
     groupId: number;
@@ -18,7 +18,7 @@ const GroupPage: React.FC = () => {
     const [popUpText, setpopUpText] = useState("");
 
 
-    const {getGroupsForUser} = useSelectedGroup();
+    const {loadUserGroups} = useSelectedGroup();
 
     const handleOpenPopup = (mode: "create" | "join") => {
         setPopupMode(mode);
@@ -35,7 +35,7 @@ const GroupPage: React.FC = () => {
             await axiosWithAuth.post("/group/protected/groupAdd", {
                 name: popUpText,
             });
-            await getGroupsForUser()
+            await loadUserGroups()
             handlePopupClose();
         } else {
             alert("Le nom du groupe ne peut pas être vide !");
@@ -49,7 +49,7 @@ const GroupPage: React.FC = () => {
                     groupId: popUpText,
                 });
                 alert("You successfully joined the group!");
-                getGroupsForUser();
+                loadUserGroups();
                 handlePopupClose();
             } catch (error) {
                 console.error("Error joining the group:", error);
@@ -69,7 +69,7 @@ const GroupPage: React.FC = () => {
     };
 
     useEffect(() => {
-        getGroupsForUser();
+        loadUserGroups();
     }, []);
 
 

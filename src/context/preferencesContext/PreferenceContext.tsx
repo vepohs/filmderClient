@@ -1,6 +1,6 @@
 // src/context/PreferenceContext.tsx
 import React, {createContext, useContext, useEffect, useState} from "react";
-import {useSelectedGroup} from "../SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../SelectedGroupContext/SelectedGroupContext.tsx";
 import {useNavigate} from "react-router-dom";
 import {PreferenceContextType, PreferencesData} from "../../types/PreferencesType.ts";
 import {getAllPreferencesAvailable, getPreferences, setPreferences} from "./preferenceApiCalls.ts";
@@ -52,7 +52,9 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     const askForPreferences = async () => {
         setLoading(true);
         try {
-            const response = await getPreferences(selectedGroup);
+            console.log("hioopm")
+            console.log(selectedGroup.groupId);
+            const response = await getPreferences(selectedGroup.groupId);
             const {genres, providers} = transformPreferencesToIds(response);
             setHasPreferences(genres.length > 0 && providers.length > 0);
             setSelectedGenres(genres);
@@ -67,12 +69,13 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
 
     const submitPreferences = async () => {
         try {
+
             const data: PreferencesData = {
                 genrePreferenceIds: selectedGenres,
                 providerPreferenceIds: selectedProviders,
                 // rewatchPreference: isRewatchChecked,
             };
-            await setPreferences(selectedGroup, data);
+            await setPreferences(selectedGroup.groupId, data);
             // Met correctement a jour les préferences
             await askForPreferences();
             alert("Préférences enregistrées avec succès !");

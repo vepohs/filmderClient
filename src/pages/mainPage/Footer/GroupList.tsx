@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {SelectedGroupContext} from "../../../context/SelectedGroupContext.tsx";
+import {SelectedGroupContext} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 
 const GroupList: React.FC = () => {
     const selectedGroupContext = useContext(SelectedGroupContext);

@@ -1,0 +1,22 @@
+.userList
+  display: flex
+  gap: 10px
+  flex-wrap: wrap
+
+.userCircle
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  color: #fff
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  font-weight: bold
+  transition: background-color 0.3s
+
+  &.selected
+    background-color: green
+
+  &.notSelected
+    background-color: red

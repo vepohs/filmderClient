@@ -22,11 +22,11 @@ export const GroupItem: React.FC<GroupItemProps> = ({group, isSelected, onClick}
             <div className="iconsContainer">
                 <Heart
                     className="groupSettingsIcon"
-                    onClick={() => navigateToLikePage(group.groupId)}
+                    onClick={() => navigateToLikePage(group)}
                 />
                 <Params
                     className="groupSettingsIcon"
-                    onClick={() => navigateToGroupSettings(group.groupId)}
+                    onClick={() => navigateToGroupSettings(group)}
                 />
             </div>
         </li>

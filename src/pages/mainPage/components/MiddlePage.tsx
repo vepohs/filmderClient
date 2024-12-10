@@ -3,7 +3,7 @@
 import "../style/MiddleMainPage.sass";
 import {useEffect, useRef, useState} from "react";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 import {MovieDisplay} from "./MovieDisplay.tsx";
 import {Movie} from "../../../types/MovieAndProviders.ts";
 
@@ -15,7 +15,7 @@ export function MiddleMainPage() {
     const containerRef = useRef<HTMLDivElement>(null);
 
 
-    const {fetchMoviesForGroup, selectedGroup} = useSelectedGroup();
+    const {loadMovies, selectedGroup} = useSelectedGroup();
 
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export function MiddleMainPage() {
     const fetchMovies = async (excludedIds: number[]) => {
         if (loading) return; // Éviter les appels multiples en cas de chargement en cours
         setLoading(true);
-        const newMovies = await fetchMoviesForGroup(excludedIds);
+        const newMovies = await loadMovies(excludedIds);
         setMovies((prevMovies) => [...prevMovies, ...newMovies]);
         setLoading(false);
     };
@@ -43,7 +43,7 @@ export function MiddleMainPage() {
     };
 
     const handleSwipe = (liked: boolean) => {
-        console.log(liked)
+        console.log(movies)
         if (movies.length > 0) {
             sendSwipeResponse(movies[0].id, liked); // "liked" indique si c'est un like ou un dislike
             handleNextImage();

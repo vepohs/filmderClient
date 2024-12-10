@@ -1,4 +1,4 @@
-import {SelectedGroupProvider} from "../SelectedGroupContext.tsx";
+import {SelectedGroupProvider} from "../SelectedGroupContext/SelectedGroupContext.tsx";
 import {Outlet} from "react-router-dom";
 
 const SelectedGroupRoute = () => {

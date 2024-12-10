@@ -56,7 +56,9 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
 
         // S'assure que le groupe me est selectionné par défaut
         // Il peut avoir des pb si jamais le selectedGroup est un group dans lequel le user n est pas
-        localStorage.setItem('selectedGroup', "me")
+
+        const defaultGroup = {groupId: "me", name: "Moi"};
+        localStorage.setItem('selectedGroup', JSON.stringify(defaultGroup));
         setIsAuthenticated(true);
     };
 
@@ -93,6 +95,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
             console.error("Error during logout:", error);
         }
     };
+
     // Permet de vérifier a chaque fois qu'on change de page ou qu'on reload la page si le token est toujours valide
     useEffect(() => {
         verifyToken();

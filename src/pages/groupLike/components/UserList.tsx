@@ -1,4 +1,6 @@
 import React from "react";
+// @ts-ignore
+import "../styles/UserList.sass"
 
 interface User {
     id: string;
@@ -14,27 +16,17 @@ interface UserListProps {
 
 const UserList: React.FC<UserListProps> = ({users, toggleUserSelection, selectedUsers}) => {
     return (
-        <div style={{display: "flex", gap: "10px", flexWrap: "wrap"}}>
+        <div className="userList">
             {users.map((user) => (
                 <div
                     key={user.id}
                     onClick={() => toggleUserSelection(user.id)} // Toggle la sélection au clic
-                    style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                        backgroundColor: selectedUsers.includes(user.id) ? "#008000" : "#FF0000", // Couleur différente si sélectionné
-                        color: "#fff",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                        transition: "background-color 0.3s",
-                    }}
+                    className={`userCircle ${
+                        selectedUsers.includes(user.id) ? "selected" : "notSelected"
+                    }`}
                 >
-                    {user.firstName[0]}
-                    {user.lastName[0]}
+                    {user.firstName[0].toUpperCase()}
+                    {user.lastName[0].toUpperCase()}
                 </div>
             ))}
         </div>

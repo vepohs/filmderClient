@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import UserList from "./components/UserList.tsx";
 import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
-import {useSelectedGroup} from "../../context/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 
 
 // @ts-ignore
@@ -126,8 +126,8 @@ const GroupLike: React.FC = () => {
 
     return (
         <div className="groupLikePage">
-            <h1>Group Users</h1>
-            <h1> le code pour rejoindre le groupe est <br/> {selectedGroup}</h1>
+            <h1>{selectedGroup.name}</h1>
+            <h1> le code pour rejoindre le groupe est <br/> {selectedGroup.groupId}</h1>
             <UserList users={users} toggleUserSelection={toggleUserSelection} selectedUsers={selectedUsers}/>
 
             <h2>Films et likes du groupe</h2>
@@ -158,7 +158,7 @@ const GroupLike: React.FC = () => {
                     ))}
             </ul>
 
-            {selectedMovie && ( // Affiche la popup si un film est sélectionné
+            {selectedMovie && (
                 <div className="popupOverlay" onClick={closeMoviePopup}>
                     <div className="popupContent">
                         <MovieDisplay

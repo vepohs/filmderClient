@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx"; // Import du contexte
+import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx"; // Import du contexte
 import {useGroupActions} from "./useGroupActions.ts";
 import {Heart} from "../components/icons/Heart.tsx";
 import {Params} from "../components/icons/Params.tsx";
@@ -10,17 +10,16 @@ export const SelectedGroupControl: React.FC = () => {
     const {selectedGroup, userGroups} = useSelectedGroup();
     const {navigateToGroupSettings, navigateToLikePage} = useGroupActions();
 
-
     const groupName =
-        selectedGroup === "me"
+        selectedGroup.groupId === "me"
             ? "Moi"
-            : userGroups.find((group) => group.groupId === selectedGroup)?.name || "Groupe inconnu";
+            : userGroups.find((group) => group.groupId === selectedGroup.groupId)?.name || "Groupe inconnu";
 
     return (
         <>
             <span>{groupName}</span>
             <div className="iconsContainer">
-                {selectedGroup !== "me" && (
+                {selectedGroup.groupId !== "me" && (
                     <Heart
                         className="groupSettingsIcon"
                         onClick={() => navigateToLikePage(selectedGroup)}

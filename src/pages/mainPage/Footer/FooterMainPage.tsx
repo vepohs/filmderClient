@@ -2,9 +2,10 @@ import {useState} from "react";
 
 // @ts-ignore
 import "../style/FooterMainPage.sass";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 import {DropdownMenu} from "./DropdownMenu.tsx";
 import {SelectedGroupControl} from "./SlectedGroupControl.tsx";
+import {Group} from "../../../types/SelectedGroupTypes.ts";
 
 export function FooterMainPage() {
     const {setSelectedGroup} = useSelectedGroup();
@@ -12,7 +13,7 @@ export function FooterMainPage() {
 
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
-    const handleGroupChange = (groupId: string) => {
+    const handleGroupChange = (groupId: Group) => {
         setSelectedGroup(groupId);
         setIsDropdownOpen(false); // Ferme le menu déroulant après sélection
     };
