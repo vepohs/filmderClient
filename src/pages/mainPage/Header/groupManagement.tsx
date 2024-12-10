@@ -6,10 +6,6 @@ import ActionButtons from "./ActionButtons.tsx";
 import Popup from "./Popup.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 
-export type Group = {
-    groupId: number;
-    name: string;
-};
 
 const GroupPage: React.FC = () => {
 

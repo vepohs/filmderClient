@@ -1,12 +1,8 @@
 import React from "react";
 // @ts-ignore
 import "../styles/UserList.sass"
+import {User} from "../../../types/UsersTypes.ts";
 
-interface User {
-    id: string;
-    firstName: string;
-    lastName: string;
-}
 
 interface UserListProps {
     users: User[]; // Liste des utilisateurs

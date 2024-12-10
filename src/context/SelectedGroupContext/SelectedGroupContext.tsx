@@ -3,7 +3,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Movie} from "../../types/MovieAndProviders.ts";
 import {Group, MovieResponse, SelectedGroupContextProps} from "../../types/SelectedGroupTypes.ts";
-import {getMovies, getUserGroups} from "./selectedGroupApiCall.ts";
+import {APIgetMovies, APIgetUserGroups} from "./selectedGroupApiCall.ts";
 
 
 export const SelectedGroupContext = createContext<SelectedGroupContextProps | undefined>(undefined);
@@ -35,7 +35,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
 
     async function loadUserGroups(): Promise<void> {
         try {
-            const response = await getUserGroups();
+            const response = await APIgetUserGroups();
             setUserGroups(response.group);
 
             if (selectedGroup.groupId !== "me" &&
@@ -53,7 +53,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const loadMovies = async (excludedIds: number[]): Promise<Movie[]> => {
         try {
-            const response: MovieResponse = await getMovies(excludedIds, selectedGroup.groupId);
+            const response: MovieResponse = await APIgetMovies(excludedIds, selectedGroup.groupId);
             return response.movies || [];
         } catch (error) {
             console.error("Error fetching movies:", error);

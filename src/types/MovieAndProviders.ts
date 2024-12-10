@@ -14,3 +14,6 @@ export interface Movie {
     votes: number;
 }
 
+export interface MovieWithCount extends Movie {
+    count: number;
+}
