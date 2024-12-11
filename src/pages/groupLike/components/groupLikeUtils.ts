@@ -15,7 +15,6 @@ export const mapMovie = (item: any): MovieWithCount => ({
     })),
 });
 
-// Nouvelle fonction pour copier le texte
 export const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
         .then(() => alert("Texte copié dans le presse-papiers !"))

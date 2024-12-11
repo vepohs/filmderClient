@@ -1,14 +1,14 @@
 // GroupLike.tsx
 import React from "react";
 import UserList from "./components/UserList.tsx";
-import {MovieDisplay} from "../mainPage/components/MovieDisplay.tsx";
-import {CardContainer} from "../mainPage/components/CardContainer.tsx";
 import {copyToClipboard} from "./components/groupLikeUtils.ts";
 
 // @ts-ignore
 import "./_GroupKike.sass";
 
 import {useGroupLikeLogic} from "./components/useGroupLikeLogic.ts";
+import {GroupMoviesSections} from "./components/GroupMoviesSections.tsx";
+import {MoviePopup} from "./components/MoviePopup.tsx";
 
 const GroupLike: React.FC = () => {
     const {
@@ -18,10 +18,12 @@ const GroupLike: React.FC = () => {
         selectedMovie,
         openMoviePopup,
         closeMoviePopup,
-        groupedMovies,
+        moviesByCount,
+        sortedCounts,
         swiped,
         selectedGroup,
     } = useGroupLikeLogic();
+
 
     return (
         <div className="groupLikePage">
@@ -43,43 +45,20 @@ const GroupLike: React.FC = () => {
             />
 
             <h2>Films et likes du groupe</h2>
-            <ul>
-                {Object.entries(groupedMovies)
-                    .sort(([a], [b]) => parseInt(b) - parseInt(a))
-                    .map(([count, movies]) => (
-                        <li key={count} className="sectionItem">
-                            <h2>
-                                {Array.from({length: parseInt(count)}).map((_, index) => (
-                                    <span key={index}>❤️</span>
-                                ))}
-                            </h2>
-                            <ul>
-                                {movies.map((movie) => (
-                                    <li key={movie.id} className="movieItem">
-                                        <CardContainer
-                                            firstBackgroundImage={movie.imagePath}
-                                            onSwipe={(liked) => swiped(liked, movie.id)}
-                                            onClick={() => openMoviePopup(movie)}
-                                        />
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-            </ul>
+
+            <GroupMoviesSections
+                sortedCounts={sortedCounts}
+                moviesByCount={moviesByCount}
+                onMovieClick={openMoviePopup}
+                onSwipe={swiped}
+            />
 
             {selectedMovie && (
-                <div className="popupOverlay" onClick={closeMoviePopup}>
-                    <div className="popupContent">
-                        <MovieDisplay
-                            movie1={selectedMovie}
-                            onSwipe={(liked) => {
-                                swiped(liked, selectedMovie.id);
-                                closeMoviePopup();
-                            }}
-                        />
-                    </div>
-                </div>
+                <MoviePopup
+                    movie={selectedMovie}
+                    onClose={closeMoviePopup}
+                    onSwipe={swiped}
+                />
             )}
         </div>
     );

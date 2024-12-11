@@ -16,7 +16,6 @@ export const useGroupLikeLogic = () => {
 
     const getGroupUsers = useCallback(async () => {
         try {
-            console.log("je suis dans getGroupUsers")
             const response: User[] = await APIgetGroupUsers(selectedGroup.groupId);
             setUsers(response);
             setSelectedUsersIds(response.map((user) => user.id));
@@ -25,7 +24,6 @@ export const useGroupLikeLogic = () => {
         }
     }, [selectedGroup.groupId]);
 
-    // Récupération des films communs selon les utilisateurs sélectionnés
     const getGroupCommonMovies = useCallback(async () => {
         try {
             const response = await APIgetGroupMoviesCommon(selectedUsersIds);
@@ -76,15 +74,29 @@ export const useGroupLikeLogic = () => {
         });
     };
 
-    // Tri et regroupement des films
-    const sortedMovies = [...movies].sort((a, b) => b.count - a.count);
-    const groupedMovies = sortedMovies.reduce((acc, movie) => {
+    // On regroupe les films par leur "count" de likes
+    /* La sortie
+    {
+  5: [ ...films avec 5 likes... ],
+  3: [ ...films avec 3 likes... ],
+  2: [ ...films avec 2 likes... ]
+}
+     */
+    const moviesByCount = movies.reduce((acc, movie) => {
         if (!acc[movie.count]) {
             acc[movie.count] = [];
         }
         acc[movie.count].push(movie);
         return acc;
     }, {} as Record<number, MovieWithCount[]>);
+
+// On récupère les différents "counts" (clés) et on les trie par ordre décroissant
+    /* La sortie
+    [5, 3, 2]
+     */
+    const sortedCounts = Object.keys(moviesByCount)
+        .map(strKey => parseInt(strKey))
+        .sort((a, b) => b - a);
 
     return {
         users,
@@ -93,7 +105,8 @@ export const useGroupLikeLogic = () => {
         selectedMovie,
         openMoviePopup,
         closeMoviePopup,
-        groupedMovies,
+        moviesByCount,
+        sortedCounts,
         swiped,
         selectedGroup
     };
