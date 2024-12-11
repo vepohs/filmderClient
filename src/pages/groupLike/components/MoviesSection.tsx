@@ -16,11 +16,19 @@ interface MoviesSectionProps {
 export const MoviesSection: React.FC<MoviesSectionProps> = ({count, movies, onMovieClick, onSwipe}) => {
     return (
         <li className="sectionItem">
-            <h2>
-                {Array.from({length: count}).map((_, index) => (
-                    <span key={index}>❤️</span>
-                ))}
-            </h2>
+            <h2>{"❤️".repeat(count)}</h2>
+
+            {
+                /*
+                <h2>
+                    {Array.from({length: count}).map((_, index) => (
+                        <span key={index}>❤️</span>
+                    ))}
+                </h2>
+                
+                 */
+            }
+
             <ul>
                 {movies.map((movie) => (
                     <li key={movie.id} className="movieItem">
