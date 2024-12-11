@@ -1,7 +1,6 @@
 // GroupLike.tsx
 import React from "react";
 import UserList from "./components/UserList.tsx";
-import {copyToClipboard} from "./components/groupLikeUtils.ts";
 
 // @ts-ignore
 import "./_GroupKike.sass";
@@ -9,6 +8,7 @@ import "./_GroupKike.sass";
 import {useGroupLikeLogic} from "./components/useGroupLikeLogic.ts";
 import {GroupMoviesSections} from "./components/GroupMoviesSections.tsx";
 import {MoviePopup} from "./components/MoviePopup.tsx";
+import {GroupHeader} from "./components/GroupHeader.tsx";
 
 const GroupLike: React.FC = () => {
     const {
@@ -26,16 +26,8 @@ const GroupLike: React.FC = () => {
 
     return (
         <div className="groupLikePage">
-            <h1>{selectedGroup.name}</h1>
-            <h1>
-                le code pour rejoindre le groupe est <br/>
-                <span
-                    onClick={() => copyToClipboard(selectedGroup.groupId)}
-                    style={{cursor: "pointer", textDecoration: "underline", color: "blue"}}
-                >
-                    {selectedGroup.groupId}
-                </span>
-            </h1>
+
+            <GroupHeader selectedGroup={selectedGroup}/>
 
             <UserList
                 users={users}
@@ -43,7 +35,6 @@ const GroupLike: React.FC = () => {
                 selectedUsers={selectedUsersIds}
             />
 
-            <h2>Films et likes du groupe</h2>
 
             <GroupMoviesSections
                 sortedCounts={sortedCounts}

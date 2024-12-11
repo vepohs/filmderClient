@@ -19,20 +19,22 @@ export const GroupMoviesSections: React.FC<GroupMoviesSectionsProps> = ({
                                                                         }) => {
 
     return (
-        <ul>
-            {sortedCounts.map((count) => {
-                const moviesForThisCount = moviesByCount[count];
-                return (
-                    <MoviesSection
-                        key={count}
-                        count={count}
-                        movies={moviesForThisCount}
-                        onMovieClick={onMovieClick}
-                        onSwipe={onSwipe}
-                    />
-                );
-            })}
-        </ul>
+        <>
+            <h2>Films et likes du groupe</h2>
+            <ul>
+                {sortedCounts.map((count) => {
+                    const moviesForThisCount = moviesByCount[count];
+                    return (
+                        <MoviesSection
+                            key={count}
+                            count={count}
+                            movies={moviesForThisCount}
+                            onMovieClick={onMovieClick}
+                            onSwipe={onSwipe}
+                        />
+                    );
+                })}
+            </ul>
+        </>
     );
-
 };
