@@ -14,9 +14,9 @@ export const useGroupLikeLogic = () => {
     const [movies, setMovies] = useState<MovieWithCount[]>([]);
     const [selectedMovie, setSelectedMovie] = useState<MovieWithCount | null>(null);
 
-    // Récupération des utilisateurs du groupe
     const getGroupUsers = useCallback(async () => {
         try {
+            console.log("je suis dans getGroupUsers")
             const response: User[] = await APIgetGroupUsers(selectedGroup.groupId);
             setUsers(response);
             setSelectedUsersIds(response.map((user) => user.id));

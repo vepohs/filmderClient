@@ -6,7 +6,7 @@ const PublicGuard = () => {
     const {isAuthenticated, loading} = useAuth();
 
 // La vérif de la validiter du token ce fait dans le useEffect dans AuthContext
-    console.log("JSUISLAAAAAAAAAAAAAAAAAAAAAAA")
+
     // Evite le pb d'affichage quand on refresh la page ou qu'on est en train de parler a l'api
     if (loading || isAuthenticated === null) {
         return <div>Chargement...</div>;

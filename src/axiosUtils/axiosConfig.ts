@@ -44,7 +44,6 @@ axiosWithAuth.interceptors.response.use(
 // Function to get a new access token using the refresh token
 const getNewAccessToken = async () => {
     try {
-        console.log("JE DEMANDE UN NEW ACCESS TOKEN");
         const refreshToken = localStorage.getItem('refreshToken');
         if (!refreshToken) {
             throw new Error("No refresh token available in localStorage");
@@ -68,7 +67,6 @@ const getNewAccessToken = async () => {
         throw error;
     }
 };
-
 
 
 export default axiosWithAuth;

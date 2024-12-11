@@ -52,8 +52,6 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     const askForPreferences = async () => {
         setLoading(true);
         try {
-            console.log("hioopm")
-            console.log(selectedGroup.groupId);
             const response = await getPreferences(selectedGroup.groupId);
             const {genres, providers} = transformPreferencesToIds(response);
             setHasPreferences(genres.length > 0 && providers.length > 0);
