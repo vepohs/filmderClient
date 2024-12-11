@@ -24,11 +24,6 @@ const GroupLike: React.FC = () => {
         selectedGroup,
     } = useGroupLikeLogic();
 
-    console.log("yooooooooo")
-    console.log(sortedCounts)
-    console.log(moviesByCount)
-
-
     return (
         <div className="groupLikePage">
             <h1>{selectedGroup.name}</h1>
