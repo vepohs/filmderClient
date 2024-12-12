@@ -1,5 +1,4 @@
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {Group} from "../../../types/SelectedGroupTypes.ts";
 import {User} from "../../../types/UsersTypes.ts";
 import {MovieWithCount} from "../../../types/MovieAndProviders.ts";
 
