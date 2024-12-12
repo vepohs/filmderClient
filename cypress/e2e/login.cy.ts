@@ -1,41 +1,30 @@
-describe('Page d\'inscription', () => {
-
+describe('Page de connexion', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173/signup')
+        // Navigue vers la page de connexion avant chaque test
+        cy.visit('http://localhost:5173/login')
     })
 
-    it('Doit afficher le formulaire d\'inscription correctement', () => {
-
+    it('Doit afficher le formulaire de connexion correctement', () => {
         // Vérifie la présence des champs
-        cy.get('#firstName').should('be.visible')
-        cy.get('#lastName').should('be.visible')
         cy.get('#email').should('be.visible')
-        cy.get('#age').should('be.visible')
         cy.get('#password').should('be.visible')
-        cy.get('#confirmPassword').should('be.visible')
-        cy.get('.submitBtn').should('be.visible')
+        cy.get('.submitBtnSignIn').should('be.visible')
 
-        // Vérifie qu'il y a un titre SIGN UP
-        cy.contains('SIGN UP').should('exist')
+        // Vérifie qu'il y a un titre "Connexion"
+        cy.contains('Connexion').should('exist')
     })
 
-    it('Doit permettre de remplir le formulaire et le soumettre', () => {
-        // On remplit chaque champ avec des valeurs de test
-        cy.get('#firstName').type('Jean')
-        cy.get('#lastName').type('Dupont')
+    it('Doit permettre de remplir le formulaire et de se connecter', () => {
+        // Remplit le formulaire avec les informations d'inscription
         cy.get('#email').type('jean.dupont@example.co')
-        cy.get('#age').type('30')
         cy.get('#password').type('MonSuperMotDePasse123!')
-        cy.get('#confirmPassword').type('MonSuperMotDePasse123!')
 
-        // On clique sur le bouton SIGN UP
-        cy.get('.submitBtn').click()
+        // Clique sur le bouton "Se connecter"
+        cy.get('.submitBtnSignIn').click()
 
-        // Ici tu vérifieras ce qui est supposé se passer après la soumission.
-        // Par exemple, si ton site redirige vers /welcome, tu peux faire :
-         cy.url().should('include', '/login')
+        // Vérifie le comportement après la connexion
+        // Par exemple, redirection vers une page d'accueil utilisateur
+        cy.url().should('include', '/protected') // Remplace "/dashboard" par la page correcte
 
-        // Ou vérifier un message de succès :
-        // cy.contains('Votre compte a été créé avec succès').should('be.visible')
     })
-})
+});
