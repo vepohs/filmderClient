@@ -26,7 +26,7 @@ export const useGroupLikeLogic = () => {
 
     const getGroupCommonMovies = useCallback(async () => {
         try {
-            const response = await APIgetGroupMoviesCommon(selectedUsersIds);
+            const response = await APIgetGroupMoviesCommon(selectedUsersIds, selectedGroup.groupId);
             const moviesWithDetails = response.map(mapMovie);
             setMovies(moviesWithDetails);
         } catch (error) {
@@ -62,7 +62,7 @@ export const useGroupLikeLogic = () => {
 
     const sendSwipeResponse = async (movieId: number, liked: boolean) => {
         try {
-            await APIsendSwipeResponse(movieId, liked, selectedGroup);
+            await APIsendSwipeResponse(movieId, liked, selectedGroup.groupId);
         } catch (error) {
             console.error("Erreur lors de l'envoi de la réponse :", error);
         }

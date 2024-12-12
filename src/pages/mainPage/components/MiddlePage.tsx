@@ -31,10 +31,10 @@ export function MiddleMainPage() {
         setLoading(false);
     };
 
-    const sendSwipeResponse = async (movie: number, liked: boolean) => {
+    const sendSwipeResponse = async (movieId: number, liked: boolean) => {
         try {
             await axiosWithAuth.post("/users/protected/swipeMovie", {
-                movie,
+                movieId,
                 liked,
             });
         } catch (error) {

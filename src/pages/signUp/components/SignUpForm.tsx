@@ -30,8 +30,8 @@ export function SignUpForm() {
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
 
         try {
-            const mailResponse = await axios.post<IsUniqueEmailResponse>(`${API_BASE_URL}/api/users/isUniqueEmail`
-                , {email: data.email});
+            const mailResponse = await axios.get<IsUniqueEmailResponse>(`${API_BASE_URL}/api/users/isUniqueEmail`
+                , {params: {email: data.email}});
             const isUnique = mailResponse.data.isUnique;
             if (!isUnique) {
                 setError('email', {message: 'Cet email est déjà utilisé'});

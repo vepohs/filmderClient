@@ -8,6 +8,7 @@ export const mapMovie = (item: any): MovieWithCount => ({
     providers: item.movie.providers.map((provider: Provider) => ({
         id: provider.id,
         name: provider.name,
+        logoPath: provider.logoPath,
     })),
     genres: item.movie.genres.map((genre: Genre) => ({
         id: genre.id,
