@@ -29,7 +29,7 @@ export const MoviesSection: React.FC<MoviesSectionProps> = ({count, movies, onMo
                  */
             }
 
-            <ul>
+            <ul className='movieContainer'>
                 {movies.map((movie) => (
                     <li key={movie.id} className="movieItem">
                         <CardContainer

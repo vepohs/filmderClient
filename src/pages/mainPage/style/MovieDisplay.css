@@ -25,6 +25,7 @@
 .imageContainer .card {
   width: 90%;
   height: 90%;
+  object-fit: contain;
 }
 .imageContainer .svgLike {
   height: 60px;
