@@ -23,7 +23,7 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to VPS
+      - name: Deploy to the VPS
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.VPS_HOST }}
