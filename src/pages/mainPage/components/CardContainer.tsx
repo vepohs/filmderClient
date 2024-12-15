@@ -91,8 +91,8 @@ function Card({
                     scale,
                     backgroundImage: `url(${backgroundImage})`,
                     backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center"
+                    boxShadow: "0px 0px 5px 5px rgba(0,0, 0, 0.3)"
+
                 }}
             />
         </motion.div>

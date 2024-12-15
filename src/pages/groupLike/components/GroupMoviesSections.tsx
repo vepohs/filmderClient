@@ -20,8 +20,7 @@ export const GroupMoviesSections: React.FC<GroupMoviesSectionsProps> = ({
 
     return (
         <>
-            <h2>Films et likes du groupe</h2>
-            <ul>
+            <ul className='ul-container'>
                 {sortedCounts.map((count) => {
                     const moviesForThisCount = moviesByCount[count];
                     return (
