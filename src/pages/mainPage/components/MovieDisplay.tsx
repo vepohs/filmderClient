@@ -6,6 +6,8 @@ import {SvgDislike} from "./icons/SvgDislike.tsx";
 import "../style/MovieDisplay.sass";
 import {CardContainer} from "./CardContainer.tsx";
 import {Movie} from "../../../types/MovieAndProviders.ts";
+import {SVGEye} from "./icons/SVGEye.tsx";
+import {useState} from "react";
 
 
 interface MovieDisplayProps {
@@ -15,18 +17,44 @@ interface MovieDisplayProps {
 }
 
 export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
+    const [showTrailer, setShowTrailer] = useState(false);
+    const onShowTrailer = () => {
+        setShowTrailer((prev) => !prev); // Alterne entre afficher et masquer le trailer
+    };
     return (
         <>
             <div className="imageContainer">
                 <CardContainer
-                    onSwipe={onSwipe}
+                    className={showTrailer}
+                    onSwipe={(liked) => {
+                        onSwipe(liked);
+                        setShowTrailer(false);
+                    }}
                     firstBackgroundImage={movie1.imagePath}
                     {...(movie2?.imagePath ? {secondBackgroundImage: movie2.imagePath} : {})}
                 />
+                <SvgDislike onClick={() => {
+                    onSwipe(false);
+                    setShowTrailer(false)
+                }}/>
+                <SvgLike onClick={() => {
+                    onSwipe(true);
+                    setShowTrailer(false);
+                }}/>
 
-                <SvgDislike onClick={() => onSwipe(false)}/>
-                <SvgLike onClick={() => onSwipe(true)}/>
+                {movie1.videoPath && <SVGEye onClick={() => onShowTrailer()}/>}
+                {showTrailer && movie1.videoPath && (
+                    <div className="videoContainer">
+                        <iframe className="video"
+                                src={`https://www.youtube.com/embed/${movie1.videoPath}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0`}
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                        ></iframe>
+                    </div>
+                )}
             </div>
+
             <div className="detailContainer">
                 <div className="title_duration_container">
                     <div className="title">{movie1.title}</div>

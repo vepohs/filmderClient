@@ -11,7 +11,8 @@ export interface Movie {
     imagePath: string;
     releaseDate: string;
     title?: string;
-    votes: number;
+    votes: number
+    videoPath?: string;
 }
 
 export interface MovieWithCount extends Movie {

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import "../style/groupManagement.sass";
 import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
 import ActionButtons from "./ActionButtons.tsx";
-import Popup from "./Popup.tsx";
+import Popup from "../Header/Popup.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
 
 

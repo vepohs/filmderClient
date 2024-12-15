@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import {
     motion,
     useMotionValue,
@@ -11,7 +11,9 @@ interface CardContainerProps {
     secondBackgroundImage?: string;
     onClick?: () => void;
     onSwipe: (like: boolean) => void;
+    className?: boolean;
 }
+
 interface CardProps {
     backgroundImage: string;
     onSwipe?: (like: boolean) => void;
@@ -39,12 +41,12 @@ function Card({
     });
 
     const variantsFrontCard = {
-        animate: { scale: 1, y: 0, opacity: 1 },
+        animate: {scale: 1, y: 0, opacity: 1},
         exit: (custom: number) => ({
             x: custom,
             opacity: 0,
             scale: 1.05,
-            transition: { duration: 0.4 }
+            transition: {duration: 0.4}
         })
     };
 
@@ -70,9 +72,9 @@ function Card({
                 rotate,
                 cursor: "grab"
             }}
-            whileTap={{ cursor: "grabbing" }}
+            whileTap={{cursor: "grabbing"}}
             drag={drag}
-            dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
+            dragConstraints={{top: 0, right: 0, bottom: 0, left: 0}}
             onDragEnd={handleDragEnd}
             variants={variantsFrontCard}
             initial="initial"
@@ -90,8 +92,10 @@ function Card({
                 style={{
                     scale,
                     backgroundImage: `url(${backgroundImage})`,
-                    backgroundSize: "contain",
-                    boxShadow: "0px 0px 5px 5px rgba(0,0, 0, 0.3)"
+                    backgroundSize: "cover", // Remplace "contain" pour remplir le conteneur
+                    backgroundPosition: "center", // Centrer l'image dans le conteneur
+                    backgroundRepeat: "no-repeat", // Empêche la répétition
+                    boxShadow: "0 15px 35px rgba(0, 0, 0, 0.3), 0 5px 10px rgba(10, 20, 0, 0.65)",
 
                 }}
             />
@@ -101,6 +105,7 @@ function Card({
 
 
 export function CardContainer({
+                                  className,
                                   onSwipe,
                                   onClick,
                                   firstBackgroundImage,
@@ -109,10 +114,10 @@ export function CardContainer({
     const [index, setIndex] = useState(0);
 
     return (
-        <motion.div className="draggableContainer">
+        <motion.div className={`draggableContainer ${className ? "opacity" : ""}`}>
             <AnimatePresence initial={false}>
                 {secondBackgroundImage && (
-                    <Card backgroundImage={secondBackgroundImage} />
+                    <Card backgroundImage={secondBackgroundImage}/>
                 )}
                 <Card
                     onClick={onClick}

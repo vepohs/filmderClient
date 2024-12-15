@@ -6,6 +6,7 @@ import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGr
 import {DropdownMenu} from "./DropdownMenu.tsx";
 import {SelectedGroupControl} from "./SlectedGroupControl.tsx";
 import {Group} from "../../../types/SelectedGroupTypes.ts";
+import _GroupPage from "./groupManagement.tsx";
 
 export function FooterMainPage() {
     const {setSelectedGroup} = useSelectedGroup();
@@ -20,6 +21,7 @@ export function FooterMainPage() {
 
     return (
         <div className="footerPrefer">
+            <div className ="navFooter">
             <div className="customComboBox">
                 <div className="selectedGroup" onClick={toggleDropdown}>
                     <SelectedGroupControl/>
@@ -27,6 +29,8 @@ export function FooterMainPage() {
                 </div>
                 {isDropdownOpen && <DropdownMenu onGroupChange={handleGroupChange}/>}
             </div>
+            <_GroupPage/>
+                </div>
         </div>
     );
 }

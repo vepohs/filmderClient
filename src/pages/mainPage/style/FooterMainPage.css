@@ -4,62 +4,80 @@
   flex-shrink: 0;
 }
 
+.navFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .customComboBox {
+  border: none;
   margin-top: 10px;
+  margin-left: 10px;
   position: relative;
   width: 60%;
+  color: rgba(255, 255, 255, 0.76);
 }
 .customComboBox .selectedGroup {
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background: linear-gradient(-45deg, #1d0102, #060232, #39030f);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.customComboBox .selectedGroup .action-buttons {
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 .customComboBox .selectedGroup .groupName {
-  flex: 1;
-  text-align: left;
-  margin-right: 10px;
+  color: #ffffff;
 }
 .customComboBox .selectedGroup .iconsContainer {
   display: flex;
   align-items: center;
   gap: 5px;
-}
-.customComboBox .selectedGroup .dropdownIcon {
-  margin-left: 10px;
-  font-size: 1.5rem;
-  color: #555;
+  color: white;
 }
 .customComboBox .groupList {
   list-style: none;
-  margin: 0;
   padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: #b26464;
   position: absolute;
   width: 100%;
   top: 100%;
   left: 0;
   z-index: 10;
+  border: none;
+  max-height: 200%;
+  overflow: scroll;
 }
 .customComboBox .groupList .groupItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
-  border-bottom: 1px solid white;
+  background: linear-gradient(45deg, #1d0102, #060232, #39030f);
+  border: #1b0202 1px solid;
+  border-top: none;
+  box-shadow: rgba(27, 2, 2, 0.39) 0px 0px 5px;
 }
 .customComboBox .groupList .groupItem:last-child {
   border-bottom: none;
 }
 .customComboBox .groupList .groupItem:hover {
-  background-color: white;
+  background-color: rgb(194.9267241379, 134.0732758621, 134.0732758621);
 }
 .customComboBox .groupList .groupItem.active {
   background-color: #e0f7fa;
@@ -68,10 +86,9 @@
 
 .groupSettingsIcon {
   cursor: pointer;
-  color: #555;
+  color: #ffffff;
   height: 20px;
   width: 20px;
-  margin-left: 10px;
 }
 .groupSettingsIcon:hover {
   color: #007bff;

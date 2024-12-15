@@ -2,9 +2,9 @@
 $border-color: #ccc
 $border-radius: 8px
 $padding: 10px
-$background-color: #f9f9f9
+$background-color: #b26464
 $active-background-color: #e0f7fa
-$text-color: #555
+$text-color: #ffffff
 $hover-color: #007bff
 
 // Footer principal
@@ -13,45 +13,66 @@ $hover-color: #007bff
   height: 20%
   flex-shrink: 0
 
+.navFooter
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 10px
+    color: white
+    font-size: 1.2rem
+    font-weight: bold
+
+
+
 // Combo Box personnalisé
 .customComboBox
+  border: none
   margin-top: 10px
+  margin-left: 10px
   position: relative
   width: 60%
+  color: rgba(255, 255, 255, 0.76)
+
 
   // Groupe sélectionné
   .selectedGroup
-    border: 1px solid $border-color
-    border-radius: $border-radius
+    .action-buttons
+      background-color: white
+      align-items: center
+      justify-content: center
+      text-align: center
+
+
+    .groupList
+
+    border-top-left-radius: $border-radius
+    border-top-right-radius: $border-radius
     padding: $padding
-    background-color: $background-color
+    background :  linear-gradient(-45deg, #1d0102, #060232, #39030f)
     cursor: pointer
     display: flex
     justify-content: space-between
     align-items: center
 
     .groupName
-      flex: 1
-      text-align: left
-      margin-right: 10px
+        color: $text-color
 
     .iconsContainer
       display: flex
       align-items: center
       gap: 5px
+      color: white
 
     .dropdownIcon
-      margin-left: 10px
-      font-size: 1.5rem
-      color: $text-color
+
 
   // Liste des groupes
   .groupList
     list-style: none
-    margin: 0
     padding: 0
-    border: 1px solid $border-color
-    border-radius: $border-radius
+
+    border-bottom-left-radius: $border-radius
+    border-bottom-right-radius: $border-radius
     background-color: $background-color
     position: absolute
     width: 100%
@@ -60,13 +81,20 @@ $hover-color: #007bff
     left: 0
     z-index: 10
 
+    border: none
+    max-height: 200%
+    overflow: scroll
+
     .groupItem
       display: flex
       justify-content: space-between
       align-items: center
-      padding: 8px
+      padding: $padding
       cursor: pointer
-      border-bottom: 1px solid lighten($border-color, 30%)
+      background: linear-gradient(45deg, #1d0102, #060232, #39030f)
+      border: #1b0202 1px solid
+      border-top: none
+      box-shadow: rgba(27, 2, 2, 0.39) 0px 0px 5px
 
       &:last-child
         border-bottom: none
@@ -85,8 +113,9 @@ $hover-color: #007bff
   color: $text-color
   height: 20px
   width: 20px
-  margin-left: 10px
+
   // Taille ajustée pour réduire la hauteur
 
   &:hover
     color: $hover-color
+
