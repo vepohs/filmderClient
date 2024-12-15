@@ -29,6 +29,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASS }}
+          port: 55666
           source: "dist/*"
           target: "/var/www/html"
           strip_components: 1
