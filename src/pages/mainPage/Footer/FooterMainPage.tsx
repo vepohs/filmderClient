@@ -2,7 +2,7 @@ import {useState} from "react";
 
 // @ts-ignore
 import "../style/FooterMainPage.sass";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {DropdownMenu} from "./DropdownMenu.tsx";
 import {SelectedGroupControl} from "./SlectedGroupControl.tsx";
 import {Group} from "../../../types/SelectedGroupTypes.ts";

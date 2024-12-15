@@ -1,5 +1,5 @@
 // src/AAAcomponents/FormInput.tsx
-import {FieldError, FieldValues, Path, UseFormRegister} from 'react-hook-form';
+import {FieldValues} from 'react-hook-form';
 
 import { ErrorTooltip } from "./ErrorTooltip.tsx";
 
@@ -7,15 +7,8 @@ import { ErrorTooltip } from "./ErrorTooltip.tsx";
 import "../style/FormInput.sass";
 // @ts-ignore
 import '../style/Icon.sass';
+import {FormInputProps} from "../../types/FormInputPropsTye.ts";
 
-type FormInputProps<TFormValues extends FieldValues> = {
-    name: Path<TFormValues>;
-    type: string;
-    register: UseFormRegister<TFormValues>;
-    error?: FieldError;
-    placeholder: string;
-    icon: React.ElementType;
-};
 
 function FormInput <TFormValues extends FieldValues> ({
                        name,

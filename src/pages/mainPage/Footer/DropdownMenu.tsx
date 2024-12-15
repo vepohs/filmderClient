@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {GroupItem} from "./GroupItem.tsx";
 // @ts-ignore
 import "../style/FooterMainPage.sass";

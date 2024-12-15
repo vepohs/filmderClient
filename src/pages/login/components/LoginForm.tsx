@@ -1,18 +1,18 @@
 // src/AAAcomponents/LoginForm.tsx
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import axios from "axios";
-
 import {LoginFormInputs} from "../../../types/formInputsTypes.ts";
-import {loginSchema} from "../loginSchema.ts";
+import {loginSchema} from "../../../Utils/loginSchema.ts";
 import FormInput from "../../../common/components/FormInput.tsx";
 import {EmailIcon} from "../../../common/icons/EmailIcon.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
 import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
+import {useAuth} from "../../../context/AuthContext.tsx";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
-import {useAuth} from "../../../context/AuthContext/AuthContext.tsx";
+import axios from "axios";
+
 
 export function LoginForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({
@@ -22,8 +22,7 @@ export function LoginForm() {
 
     const {login} = useAuth()
 
-
-     const handleAxiosError = (error: unknown): string => {
+     const handleLoginError = (error: unknown): string => {
         if (axios.isAxiosError(error)) {
             switch (error.response?.status) {
                 case 401:
@@ -42,7 +41,7 @@ export function LoginForm() {
             await login(data);
 
         } catch (error: unknown) {
-            const errorMessage = handleAxiosError(error);
+            const errorMessage = handleLoginError(error);
             setError("password", {message: errorMessage});
         }
     };

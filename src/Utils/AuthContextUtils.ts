@@ -1,4 +1,5 @@
-import {LoginResponse} from "../../types/AuthContext.ts";
+import {LoginResponse} from "../types/AuthContext.ts";
+
 
 export const setLocalStorage = (accessToken: string, refreshToken: string, selectedGroup: object) => {
     localStorage.setItem("accessToken", accessToken);

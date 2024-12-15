@@ -2,8 +2,8 @@
 // @ts-expect-error
 import "../style/MiddleMainPage.sass";
 import {useEffect, useRef, useState} from "react";
-import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
+import axiosWithAuth from "../../../Utils/axiosWithAuth.ts";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {MovieDisplay} from "./MovieDisplay.tsx";
 import {Movie} from "../../../types/MovieAndProviders.ts";
 

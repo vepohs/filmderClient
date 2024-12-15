@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 // @ts-ignore
 import "../style/groupManagement.sass";
-import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
+import axiosWithAuth from "../../../Utils/axiosWithAuth.ts";
 import ActionButtons from "./ActionButtons.tsx";
 import Popup from "../Header/Popup.tsx";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 
 
 const GroupPage: React.FC = () => {

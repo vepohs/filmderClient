@@ -1,11 +1,11 @@
 // src/AuthContext.tsx
 import React, {createContext, useContext, useEffect, useState} from 'react';
 
-import {LoginFormInputs} from "../../types/formInputsTypes.ts";
+import {LoginFormInputs} from "../types/formInputsTypes.ts";
 import {useNavigate} from "react-router-dom";
-import {APIlogin, APILogout, APIverifyAccessToken} from "../../Services/AuthContextAPICalls.ts";
-import {clearLocalStorage, extractUserInfo, getRefreshToken, setLocalStorage} from "./AuthContextUtils.ts";
-import {LoginResponse} from "../../types/AuthContext.ts";
+import {APIlogin, APILogout, APIverifyAccessToken} from "../Services/AuthContextAPICalls.ts";
+import {clearLocalStorage, extractUserInfo, getRefreshToken, setLocalStorage} from "../Utils/AuthContextUtils.ts";
+import {LoginResponse} from "../types/AuthContext.ts";
 
 interface AuthContextType {
     isAuthenticated: boolean | null;

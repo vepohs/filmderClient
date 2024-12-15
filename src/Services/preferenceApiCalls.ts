@@ -1,4 +1,4 @@
-import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
+import axiosWithAuth from "../Utils/axiosWithAuth.ts";
 import {PreferencesData, PreferencesResponse} from "../types/PreferencesType.ts";
 
 export const getAllPreferencesAvailable = () =>

@@ -1,25 +1,19 @@
 // src/AAAcomponents/PasswordInput.tsx
 
 import {useState} from 'react';
-import {FieldError, FieldValues, Path, UseFormRegister} from 'react-hook-form';
+import {FieldValues} from 'react-hook-form';
 import {OpenEyeIcon} from '../icons/OpenEyeIcon.tsx';
 import {CloseEyeIcon} from '../icons/CloseEyeIcon.tsx';
 import {Tooltip} from "react-tooltip";
 import {ErrorTooltip} from "./ErrorTooltip.tsx";
-
+import {PasswordInputProps} from "../../types/FormInputPropsTye.ts";
 // @ts-ignore
 import "../style/Icon.sass";
 // @ts-ignore
 import "../style/PasswordInput.sass";
 
 
-interface PasswordInputProps<TFormValues extends FieldValues> {
-    name: Path<TFormValues>;
-    register: UseFormRegister<TFormValues>;
-    error?: FieldError;
-    placeholder: string;
-    icon: React.ElementType;
-}
+
 
 function PasswordInput<TFormValues extends FieldValues>({name, register, error, placeholder,icon :Icon}: PasswordInputProps<TFormValues>) {
     const [showPassword, setShowPassword] = useState(false);

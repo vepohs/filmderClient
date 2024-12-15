@@ -1,5 +1,5 @@
-import {PreferencesResponse} from "../../types/PreferencesType.ts";
-import {Genre, Provider} from "../../types/GenresAndProviders.ts";
+import {PreferencesResponse} from "../types/PreferencesType.ts";
+import {Genre, Provider} from "../types/GenresAndProviders.ts";
 
 export const transformPreferencesToIds = (data: PreferencesResponse) => ({
     genres: data.genrePreference.map((genre: Genre) => genre.id),

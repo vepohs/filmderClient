@@ -1,4 +1,4 @@
-import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
+import axiosWithAuth from "../Utils/axiosWithAuth.ts";
 import {MovieResponse} from "../types/SelectedGroupTypes.ts";
 /*
 attention ici y a pas {} car c est considerer comme une ligne donc pas besoin
