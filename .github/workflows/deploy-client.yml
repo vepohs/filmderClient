@@ -42,4 +42,4 @@ jobs:
           password: ${{ secrets.VPS_PASS }}
           port: 55666
           script: |
-             systemctl restart nginx
+             sudo systemctl restart nginx
