@@ -2,7 +2,7 @@
 import "../style/HeaderMainPage.sass";
 import MyLogo from "../../../common/icons/filmderIcon.tsx";
 import {SvgLogout} from "../components/icons/SvgLogout.tsx";
-import {useAuth} from "../../../context/AuthContext.tsx";
+import {useAuth} from "../../../context/AuthContext/AuthContext.tsx";
 
 export function HeaderMainPage() {
 

@@ -3,7 +3,7 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import {useSelectedGroup} from "../SelectedGroupContext/SelectedGroupContext.tsx";
 import {useNavigate} from "react-router-dom";
 import {PreferenceContextType, PreferencesData} from "../../types/PreferencesType.ts";
-import {getAllPreferencesAvailable, getPreferences, setPreferences} from "./preferenceApiCalls.ts";
+import {getAllPreferencesAvailable, getPreferences, setPreferences} from "../../Services/preferenceApiCalls.ts";
 import {Genre, Provider} from "../../types/GenresAndProviders.ts";
 import {transformPreferencesToIds, transformPreferencesToObjects} from "./preferencesUtils.ts";
 

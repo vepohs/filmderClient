@@ -1,6 +1,6 @@
-import axiosWithAuth from "../../../axiosUtils/axiosConfig.ts";
-import {User} from "../../../types/UsersTypes.ts";
-import {MovieWithCount} from "../../../types/MovieAndProviders.ts";
+import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
+import {User} from "../types/UsersTypes.ts";
+import {MovieWithCount} from "../types/MovieAndProviders.ts";
 
 
 export const APIgetGroupUsers = (groupId: string): Promise<User[]> =>

@@ -5,12 +5,14 @@ import {HeaderLogin} from "./components/HeaderLogin.tsx";
 
 // @ts-ignore
 import "./_Login.sass";
+import {GoToSignUp} from "./components/GoToSignUp.tsx";
 
 function _Login() {
     return (
         <div className="loginContainer">
             <HeaderLogin/>
             <LoginForm/>
+            <GoToSignUp/>
         </div>
     );
 }

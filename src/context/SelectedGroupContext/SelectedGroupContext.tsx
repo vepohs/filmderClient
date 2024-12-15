@@ -3,7 +3,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Movie} from "../../types/MovieAndProviders.ts";
 import {Group, MovieResponse, SelectedGroupContextProps} from "../../types/SelectedGroupTypes.ts";
-import {APIgetMovies, APIgetUserGroups} from "./selectedGroupApiCall.ts";
+import {APIgetMovies, APIgetUserGroups} from "../../Services/selectedGroupApiCall.ts";
 
 
 export const SelectedGroupContext = createContext<SelectedGroupContextProps | undefined>(undefined);

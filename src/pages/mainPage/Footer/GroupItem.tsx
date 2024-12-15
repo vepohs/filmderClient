@@ -1,5 +1,5 @@
 import React from "react";
-import {useGroupActions} from "./useGroupActions.ts";
+import {useGroupActions} from "../../../hooks/useGroupActions.ts";
 import {Heart} from "../components/icons/Heart.tsx";
 import {Params} from "../components/icons/Params.tsx";
 

@@ -4,7 +4,7 @@ import {GroupItem} from "./GroupItem.tsx";
 // @ts-ignore
 import "../style/FooterMainPage.sass";
 import {Params} from "../components/icons/Params.tsx";
-import {useGroupActions} from "./useGroupActions.ts";
+import {useGroupActions} from "../../../hooks/useGroupActions.ts";
 import {Group} from "../../../types/SelectedGroupTypes.ts";
 
 type DropdownMenuProps = {

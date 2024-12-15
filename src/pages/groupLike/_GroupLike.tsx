@@ -5,7 +5,7 @@ import UserList from "./components/UserList.tsx";
 // @ts-ignore
 import "./_GroupKike.sass";
 
-import {useGroupLikeLogic} from "./components/useGroupLikeLogic.ts";
+import {useGroupLikeLogic} from "../../hooks/useGroupLikeLogic.ts";
 import {GroupMoviesSections} from "./components/GroupMoviesSections.tsx";
 import {MoviePopup} from "./components/MoviePopup.tsx";
 import {GroupHeader} from "./components/GroupHeader.tsx";

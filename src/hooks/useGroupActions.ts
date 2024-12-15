@@ -1,6 +1,6 @@
-import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
+import {useSelectedGroup} from "../context/SelectedGroupContext/SelectedGroupContext.tsx";
 import {useNavigate} from "react-router-dom";
-import {Group} from "../../../types/SelectedGroupTypes.ts";
+import {Group} from "../types/SelectedGroupTypes.ts";
 
 export const useGroupActions = () => {
 

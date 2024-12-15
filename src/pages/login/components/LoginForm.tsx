@@ -12,8 +12,7 @@ import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
-import {useAuth} from "../../../context/AuthContext.tsx";
-import {GoToSignUp} from "./GoToSignUp.tsx";
+import {useAuth} from "../../../context/AuthContext/AuthContext.tsx";
 
 export function LoginForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({
@@ -23,28 +22,29 @@ export function LoginForm() {
 
     const {login} = useAuth()
 
-    const tryLogin = async (data: LoginFormInputs) => {
-        try {
-            login(data);
-        } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                if (error.response?.status === 401) {
-                    setError('password', {message: 'Email ou mot de passe incorrect'});
-                } else if (error.code === "ERR_NETWORK") {
-                    console.log("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
-                } else if (error.response?.status === 500) {
-                    alert("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
-                } else {
-                    console.log("Une erreur inattendue est survenue. Veuillez réessayer.");
-                }
-            } else {
-                console.log("Une erreur inattendue est survenue.");
+
+     const handleAxiosError = (error: unknown): string => {
+        if (axios.isAxiosError(error)) {
+            switch (error.response?.status) {
+                case 401:
+                    return "Email ou mot de passe incorrect";
+                case 500:
+                    return "Erreur serveur. Veuillez réessayer.";
+                default:
+                    return "Une erreur inattendue est survenue.";
             }
         }
-    }
+        return "Erreur inconnue.";
+    };
 
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-        await tryLogin(data);
+        try {
+            await login(data);
+
+        } catch (error: unknown) {
+            const errorMessage = handleAxiosError(error);
+            setError("password", {message: errorMessage});
+        }
     };
 
     return (
@@ -67,9 +67,6 @@ export function LoginForm() {
                 />
                 <button className="submitBtnSignIn" type="submit">Se connecter</button>
             </form>
-            <GoToSignUp/>
         </div>
     );
 }
-
-export default LoginForm;

@@ -26,7 +26,7 @@ axiosWithAuth.interceptors.response.use(
     async error => {
         if (error.response?.status === 401) {
             try {
-                // Appel au rafraîchissement du token (définir une fonction `refreshAccessToken` ici ou ailleurs)
+                // Appel au rafraîchissement du token
                 const newAccessToken = await getNewAccessToken();
                 localStorage.setItem('accessToken', newAccessToken);
                 error.config.headers.Authorization = `Bearer ${newAccessToken}`;

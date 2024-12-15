@@ -1,6 +1,6 @@
 // src/AuthenticatedGuard.tsx
 import {Navigate, Outlet} from 'react-router-dom';
-import {useAuth} from '../AuthContext.tsx';
+import {useAuth} from '../AuthContext/AuthContext.tsx';
 
 const AuthenticatedGuard = () => {
     const {isAuthenticated, loading} = useAuth();
@@ -8,7 +8,7 @@ const AuthenticatedGuard = () => {
 // La vérif de la validiter du token ce fait dans le useEffect dans AuthContext
 
     // Evite le pb d'affichage quand on refresh la page ou qu'on est en train de parler a l'api
-    if (loading || isAuthenticated === null) {
+    if (loading) {
         return <div>Chargement...</div>;
     }
 

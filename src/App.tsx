@@ -11,7 +11,7 @@ import _MainPage from "./pages/mainPage/_MainPage.tsx";
 import PreferencesForm from "./pages/preferences/PreferencesPage.tsx";
 import SelectedGroupRoute from "./context/Routes/SelectedGroupRoute.tsx";
 import PreferenceRoute from "./context/Routes/PreferenceRoute.tsx";
-import {AuthProvider} from "./context/AuthContext.tsx";
+import {AuthProvider} from "./context/AuthContext/AuthContext.tsx";
 import _GroupLike from "./pages/groupLike/_GroupLike.tsx";
 import SelectedGroupGuard from "./context/Guard/SelectedGroupGuard.tsx";
 

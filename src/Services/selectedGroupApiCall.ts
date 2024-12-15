@@ -1,5 +1,5 @@
-import axiosWithAuth from "../../axiosUtils/axiosConfig.ts";
-import {MovieResponse} from "../../types/SelectedGroupTypes.ts";
+import axiosWithAuth from "../axiosUtils/axiosConfig.ts";
+import {MovieResponse} from "../types/SelectedGroupTypes.ts";
 /*
 attention ici y a pas {} car c est considerer comme une ligne donc pas besoin
 pas d'accolade = return implicite

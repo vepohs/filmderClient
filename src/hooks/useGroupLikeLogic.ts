@@ -1,10 +1,10 @@
 // useGroupLikeLogic.ts
 import {useCallback, useEffect, useState} from "react";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx";
-import {User} from "../../../types/UsersTypes.ts";
-import {APIgetGroupMoviesCommon, APIgetGroupUsers, APIsendSwipeResponse} from "./groupLikeApiCall.ts";
-import {mapMovie} from "./groupLikeUtils.ts";
-import {MovieWithCount} from "../../../types/MovieAndProviders.ts";
+import {useSelectedGroup} from "../context/SelectedGroupContext/SelectedGroupContext.tsx";
+import {User} from "../types/UsersTypes.ts";
+import {APIgetGroupMoviesCommon, APIgetGroupUsers, APIsendSwipeResponse} from "../Services/groupLikeApiCall.ts";
+import {mapMovie} from "../pages/groupLike/components/groupLikeUtils.ts";
+import {MovieWithCount} from "../types/MovieAndProviders.ts";
 
 
 export const useGroupLikeLogic = () => {

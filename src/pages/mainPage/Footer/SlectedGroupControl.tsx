@@ -1,6 +1,6 @@
 import React from "react";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext/SelectedGroupContext.tsx"; // Import du contexte
-import {useGroupActions} from "./useGroupActions.ts";
+import {useGroupActions} from "../../../hooks/useGroupActions.ts";
 import {Heart} from "../components/icons/Heart.tsx";
 import {Params} from "../components/icons/Params.tsx";
 // @ts-ignore
