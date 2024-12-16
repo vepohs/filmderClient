@@ -26,7 +26,6 @@ const GroupLike: React.FC = () => {
 
     return (
         <div className="groupLikePage">
-
             <GroupHeader selectedGroup={selectedGroup}/>
 
             <UserList

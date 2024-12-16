@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import GenresSelector from "./components/GenresSelector.tsx";
-import ReWatchCheckBox from "./components/ReWatchCheckBox.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
 
 
@@ -10,9 +9,6 @@ import {usePreferences} from "../../context/preferencesContext/PreferenceContext
 
 
 const PreferencesForm: React.FC = () => {
-
-
-    const [isRewatchChecked, setIsRewatchChecked] = useState<boolean>(false);
 
     const {submitPreferences, askForPreferences} = usePreferences();
 
@@ -24,17 +20,6 @@ const PreferencesForm: React.FC = () => {
         <div className="PreferencesGlobal">
             <h1>Genres</h1>
             <GenresSelector/>
-            <hr/>
-
-
-            <h1>Rewatch</h1>
-            <ReWatchCheckBox
-                label="Rewatch"
-                isChecked={isRewatchChecked}
-                setIsChecked={setIsRewatchChecked}
-            />
-            <hr/>
-
             <h1>Providers</h1>
             <ProviderSelector/>
 

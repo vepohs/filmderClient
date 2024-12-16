@@ -1,97 +1,97 @@
+svg {
+  height: 27px;
+  width: 27px;
+  margin-right: 10px;
+  stroke: rgba(255, 255, 255, 0.91);
+}
+
 .footerPrefer {
+  height: 15%;
   width: 100%;
-  height: 20%;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
-
-.navFooter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.customComboBox {
-  border: none;
-  margin-top: 10px;
-  margin-left: 10px;
-  position: relative;
-  width: 60%;
-  color: rgba(255, 255, 255, 0.76);
-}
-.customComboBox .selectedGroup {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding: 10px;
-  background: linear-gradient(-45deg, #1d0102, #060232, #39030f);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.customComboBox .selectedGroup .action-buttons {
-  background-color: white;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.customComboBox .selectedGroup .groupName {
-  color: #ffffff;
-}
-.customComboBox .selectedGroup .iconsContainer {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: white;
-}
-.customComboBox .groupList {
-  list-style: none;
-  padding: 0;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background-color: #b26464;
-  position: absolute;
+.footerPrefer .navFooter {
+  height: 100%;
   width: 100%;
-  top: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.footerPrefer .navFooter .group-page {
+  padding: 0;
+  margin: 0;
+  width: 40%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+}
+.footerPrefer .navFooter .customComboBox {
+  margin-left: 20px;
+  width: 60%;
+  height: 90%;
+}
+.footerPrefer .navFooter .customComboBox .selectedGroup {
+  box-shadow: rgba(244, 244, 244, 0.18) -2px -2px 20px 1px inset;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  position: relative;
+  height: 33%;
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.footerPrefer .navFooter .customComboBox .selectedGroup span {
+  color: rgba(255, 255, 255, 0.91);
+  position: absolute;
   left: 0;
-  z-index: 10;
+  padding-left: 10px;
+}
+.footerPrefer .navFooter .customComboBox .selectedGroup .dropdownIcon {
+  position: relative;
+  padding-right: 6px;
+}
+.footerPrefer .navFooter .customComboBox .selectedGroup .iconsContainer {
+  color: white;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footerPrefer .navFooter .customComboBox .groupList {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   border: none;
-  max-height: 200%;
+  height: 66%;
   overflow: scroll;
 }
-.customComboBox .groupList .groupItem {
+.footerPrefer .navFooter .customComboBox .groupList .groupItem {
+  box-shadow: rgba(244, 244, 244, 0.18) -2px -2px 20px 1px inset;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0);
   display: flex;
+  padding-right: 31.84px;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  cursor: pointer;
-  background: linear-gradient(45deg, #1d0102, #060232, #39030f);
-  border: #1b0202 1px solid;
-  border-top: none;
-  box-shadow: rgba(27, 2, 2, 0.39) 0px 0px 5px;
+  text-align: center;
 }
-.customComboBox .groupList .groupItem:last-child {
-  border-bottom: none;
+.footerPrefer .navFooter .customComboBox .groupList .groupItem .groupName {
+  padding-left: 10px;
+  color: rgba(255, 255, 255, 0.91);
+  height: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
-.customComboBox .groupList .groupItem:hover {
-  background-color: rgb(194.9267241379, 134.0732758621, 134.0732758621);
-}
-.customComboBox .groupList .groupItem.active {
-  background-color: #e0f7fa;
-  font-weight: bold;
-}
-
-.groupSettingsIcon {
-  cursor: pointer;
-  color: #ffffff;
-  height: 20px;
-  width: 20px;
-}
-.groupSettingsIcon:hover {
-  color: #007bff;
+.footerPrefer .navFooter .customComboBox .groupList .groupItem .iconsContainer {
+  color: white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=FooterMainPage.css.map */
