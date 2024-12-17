@@ -17,13 +17,11 @@ const PreferencesForm: React.FC = () => {
 
     return (
         <div className="PreferencesGlobal">
-            <h1>Genres</h1>
+
             <GenresSelector/>
             <hr/>
 
-            <h1>Providers</h1>
             <ProviderSelector/>
-
             <button onClick={submitPreferences} className="submitButton">
                 Enregistrer les préférences
             </button>

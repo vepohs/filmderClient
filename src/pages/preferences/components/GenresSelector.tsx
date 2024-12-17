@@ -18,7 +18,9 @@ const GenresSelector: React.FC = () => {
 
 
     return (
-        <div className="genreContainer">
+        <>
+            <h1>Genres</h1>
+    <div className="genreContainer">
             {allGenres.map((genre) => (
                 <button
                     key={genre.id}
@@ -29,6 +31,7 @@ const GenresSelector: React.FC = () => {
                 </button>
             ))}
         </div>
+        </>
     );
 };
 

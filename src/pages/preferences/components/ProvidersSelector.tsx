@@ -17,17 +17,20 @@ const ProviderSelector: React.FC = () => {
     };
 
     return (
-        <div className="providerContainer">
-            {allProviders.map((provider) => (
-                <button
-                    key={provider.id}
-                    onClick={() => toggleProvider(provider.id)}
-                    className={`providerButton ${selectedProviders.includes(provider.id) ? "selected" : ""}`}
-                >
-                    {provider.name}
-                </button>
-            ))}
-        </div>
+        <>
+            <h1>Providers</h1>
+            <div className="providerContainer">
+                {allProviders.map((provider) => (
+                    <button
+                        key={provider.id}
+                        onClick={() => toggleProvider(provider.id)}
+                        className={`providerButton ${selectedProviders.includes(provider.id) ? "selected" : ""}`}
+                    >
+                        {provider.name}
+                    </button>
+                ))}
+            </div>
+        </>
     );
 };
 
