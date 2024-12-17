@@ -6,6 +6,7 @@ import axiosWithAuth from "../../../Utils/axiosWithAuth.ts";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {MovieDisplay} from "./MovieDisplay.tsx";
 import {Movie} from "../../../types/MovieAndProviders.ts";
+import {MovieResponse} from "../../../types/SelectedGroupTypes.ts";
 
 
 export function MiddleMainPage() {
@@ -14,10 +15,8 @@ export function MiddleMainPage() {
     const [loading, setLoading] = useState<boolean>(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
-
-    const {loadMovies, selectedGroup} = useSelectedGroup();
-
-
+    const {selectedGroup} = useSelectedGroup();
+    
     useEffect(() => {
         setMovies([]);
         fetchMovies([]);
@@ -65,6 +64,34 @@ export function MiddleMainPage() {
     const swiped = (liked: boolean) => {
         handleSwipe(liked);
     };
+
+    const loadMovies = async (excludedIds: number[]): Promise<Movie[]> => {
+        try {
+            const response: MovieResponse = await APIgetMovies(excludedIds, selectedGroup.groupId);
+            return response.movies || [];
+        } catch (error) {
+            console.error("Error fetching movies:", error);
+            return [];
+        }
+    };
+
+     const APIgetMovies = (listExcluedIds: number[], groupId: string): Promise<MovieResponse> => {
+        return groupId === "me"
+            ? APIgetMoviesForUser(listExcluedIds)
+            : APIgetMoviesForGroup(listExcluedIds, groupId);
+    }
+
+     const APIgetMoviesForUser = (listExcluedIds: number[]) =>
+        axiosWithAuth
+            .post<MovieResponse>("movie/protected/getMovie", {listExcluedIds})
+            .then((response) => response.data);
+
+
+     const APIgetMoviesForGroup = (listExcluedIds: number[], groupId: string) =>
+        axiosWithAuth
+            .post<MovieResponse>("movie/protected/getGroupMovie", {listExcluedIds, groupId})
+            .then((response) => response.data);
+
 
 
     return (

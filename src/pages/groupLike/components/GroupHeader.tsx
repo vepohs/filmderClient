@@ -1,8 +1,9 @@
 // GroupHeader.tsx
 import React from "react";
 import {Group} from "../../../types/SelectedGroupTypes.ts";
-import {copyToClipboard} from "./groupLikeUtils.ts";
+
 import {SVGCopy} from "./SVGCopy.tsx";
+import {copyToClipboard} from "../../../Utils/groupLikeUtils.ts";
 
 
 interface GroupHeaderProps {

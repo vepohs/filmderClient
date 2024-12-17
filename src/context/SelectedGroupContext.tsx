@@ -1,9 +1,8 @@
 // src/context/SelectedGroupContext.tsx
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {Movie} from "../types/MovieAndProviders.ts";
-import {Group, MovieResponse, SelectedGroupContextProps} from "../types/SelectedGroupTypes.ts";
-import {APIgetMovies, APIgetUserGroups} from "../Services/selectedGroupApiCall.ts";
+import {Group,SelectedGroupContextProps} from "../types/SelectedGroupTypes.ts";
+import {APIgetUserGroups} from "../Services/selectedGroupApiCall.ts";
 
 
 export const SelectedGroupContext = createContext<SelectedGroupContextProps | undefined>(undefined);
@@ -51,15 +50,6 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
         }
     }
 
-    const loadMovies = async (excludedIds: number[]): Promise<Movie[]> => {
-        try {
-            const response: MovieResponse = await APIgetMovies(excludedIds, selectedGroup.groupId);
-            return response.movies || [];
-        } catch (error) {
-            console.error("Error fetching movies:", error);
-            return [];
-        }
-    };
 
     return (
         <SelectedGroupContext.Provider
@@ -69,7 +59,6 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
                 userGroups,
                 loadUserGroups,
                 navigateToPreferences,
-                loadMovies
             }}>
             {children}
         </SelectedGroupContext.Provider>

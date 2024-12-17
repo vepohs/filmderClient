@@ -11,7 +11,6 @@ export interface SelectedGroupContextProps {
     userGroups: Group[];
     loadUserGroups: () => Promise<void>; // Exposition de la fonction dans le contexte
     navigateToPreferences: () => void;
-    loadMovies: (excludedIds: number[]) => Promise<Movie[]>;
 }
 
 export interface MovieResponse {
