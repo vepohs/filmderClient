@@ -18,31 +18,34 @@ interface MovieDisplayProps {
 
 export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
     const [showTrailer, setShowTrailer] = useState(false);
-    const onShowTrailer = () => {
-        setShowTrailer((prev) => !prev); // Alterne entre afficher et masquer le trailer
+    const toggleTrailerDisplay = () => {
+        setShowTrailer((prev) => !prev);
     };
+
+    const handleSwipe =  (liked: boolean) => {
+        onSwipe(liked);
+        setShowTrailer(false);
+    }
+
     return (
         <>
             <div className="imageContainer">
                 <CardContainer
                     className={showTrailer}
                     onSwipe={(liked) => {
-                        onSwipe(liked);
-                        setShowTrailer(false);
+                        handleSwipe(liked);
                     }}
                     firstBackgroundImage={movie1.imagePath}
                     {...(movie2?.imagePath ? {secondBackgroundImage: movie2.imagePath} : {})}
                 />
                 <SvgDislike onClick={() => {
-                    onSwipe(false);
-                    setShowTrailer(false)
+                    handleSwipe(false)
                 }}/>
                 <SvgLike onClick={() => {
-                    onSwipe(true);
-                    setShowTrailer(false);
+                    handleSwipe(true)
                 }}/>
 
-                {movie1.videoPath && <SVGEye onClick={() => onShowTrailer()}/>}
+                {movie1.videoPath && <SVGEye onClick={() => toggleTrailerDisplay()}/>}
                 {showTrailer && movie1.videoPath && (
                     <div className="videoContainer">
                         <iframe className="video"

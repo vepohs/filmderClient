@@ -14,6 +14,6 @@ export const APIgetGroupMoviesCommon = (usersId: string[], groupId:string): Prom
         .then((response) => response.data); // Assurez-vous que `mapMovie` est importé ou défini correctement
 
 
-export const APIsendSwipeResponse = (movieId: number, liked: boolean, groupId: string) =>
+export const APISendGroupeSwipe = (movieId: number, liked: boolean, groupId: string) =>
     axiosWithAuth
         .post("group/protected/swipeMovieGroup", {movieId, liked, groupId});

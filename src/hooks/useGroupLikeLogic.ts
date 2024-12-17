@@ -2,7 +2,7 @@
 import {useCallback, useEffect, useState} from "react";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
 import {User} from "../types/UsersTypes.ts";
-import {APIgetGroupMoviesCommon, APIgetGroupUsers, APIsendSwipeResponse} from "../Services/groupLikeApiCall.ts";
+import {APIgetGroupMoviesCommon, APIgetGroupUsers, APISendGroupeSwipe} from "../Services/groupLikeApiCall.ts";
 import {mapMovie} from "../Utils/groupLikeUtils.ts";
 import {MovieWithCount} from "../types/MovieAndProviders.ts";
 
@@ -62,7 +62,7 @@ export const useGroupLikeLogic = () => {
 
     const sendSwipeResponse = async (movieId: number, liked: boolean) => {
         try {
-            await APIsendSwipeResponse(movieId, liked, selectedGroup.groupId);
+            await APISendGroupeSwipe(movieId, liked, selectedGroup.groupId);
         } catch (error) {
             console.error("Erreur lors de l'envoi de la réponse :", error);
         }
