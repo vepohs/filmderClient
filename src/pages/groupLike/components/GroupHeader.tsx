@@ -1,7 +1,8 @@
 // GroupHeader.tsx
 import React from "react";
 import {Group} from "../../../types/SelectedGroupTypes.ts";
-import {copyToClipboard} from "../../../Utils/groupLikeUtils.ts";
+import {copyToClipboard} from "./groupLikeUtils.ts";
+import {SVGCopy} from "./SVGCopy.tsx";
 
 
 interface GroupHeaderProps {
@@ -13,12 +14,10 @@ export const GroupHeader: React.FC<GroupHeaderProps> = ({selectedGroup}) => {
         <>
             <h1>{selectedGroup.name}</h1>
             <h1>
-                le code pour rejoindre le groupe est <br/>
-                <span
-                    onClick={() => copyToClipboard(selectedGroup.groupId)}
-                    style={{cursor: "pointer", textDecoration: "underline", color: "blue"}}
-                >
+
+                <span>
                     {selectedGroup.groupId}
+                   <SVGCopy onClick={ () => copyToClipboard(selectedGroup.groupId) }/>
                 </span>
             </h1>
         </>

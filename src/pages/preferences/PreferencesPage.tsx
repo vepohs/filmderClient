@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
 import GenresSelector from "./components/GenresSelector.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
-import {usePreferences} from "../../context/PreferenceContext.tsx";
+
 
 // @ts-ignore
 import "./_PreferencesPage.sass"
+import {usePreferences} from "../../context/preferencesContext/PreferenceContext.tsx";
 
 
 const PreferencesForm: React.FC = () => {
