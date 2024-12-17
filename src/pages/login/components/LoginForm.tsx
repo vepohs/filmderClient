@@ -8,10 +8,10 @@ import {EmailIcon} from "../../../common/icons/EmailIcon.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
 import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
 import {useAuth} from "../../../context/AuthContext.tsx";
+import axios from "axios";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
-import axios from "axios";
 
 
 export function LoginForm() {
@@ -39,7 +39,6 @@ export function LoginForm() {
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
         try {
             await login(data);
-
         } catch (error: unknown) {
             const errorMessage = handleLoginError(error);
             setError("password", {message: errorMessage});

@@ -31,17 +31,16 @@ export function SignUpForm() {
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
-
             await createNewUser(data);
-            navigate("/protected/preferences"); // Remplacez "/welcome" par le chemin de la page cible
+            navigate("/protected/preferences");
 
         } catch (error: unknown) {
             // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE
-            handleSignUpError(error, setError);
+            handleSignUpError(error);
         }
     };
 
-    function handleSignUpError(error: unknown, setError: any) {
+    function handleSignUpError(error: unknown) {
         if (axios.isAxiosError(error)) {
             if (error.code === "ERR_NETWORK") {
                 alert("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
@@ -58,8 +57,6 @@ export function SignUpForm() {
             alert("Une erreur inattendue est survenue. Veuillez réessayer.");
         }
     }
-
-
 
     return (
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
