@@ -5,7 +5,7 @@ import '../style/GoToSignIn.sass';
 export function GoToSignIn() {
     return (
         <div className='signInContainer'>
-            <p>Already have a account?</p>
+            <p>Vous avez déjà une compte ?</p>
             <Link to="/login">sign in</Link>
         </div>
     );
