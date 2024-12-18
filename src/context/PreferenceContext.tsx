@@ -10,7 +10,8 @@ import {handleErrorToast, handleSuccessToast} from "../Utils/toastUtils.ts";
 
 const PreferenceContext = createContext<PreferenceContextType>({
     hasPreferences: null,
-    loading: false,
+    askPrefLoading: false,
+    submitPrefLoading: false,
     allGenres: [],
     allProviders: [],
     selectedGenres: [],
@@ -27,7 +28,8 @@ const PreferenceContext = createContext<PreferenceContextType>({
 
 export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const [hasPreferences, setHasPreferences] = useState<boolean | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [askPrefLoading, setAskPrefLoading] = useState<boolean>(false);
+    const [submitPrefLoading, setSubmitPrefLoading] = useState<boolean>(false);
 
     const [allGenres, setAllGenres] = useState<Genre[]>([]);
     const [allProviders, setallProviders] = useState<Provider[]>([]);
@@ -50,7 +52,7 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     }
 
     const askForPreferences = async () => {
-        setLoading(true);
+        setAskPrefLoading(true);
         try {
             const response = await getPreferences(selectedGroup.groupId);
             const {genres, providers} = transformPreferencesToIds(response);
@@ -61,17 +63,16 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             console.error("Erreur lors de la récupération des préférences utilisateur:", error);
             alert("Impossible de récupérer les préférences utilisateur. Veuillez réessayer.");
         } finally {
-            setLoading(false);
+            setAskPrefLoading(false);
         }
     };
 
     const submitPreferences = async () => {
         try {
-
+            setSubmitPrefLoading(true);
             const data: PreferencesData = {
                 genrePreferenceIds: selectedGenres,
                 providerPreferenceIds: selectedProviders,
-                // rewatchPreference: isRewatchChecked,
             };
             await setPreferences(selectedGroup.groupId, data);
             // Met correctement a jour les préferences
@@ -82,6 +83,8 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             }, 1500);
         } catch (error) {
             handleErrorToast("Erreur lors de l'enregistrement des préférences.");
+        }finally {
+            setSubmitPrefLoading(false);
         }
     };
 
@@ -101,7 +104,8 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     return (
         <PreferenceContext.Provider value={{
             hasPreferences,
-            loading,
+            askPrefLoading,
+            submitPrefLoading,
             allGenres,
             allProviders,
             selectedProviders,
@@ -109,7 +113,8 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             setSelectedGenres,
             setSelectedProviders,
             submitPreferences,
-            askForPreferences
+            askForPreferences,
+
         }}>
             {children}
         </PreferenceContext.Provider>

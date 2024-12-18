@@ -2,16 +2,16 @@ import React, {useEffect} from "react";
 import GenresSelector from "./components/GenresSelector.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
 import {usePreferences} from "../../context/PreferenceContext.tsx";
+import {CustomToastContainer} from "../../common/components/CustomToastContainer.tsx";
 
 // @ts-ignore
 import "./PreferencesPage.sass"
-import {CustomToastContainer} from "../../common/components/CustomToastContainer.tsx";
 
 
 
 const PreferencesForm: React.FC = () => {
 
-    const {submitPreferences, askForPreferences} = usePreferences();
+    const {submitPreferences, askForPreferences, submitPrefLoading} = usePreferences();
 
     useEffect(() => {
         askForPreferences();
@@ -24,7 +24,7 @@ const PreferencesForm: React.FC = () => {
 
 
             <ProviderSelector/>
-            <button onClick={submitPreferences} className="submitButton">
+            <button onClick={submitPreferences} className="submitButton" disabled={submitPrefLoading}>
                 Enregistrer les préférences
             </button>
             <CustomToastContainer/>

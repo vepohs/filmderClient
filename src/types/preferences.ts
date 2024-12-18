@@ -3,7 +3,8 @@ import {Genre, Provider} from "./genreAndProvider";
 
 export interface PreferenceContextType {
     hasPreferences: boolean | null;
-    loading: boolean;
+    askPrefLoading: boolean;
+    submitPrefLoading: boolean;
     allGenres: Genre[];
     allProviders: Provider[];
     selectedGenres: number[];
