@@ -15,6 +15,7 @@ import {checkUniqueEmail, createNewUser} from "../../../services/SignUpFormApiCa
 // @ts-ignore
 import "../style/SignUpForm.sass";
 import {toast, ToastContainer} from "react-toastify";
+import {handleError, handleSuccess} from "../../../Utils/toastUtils.ts";
 
 
 
@@ -30,12 +31,12 @@ export function SignUpForm() {
         try {
             const { isUnique } = await checkUniqueEmail(data.email);
             if (!isUnique) {
-                toast.error("Cet email est déjà utilisé");
+                handleError("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
             await createNewUser(data);
-            toast.success("Inscription réussie !");
+            handleSuccess("Inscription réussie. Redirection vers vos préférences...");
             setTimeout(() => {
                 navigate("/protected/preferences");
             }, 1500);
@@ -65,7 +66,6 @@ export function SignUpForm() {
 
     return (
         <>
-
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
             <FormInput<FormInputs>
                 icon={SvgNameIcon}
