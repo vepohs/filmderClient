@@ -1,7 +1,6 @@
-// MoviePopup.tsx
 import React from "react";
-import {MovieWithCount} from "../../../types/MovieAndProviders.ts";
-import {MovieDisplay} from "../../mainPage/components/MovieDisplay.tsx";
+import {MovieDisplay} from "../../../common/components/MovieDisplay.tsx";
+import {MovieWithCount} from "../../../types/movie.ts";
 
 
 interface MoviePopupProps {

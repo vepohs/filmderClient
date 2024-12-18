@@ -1,5 +1,5 @@
 import axiosWithAuth from "../Utils/axiosWithAuth.ts";
-import {MovieResponse} from "../types/SelectedGroupTypes.ts";
+import {MovieResponse} from "../types/movie.ts";
 
 export const APIgetMovies = (listExcluedIds: number[], groupId: string): Promise<MovieResponse> => {
     return groupId === "me"

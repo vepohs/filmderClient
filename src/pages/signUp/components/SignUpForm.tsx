@@ -1,18 +1,22 @@
 import FormInput from "../../../common/components/FormInput.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {FormInputs} from "../../../types/formInputsTypes.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {signUpSchema} from "../../../Utils/signUpSchema.ts";
 import axios from "axios";
-import {EmailIcon} from "../../../common/icons/EmailIcon.tsx";
-import {NameIcon} from "../../../common/icons/NameIcon.tsx";
-import {AgeIcon} from "../../../common/icons/AgeIcon.tsx";
-import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
+import {SvgEmailIcon} from "../../../common/icons/SvgEmailIcon.tsx";
+import {SvgNameIcon} from "../../../common/icons/SvgNameIcon.tsx";
+import {SvgAgeIcon} from "../../../common/icons/SvgAgeIcon.tsx";
+import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
 import {useNavigate} from "react-router-dom";
-import {checkUniqueEmail, createNewUser} from "../../../Services/SignUpFormApiCall.ts";
+import {FormInputs} from "../../../types/forms.ts";
+import {checkUniqueEmail, createNewUser} from "../../../services/SignUpFormApiCall.ts";
+
 // @ts-ignore
 import "../style/SignUpForm.sass";
+import {toast, ToastContainer} from "react-toastify";
+import {handleError, handleSuccess} from "../../../Utils/toastUtils.ts";
+
 
 
 export function SignUpForm() {
@@ -24,16 +28,18 @@ export function SignUpForm() {
     const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-
         try {
             const { isUnique } = await checkUniqueEmail(data.email);
             if (!isUnique) {
+                handleError("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
             await createNewUser(data);
-            navigate("/protected/preferences");
-
+            handleSuccess("Inscription réussie. Redirection vers vos préférences...");
+            setTimeout(() => {
+                navigate("/protected/preferences");
+            }, 1500);
         } catch (error: unknown) {
             // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE
             handleSignUpError(error);
@@ -43,25 +49,26 @@ export function SignUpForm() {
     function handleSignUpError(error: unknown) {
         if (axios.isAxiosError(error)) {
             if (error.code === "ERR_NETWORK") {
-                alert("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
+                toast.error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
             } else if (error.response?.status === 409) {
+                // On sait jamais que un méchant envoie un mail deja utilisé ou quoi
+                toast.error("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
             } else if (error.response?.status === 500) {
-                alert("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
+                toast.error("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
             } else {
-                console.error("Erreur inattendue lors de la requête AXIOS:", error);
-                alert("Une erreur inattendue est survenue. Veuillez réessayer.");
+                toast.error("Une erreur inattendue est survenue. Veuillez réessayer.");
             }
         } else {
-            console.error("Erreur inconnue:", error);
-            alert("Une erreur inattendue est survenue. Veuillez réessayer.");
+            toast.error("Une erreur inattendue est survenue. Veuillez réessayer.");
         }
     }
 
     return (
+        <>
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
             <FormInput<FormInputs>
-                icon={NameIcon}
+                icon={SvgNameIcon}
                 name="firstName"
                 type="text"
                 placeholder={'Prénom'}
@@ -69,7 +76,7 @@ export function SignUpForm() {
                 error={errors.firstName}
             />
             <FormInput<FormInputs>
-                icon={NameIcon}
+                icon={SvgNameIcon}
                 name="lastName"
                 type="text"
                 register={register}
@@ -78,7 +85,7 @@ export function SignUpForm() {
             />
 
             <FormInput<FormInputs>
-                icon={EmailIcon}
+                icon={SvgEmailIcon}
                 name="email"
                 type="email"
                 register={register}
@@ -86,7 +93,7 @@ export function SignUpForm() {
                 error={errors.email}
             />
             <FormInput<FormInputs>
-                icon={AgeIcon}
+                icon={SvgAgeIcon}
                 name="age"
                 type="text"
                 placeholder={'Âge'}
@@ -95,7 +102,7 @@ export function SignUpForm() {
             />
 
             <PasswordInput<FormInputs>
-                icon={PasswordIcon}
+                icon={SvgPasswordIcon}
                 name="password"
                 register={register}
                 placeholder='Mot de passe'
@@ -103,7 +110,7 @@ export function SignUpForm() {
             />
 
             <PasswordInput<FormInputs>
-                icon={PasswordIcon}
+                icon={SvgPasswordIcon}
                 name="confirmPassword"
                 placeholder='Mot de passe'
                 register={register}
@@ -111,5 +118,15 @@ export function SignUpForm() {
             />
             <button className="submitBtn" type="submit">SIGN UP</button>
         </form>
+
+    <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+    />
+        </>
     );
 }

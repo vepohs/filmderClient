@@ -1,7 +1,8 @@
 import React from "react";
+import {User} from "../../../types/user.ts";
+
 // @ts-ignore
 import "../styles/UserList.sass"
-import {User} from "../../../types/UsersTypes.ts";
 
 
 interface UserListProps {

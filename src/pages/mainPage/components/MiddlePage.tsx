@@ -1,8 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import "../style/MiddleMainPage.sass";
 import {useMiddleMainPage} from "../../../hooks/useMiddlePage.ts";
-import {MovieDisplay} from "./MovieDisplay.tsx";
+import {MovieDisplay} from "../../../common/components/MovieDisplay.tsx";
+// @ts-ignore
+import "../style/MiddleMainPage.sass";
 
 
 export function MiddleMainPage() {

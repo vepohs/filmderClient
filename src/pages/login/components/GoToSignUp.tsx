@@ -1,8 +1,7 @@
-// src/AAAcomponents/GoToSignUp.tsx
+import {Link} from "react-router-dom";
 
 // @ts-ignore
 import "../style/GoToSignUp.sass";
-import {Link} from "react-router-dom";
 
 export function GoToSignUp() {
     return (

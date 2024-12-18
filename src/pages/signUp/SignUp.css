@@ -1,0 +1,11 @@
+.signUpGlobalStyle {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(45deg, #1d0102, #060232, #39030f);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*# sourceMappingURL=SignUp.css.map */

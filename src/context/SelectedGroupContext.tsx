@@ -1,8 +1,8 @@
 // src/context/SelectedGroupContext.tsx
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {Group,SelectedGroupContextProps} from "../types/SelectedGroupTypes.ts";
-import {APIgetUserGroups} from "../Services/selectedGroupApiCall.ts";
+import {Group, SelectedGroupContextProps} from "../types/group.ts";
+import {APIgetUserGroups} from "../services/selectedGroupApiCall.ts";
 
 
 export const SelectedGroupContext = createContext<SelectedGroupContextProps | undefined>(undefined);

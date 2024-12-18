@@ -1,11 +1,13 @@
 import React from "react";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {GroupItem} from "./GroupItem.tsx";
+import {SvgParams} from "../components/icons/SvgParams.tsx";
+import {useGroupActions} from "../../../hooks/useGroupActions.ts";
+import {Group} from "../../../types/group.ts";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+
 // @ts-ignore
 import "../style/FooterMainPage.sass";
-import {Params} from "../components/icons/Params.tsx";
-import {useGroupActions} from "../../../hooks/useGroupActions.ts";
-import {Group} from "../../../types/SelectedGroupTypes.ts";
+
 
 type DropdownMenuProps = {
     onGroupChange: (group: Group) => void; // Accepte maintenant un objet de type Group
@@ -28,7 +30,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({onGroupChange}) => {
                 >
                     <span className="groupName">Moi</span>
 
-                    <Params
+                    <SvgParams
                         className="groupSettingsIcon"
                         onClick={() => navigateToGroupSettings({groupId: "me", name: "Moi"})}
                     />

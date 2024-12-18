@@ -1,19 +1,20 @@
-import _Login from "./pages/login/_Login.tsx";
-import _SignUp from "./pages/signUp/_SignUp.tsx";
+
 import {Route, Routes} from "react-router-dom";
 import AuthenticatedGuard from "./Guard/AuthenticatedGuard.tsx";
 import PublicGuard from "./Guard/PublicGuard.tsx";
 import PreferencesGuard from "./Guard/PreferencesGuard.tsx";
-import _GroupPage from "./pages/mainPage/Footer/groupManagement.tsx";
-// @ts-ignore
-import "./App.sass"
-import _MainPage from "./pages/mainPage/_MainPage.tsx";
 import PreferencesForm from "./pages/preferences/PreferencesPage.tsx";
 import SelectedGroupRoute from "./context/Routes/SelectedGroupRoute.tsx";
 import PreferenceRoute from "./context/Routes/PreferenceRoute.tsx";
-import {AuthProvider} from "./context/AuthContext.tsx";
-import _GroupLike from "./pages/groupLike/_GroupLike.tsx";
 import SelectedGroupGuard from "./Guard/SelectedGroupGuard.tsx";
+import Login from "./pages/login/Login.tsx";
+import MainPage from "./pages/mainPage/MainPage.tsx";
+import SignUp from "./pages/signUp/SignUp.tsx";
+import GroupLike from "./pages/groupLike/GroupLike.tsx";
+import {AuthProvider} from "./context/AuthContext.tsx";
+// @ts-ignore
+import "./App.sass"
+
 
 function App() {
     return (
@@ -21,9 +22,9 @@ function App() {
         <AuthProvider>
             <Routes>
                 <Route element={<PublicGuard/>}>
-                    <Route index element={<_Login/>}/>
-                    <Route path="/login" element={<_Login/>}/>
-                    <Route path="/signup" element={<_SignUp/>}/>
+                    <Route index element={<Login/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/signup" element={<SignUp/>}/>
                 </Route>
 
                 <Route path="/protected" element={<AuthenticatedGuard/>}>
@@ -34,16 +35,16 @@ function App() {
                             <Route index
                                    element={
                                        <PreferencesGuard>
-                                           <_MainPage/>
+                                           <MainPage/>
                                        </PreferencesGuard>
                                    }
                             />
                         </Route>
 
 
-                        <Route path="groupPage" element={<_GroupPage/>}/>
+                        <Route path="groupPage" element={<GroupLike/>}/>
                         <Route element={<SelectedGroupGuard/>}>
-                            <Route path="groupLike" element={<_GroupLike/>}/>
+                            <Route path="groupLike" element={<GroupLike/>}/>
                         </Route>
                         <Route path="*" element="erreur 404"/>
                     </Route>

@@ -1,7 +1,7 @@
 import React from "react";
 import {useGroupActions} from "../../../hooks/useGroupActions.ts";
-import {Heart} from "../components/icons/Heart.tsx";
-import {Params} from "../components/icons/Params.tsx";
+import {SvgHeart} from "../components/icons/SvgHeart.tsx";
+import {SvgParams} from "../components/icons/SvgParams.tsx";
 
 // @ts-ignore
 import "../style/FooterMainPage.sass";
@@ -20,11 +20,11 @@ export const GroupItem: React.FC<GroupItemProps> = ({group, isSelected, onClick}
             onClick={onClick}>
             <span className="groupName">{group.name}</span>
             <div className="iconsContainer">
-                <Heart
+                <SvgHeart
                     className="groupSettingsIcon"
                     onClick={() => navigateToLikePage(group)}
                 />
-                <Params
+                <SvgParams
                     className="groupSettingsIcon"
                     onClick={() => navigateToGroupSettings(group)}
                 />

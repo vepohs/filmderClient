@@ -1,6 +1,6 @@
 // src/utils/axiosWithAuth.ts
 import axios from "axios";
-import {API_BASE_URL} from "./ServerConstant.ts";
+import {API_BASE_URL} from "./serverConstant.ts";
 
 // Création d'une instance Axios pour la configuration
 const axiosWithAuth = axios.create({
