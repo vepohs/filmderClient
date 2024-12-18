@@ -10,7 +10,7 @@ import {SvgAgeIcon} from "../../../common/icons/SvgAgeIcon.tsx";
 import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
 import {useNavigate} from "react-router-dom";
 import {FormInputs} from "../../../types/forms.ts";
-import {checkUniqueEmail, createNewUser} from "../../../services/SignUpFormApiCall.ts";
+import {checkUniqueEmail, createNewUser} from "../../../services/signUpFormApiCall.ts";
 
 // @ts-ignore
 import "../style/SignUpForm.sass";
