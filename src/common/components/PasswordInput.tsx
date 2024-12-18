@@ -33,14 +33,14 @@ function PasswordInput<TFormValues extends FieldValues>({name, register, error, 
                 className="passwordToggleBtn"
                 aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
                 aria-pressed={showPassword}
+                tabIndex={-1}
             >
                 {showPassword ? <SvgOpenEyeIcon/> : <SvgCloseEyeIcon/>}
             </button>
             {error &&
                 <ErrorTooltip message={error.message}/>
             }
-            <Tooltip id="my-tooltip1" className="tooltip" positionStrategy="fixed"
-            />
+            <Tooltip id="my-tooltip1" className="tooltip" positionStrategy="fixed"/>
         </div>
 
 

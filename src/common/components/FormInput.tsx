@@ -26,7 +26,6 @@ function FormInput <TFormValues extends FieldValues> ({
                 placeholder={placeholder}
                 {...register(name)}
             />
-
             {error && <ErrorTooltip message={error.message} />}
         </div>
     );

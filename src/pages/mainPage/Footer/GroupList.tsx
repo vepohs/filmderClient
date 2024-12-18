@@ -2,13 +2,8 @@ import React from "react";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 
 const GroupList: React.FC = () => {
-    const selectedGroupContext = useSelectedGroup();
 
-    if (!selectedGroupContext) {
-        throw new Error("GroupList must be used within a SelectedGroupProvider");
-    }
-
-    const {userGroups} = selectedGroupContext;
+    const {userGroups} = useSelectedGroup();
 
     return (
         <div className="groups-section">

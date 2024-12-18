@@ -6,14 +6,15 @@ import PreferencesGuard from "./Guard/PreferencesGuard.tsx";
 import PreferencesForm from "./pages/preferences/PreferencesPage.tsx";
 import SelectedGroupRoute from "./context/Routes/SelectedGroupRoute.tsx";
 import PreferenceRoute from "./context/Routes/PreferenceRoute.tsx";
-import {AuthProvider} from "./context/authContext.tsx";
 import SelectedGroupGuard from "./Guard/SelectedGroupGuard.tsx";
 import Login from "./pages/login/Login.tsx";
 import MainPage from "./pages/mainPage/MainPage.tsx";
 import SignUp from "./pages/signUp/SignUp.tsx";
 import GroupLike from "./pages/groupLike/GroupLike.tsx";
+import {AuthProvider} from "./context/AuthContext.tsx";
 // @ts-ignore
 import "./App.sass"
+
 
 function App() {
     return (

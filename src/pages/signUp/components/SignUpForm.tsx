@@ -26,7 +26,6 @@ export function SignUpForm() {
     const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-
         try {
             const { isUnique } = await checkUniqueEmail(data.email);
             if (!isUnique) {
@@ -35,7 +34,6 @@ export function SignUpForm() {
             }
             await createNewUser(data);
             navigate("/protected/preferences");
-
         } catch (error: unknown) {
             // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE
             handleSignUpError(error);
