@@ -1,7 +1,7 @@
-// @ts-ignore
-import '../style/GoToSignIn.sass';
 import {Link} from "react-router-dom";
 
+// @ts-ignore
+import '../style/GoToSignIn.sass';
 export function GoToSignIn() {
     return (
         <div className='signInContainer'>
