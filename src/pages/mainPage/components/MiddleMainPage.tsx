@@ -15,7 +15,7 @@ export function MiddleMainPage() {
     return (
         <div className="middleMainPage" ref={containerRef}>
             {!movies.length ? (
-                <div className="spinner"></div>
+                <div className="spinnerMainPage"></div>
             ) : (
                 <MovieDisplay
                     movie1={firstMovie}

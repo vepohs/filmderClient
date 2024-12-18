@@ -1,18 +1,18 @@
 import { toast } from "react-toastify";
 
-export const handleSuccess = (message: string) => {
+export const handleSuccessToast = (message: string) => {
     toast.success(message);
 };
 
-export const handleError = (message: string) => {
+export const handleErrorToast = (message: string) => {
     toast.error(message);
 };
 
-export const handleInfo = (message: string) => {
+export const handleInfoToast = (message: string) => {
     toast.info(message);
 };
 
 
-export const handleWarning = (message: string) => {
+export const handleWarningToast = (message: string) => {
     toast.warn(message);
 };

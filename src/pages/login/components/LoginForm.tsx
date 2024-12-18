@@ -11,6 +11,9 @@ import {useAuth} from "../../../context/AuthContext.tsx";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
+import {useState} from "react";
+import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
+import {handleErrorToast} from "../../../Utils/toastUtils.ts";
 
 export function LoginForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({
@@ -19,8 +22,22 @@ export function LoginForm() {
     });
 
     const {login} = useAuth()
+    const [loading, setLoading] = useState(false);
 
-     const handleLoginError = (error: unknown): string => {
+    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+        setLoading(true);
+        try {
+            await login(data);
+        } catch (error: unknown) {
+            const errorMessage = handleLoginError(error);
+            setError("password", {message: errorMessage});
+            handleErrorToast(errorMessage);
+        }finally {
+            setLoading(false);
+        }
+    };
+
+    const handleLoginError = (error: unknown): string => {
         if (axios.isAxiosError(error)) {
             switch (error.response?.status) {
                 case 401:
@@ -34,14 +51,6 @@ export function LoginForm() {
         return "Erreur inconnue.";
     };
 
-    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-        try {
-            await login(data);
-        } catch (error: unknown) {
-            const errorMessage = handleLoginError(error);
-            setError("password", {message: errorMessage});
-        }
-    };
 
     return (
         <div className="login-box">
@@ -61,8 +70,12 @@ export function LoginForm() {
                     placeholder='Mot de passe'
                     error={errors.password}
                 />
-                <button className="submitBtnSignIn" type="submit">Se connecter</button>
+                <button className="submitBtnSignIn" type="submit" disabled={loading}>
+                    Se connecter
+                    {loading && <div className="spinnerLogin"></div>}
+                </button>
             </form>
+            <CustomToastContainer/>
         </div>
     );
 }

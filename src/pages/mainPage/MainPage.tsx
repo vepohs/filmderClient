@@ -2,7 +2,7 @@
 import './MainPage.sass'
 import {HeaderMainPage} from "./components/HeaderMainPage.tsx";
 import {FooterMainPage} from "./Footer/FooterMainPage.tsx";
-import {MiddleMainPage} from "./components/MiddlePage.tsx";
+import {MiddleMainPage} from "./components/MiddleMainPage.tsx";
 
 
 export function MainPage() {

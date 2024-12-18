@@ -11,11 +11,12 @@ import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
 import {useNavigate} from "react-router-dom";
 import {FormInputs} from "../../../types/forms.ts";
 import {checkUniqueEmail, createNewUser} from "../../../services/signUpFormApiCall.ts";
-import {toast, ToastContainer} from "react-toastify";
-import {handleError, handleSuccess} from "../../../Utils/toastUtils.ts";
+import {toast} from "react-toastify";
+import {handleErrorToast, handleSuccessToast} from "../../../Utils/toastUtils.ts";
 
 // @ts-ignore
 import "../style/SignUpForm.sass";
+import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
 
 
 
@@ -32,17 +33,16 @@ export function SignUpForm() {
         try {
             const { isUnique } = await checkUniqueEmail(data.email);
             if (!isUnique) {
-                handleError("Cet email est déjà utilisé");
+                handleErrorToast("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
             await createNewUser(data);
-            handleSuccess("Inscription réussie. Redirection vers vos préférences...");
+            handleSuccessToast("Inscription réussie. Redirection vers la page de connexion...");
             setTimeout(() => {
-                navigate("/protected/preferences");
+                navigate("/login");
             }, 1500);
         } catch (error: unknown) {
-            // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE
             handleSignUpError(error);
         }
     };
@@ -119,15 +119,7 @@ export function SignUpForm() {
             />
             <button className="submitBtn" type="submit">SIGN UP</button>
         </form>
-
-    <ToastContainer
-        position="bottom-center"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        pauseOnHover
-    />
+        <CustomToastContainer/>
         </>
     );
 }
