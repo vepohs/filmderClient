@@ -5,7 +5,9 @@ import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import Popup from "./Popup.tsx";
 
 // @ts-ignore
-import "../style/groupManagement.sass";
+import "../style/GroupManagement.sass";
+import {handleErrorToast, handleSuccessToast, handleWarningToast} from "../../../Utils/toastUtils.ts";
+import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
 
 const GroupPage: React.FC = () => {
 
@@ -31,10 +33,11 @@ const GroupPage: React.FC = () => {
             await axiosWithAuth.post("/group/protected/groupAdd", {
                 name: popUpText,
             });
+            handleSuccessToast("Groupe créé avec succès !");
             await loadUserGroups()
             handlePopupClose();
         } else {
-            alert("Le nom du groupe ne peut pas être vide !");
+            handleWarningToast("Le nom du groupe ne peut pas être vide !");
         }
     };
 
@@ -44,15 +47,14 @@ const GroupPage: React.FC = () => {
                 await axiosWithAuth.post("/group/protected/groupJoin", {
                     groupId: popUpText,
                 });
-                alert("You successfully joined the group!");
+                handleSuccessToast("Groupe rejoint avec succès !");
                 loadUserGroups();
                 handlePopupClose();
             } catch (error) {
-                console.error("Error joining the group:", error);
-                alert("Failed to join the group. Please try again.");
+                handleErrorToast("Impossible de rejoindre le groupe !");
             }
         } else {
-            alert("Le nom du groupe ne peut pas être vide !");
+            handleWarningToast("Le nom du groupe ne peut pas être vide !");
         }
     };
 
@@ -71,9 +73,7 @@ const GroupPage: React.FC = () => {
 
     return (
         <div className="group-page">
-
             <ActionButtons onOpenPopup={handleOpenPopup}/>
-            { /* <GroupList/> */}
             {isPopupOpen && (
                 <Popup
                     mode={popupMode}
@@ -83,6 +83,7 @@ const GroupPage: React.FC = () => {
                     onSubmit={handleSubmit}
                 />
             )}
+            <CustomToastContainer/>
         </div>
     );
 };

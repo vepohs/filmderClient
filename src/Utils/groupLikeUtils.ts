@@ -1,6 +1,7 @@
 // Fonction utilitaire pour mapper un film
 import {Genre, Provider} from "../types/genreAndProvider.ts";
 import {MovieWithCount} from "../types/movie.ts";
+import {handleErrorToast, handleSuccessToast} from "./toastUtils.ts";
 
 export const mapMovie = (item: any): MovieWithCount => ({
     ...item.movie,
@@ -18,6 +19,6 @@ export const mapMovie = (item: any): MovieWithCount => ({
 
 export const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
-        .then(() => alert("Texte copié dans le presse-papiers !"))
-        .catch((error) => console.error("Erreur lors de la copie :", error));
+        .then(() => handleSuccessToast("Copié dans le presse-papier"))
+        .catch(() => handleErrorToast("Erreur lors de la copie dans le presse-papier"));
 };

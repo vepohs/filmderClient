@@ -17,11 +17,11 @@ const Popup: React.FC<PopupProps> = ({
                                      }) => (
     <div className="popup-overlay">
         <div className="popup-content">
-            <h2>{mode === "create" ? "Create a Group" : "Join a Group"}</h2>
+            <h2>{mode === "create" ? "Créer un groupe" : "Rejoindre un groupe"}</h2>
             <input
                 type="text"
                 placeholder={
-                    mode === "create" ? "Enter new group name" : "Enter group name to join"
+                    mode === "create" ? "Enter le nom du groupe" : "Enter le code du groupe"
                 }
                 value={groupName}
                 onChange={(e) => onGroupNameChange(e.target.value)}
