@@ -1,10 +1,10 @@
 // MoviesSection.tsx
 import React from "react";
-import {MovieWithCount} from "../../../types/MovieAndProviders.ts";
-import {CardContainer} from "../../mainPage/components/CardContainer.tsx";
+import {CardContainer} from "../../../common/components/CardContainer.tsx";
+import {MovieWithCount} from "../../../types/movie.ts";
 
 // @ts-ignore
-import "../_GroupKike.sass"
+import "../GroupKike.sass"
 
 interface MoviesSectionProps {
     count: number;

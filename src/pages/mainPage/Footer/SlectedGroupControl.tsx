@@ -1,8 +1,9 @@
 import React from "react";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx"; // Import du contexte
 import {useGroupActions} from "../../../hooks/useGroupActions.ts";
-import {Heart} from "../components/icons/Heart.tsx";
-import {Params} from "../components/icons/Params.tsx";
+import {SvgHeart} from "../components/icons/SvgHeart.tsx";
+import {SvgParams} from "../components/icons/SvgParams.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+
 // @ts-ignore
 import "../style/FooterMainPage.sass";
 
@@ -20,12 +21,12 @@ export const SelectedGroupControl: React.FC = () => {
             <span>{groupName}</span>
             <div className="iconsContainer">
                 {selectedGroup.groupId !== "me" && (
-                    <Heart
+                    <SvgHeart
                         className="groupSettingsIcon"
                         onClick={() => navigateToLikePage(selectedGroup)}
                     />
                 )}
-                <Params
+                <SvgParams
                     className="groupSettingsIcon"
                     onClick={() => navigateToGroupSettings(selectedGroup)}
                 />

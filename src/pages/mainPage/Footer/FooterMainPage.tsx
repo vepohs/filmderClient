@@ -1,12 +1,12 @@
 import {useState} from "react";
+import {DropdownMenu} from "./DropdownMenu.tsx";
+import {SelectedGroupControl} from "./SlectedGroupControl.tsx";
+import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {Group} from "../../../types/group.ts";
+import GroupManagement from "./GroupManagement.tsx";
 
 // @ts-ignore
 import "../style/FooterMainPage.sass";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
-import {DropdownMenu} from "./DropdownMenu.tsx";
-import {SelectedGroupControl} from "./SlectedGroupControl.tsx";
-import {Group} from "../../../types/SelectedGroupTypes.ts";
-import _GroupPage from "./groupManagement.tsx";
 
 export function FooterMainPage() {
     const {setSelectedGroup} = useSelectedGroup();
@@ -29,7 +29,7 @@ export function FooterMainPage() {
                 </div>
                 {isDropdownOpen && <DropdownMenu onGroupChange={handleGroupChange}/>}
             </div>
-            <_GroupPage/>
+            <GroupManagement/>
                 </div>
         </div>
     );

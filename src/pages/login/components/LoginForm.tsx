@@ -1,14 +1,13 @@
-// src/AAAcomponents/LoginForm.tsx
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {LoginFormInputs} from "../../../types/formInputsTypes.ts";
 import {loginSchema} from "../../../Utils/loginSchema.ts";
 import FormInput from "../../../common/components/FormInput.tsx";
-import {EmailIcon} from "../../../common/icons/EmailIcon.tsx";
+import {SvgEmailIcon} from "../../../common/icons/SvgEmailIcon.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
-import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
-import {useAuth} from "../../../context/AuthContext.tsx";
+import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
+import {useAuth} from "../../../context/authContext.tsx";
 import axios from "axios";
+import {LoginFormInputs} from "../../../types/auth.ts";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
@@ -49,7 +48,7 @@ export function LoginForm() {
         <div className="login-box">
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                 <FormInput
-                    icon={EmailIcon}
+                    icon={SvgEmailIcon}
                     name="email"
                     type="email"
                     placeholder='Adresse email'
@@ -57,7 +56,7 @@ export function LoginForm() {
                     error={errors.email}
                 />
                 <PasswordInput
-                    icon={PasswordIcon}
+                    icon={SvgPasswordIcon}
                     name="password"
                     register={register}
                     placeholder='Mot de passe'

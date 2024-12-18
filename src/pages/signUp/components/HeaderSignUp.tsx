@@ -1,4 +1,4 @@
-import MyLogo from "../../../common/icons/filmderIcon.tsx";
+import FilmderIcon from "../../../common/icons/SvgFilmderIcon.tsx";
 // @ts-ignore
 import "../style/HeaderSignUp.sass"
 
@@ -6,7 +6,7 @@ import "../style/HeaderSignUp.sass"
 export function HeaderSignUp() {
     return (
         <div className='headerSignUpContainer'>
-            <MyLogo></MyLogo>
+            <FilmderIcon></FilmderIcon>
             <h2>SIGN UP</h2>
         </div>
     );

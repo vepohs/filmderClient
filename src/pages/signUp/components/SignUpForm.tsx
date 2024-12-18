@@ -1,18 +1,20 @@
 import FormInput from "../../../common/components/FormInput.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {FormInputs} from "../../../types/formInputsTypes.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {signUpSchema} from "../../../Utils/signUpSchema.ts";
 import axios from "axios";
-import {EmailIcon} from "../../../common/icons/EmailIcon.tsx";
-import {NameIcon} from "../../../common/icons/NameIcon.tsx";
-import {AgeIcon} from "../../../common/icons/AgeIcon.tsx";
-import {PasswordIcon} from "../../../common/icons/PasswordIcon.tsx";
+import {SvgEmailIcon} from "../../../common/icons/SvgEmailIcon.tsx";
+import {SvgNameIcon} from "../../../common/icons/SvgNameIcon.tsx";
+import {SvgAgeIcon} from "../../../common/icons/SvgAgeIcon.tsx";
+import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
 import {useNavigate} from "react-router-dom";
-import {checkUniqueEmail, createNewUser} from "../../../Services/SignUpFormApiCall.ts";
+import {FormInputs} from "../../../types/forms.ts";
+import {checkUniqueEmail, createNewUser} from "../../../services/SignUpFormApiCall.ts";
+
 // @ts-ignore
 import "../style/SignUpForm.sass";
+
 
 
 export function SignUpForm() {
@@ -61,7 +63,7 @@ export function SignUpForm() {
     return (
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
             <FormInput<FormInputs>
-                icon={NameIcon}
+                icon={SvgNameIcon}
                 name="firstName"
                 type="text"
                 placeholder={'Prénom'}
@@ -69,7 +71,7 @@ export function SignUpForm() {
                 error={errors.firstName}
             />
             <FormInput<FormInputs>
-                icon={NameIcon}
+                icon={SvgNameIcon}
                 name="lastName"
                 type="text"
                 register={register}
@@ -78,7 +80,7 @@ export function SignUpForm() {
             />
 
             <FormInput<FormInputs>
-                icon={EmailIcon}
+                icon={SvgEmailIcon}
                 name="email"
                 type="email"
                 register={register}
@@ -86,7 +88,7 @@ export function SignUpForm() {
                 error={errors.email}
             />
             <FormInput<FormInputs>
-                icon={AgeIcon}
+                icon={SvgAgeIcon}
                 name="age"
                 type="text"
                 placeholder={'Âge'}
@@ -95,7 +97,7 @@ export function SignUpForm() {
             />
 
             <PasswordInput<FormInputs>
-                icon={PasswordIcon}
+                icon={SvgPasswordIcon}
                 name="password"
                 register={register}
                 placeholder='Mot de passe'
@@ -103,7 +105,7 @@ export function SignUpForm() {
             />
 
             <PasswordInput<FormInputs>
-                icon={PasswordIcon}
+                icon={SvgPasswordIcon}
                 name="confirmPassword"
                 placeholder='Mot de passe'
                 register={register}

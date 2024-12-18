@@ -1,12 +1,11 @@
-// src/AAAcomponents/PasswordInput.tsx
-
 import {useState} from 'react';
 import {FieldValues} from 'react-hook-form';
-import {OpenEyeIcon} from '../icons/OpenEyeIcon.tsx';
-import {CloseEyeIcon} from '../icons/CloseEyeIcon.tsx';
+import {SvgOpenEyeIcon} from '../icons/SvgOpenEyeIcon.tsx';
+import {SvgCloseEyeIcon} from '../icons/SvgCloseEyeIcon.tsx';
 import {Tooltip} from "react-tooltip";
 import {ErrorTooltip} from "./ErrorTooltip.tsx";
-import {PasswordInputProps} from "../../types/FormInputPropsTye.ts";
+import {PasswordInputProps} from "../../types/forms.ts";
+
 // @ts-ignore
 import "../style/Icon.sass";
 // @ts-ignore
@@ -35,7 +34,7 @@ function PasswordInput<TFormValues extends FieldValues>({name, register, error, 
                 aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
                 aria-pressed={showPassword}
             >
-                {showPassword ? <OpenEyeIcon/> : <CloseEyeIcon/>}
+                {showPassword ? <SvgOpenEyeIcon/> : <SvgCloseEyeIcon/>}
             </button>
             {error &&
                 <ErrorTooltip message={error.message}/>

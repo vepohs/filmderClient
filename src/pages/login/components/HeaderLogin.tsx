@@ -1,6 +1,4 @@
-// src/AAAcomponents/HeaderLogin.tsx
-
-import MyLogo from "../../../common/icons/filmderIcon.tsx";
+import FilmderIcon from "../../../common/icons/SvgFilmderIcon.tsx";
 
 // @ts-ignore
 import "../style/HeaderLogin.sass";
@@ -8,7 +6,7 @@ import "../style/HeaderLogin.sass";
 export function HeaderLogin() {
     return (
         <div className='headerLoginContainer'>
-            <MyLogo />
+            <FilmderIcon />
             <h2>Connexion</h2>
         </div>
     );

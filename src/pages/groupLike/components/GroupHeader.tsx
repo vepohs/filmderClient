@@ -1,14 +1,10 @@
 // GroupHeader.tsx
 import React from "react";
-import {Group} from "../../../types/SelectedGroupTypes.ts";
-
-import {SVGCopy} from "./SVGCopy.tsx";
+import {SVGCopy} from "./icons/SVGCopy.tsx";
 import {copyToClipboard} from "../../../Utils/groupLikeUtils.ts";
+import {GroupHeaderProps} from "../../../types/group.ts";
 
 
-interface GroupHeaderProps {
-    selectedGroup: Group;
-}
 
 export const GroupHeader: React.FC<GroupHeaderProps> = ({selectedGroup}) => {
     return (

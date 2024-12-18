@@ -1,6 +1,6 @@
 // Fonction utilitaire pour mapper un film
-import {Genre, Provider} from "../types/GenresAndProviders.ts";
-import {MovieWithCount} from "../types/MovieAndProviders.ts";
+import {Genre, Provider} from "../types/genreAndProvider.ts";
+import {MovieWithCount} from "../types/movie.ts";
 
 export const mapMovie = (item: any): MovieWithCount => ({
     ...item.movie,

@@ -1,0 +1,57 @@
+.PreferencesGlobal {
+  background: linear-gradient(45deg, #1d0102, #060232, #39030f);
+  width: 100vw;
+  height: 100vh;
+}
+
+.genreContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+}
+
+.providersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+}
+
+.genreButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+.genreButton.selected {
+  background-color: red;
+  color: white;
+}
+
+.providerButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+.providerButton.selected {
+  background-color: red;
+  color: white;
+}
+
+h1 {
+  color: white;
+}
+
+/*# sourceMappingURL=PreferencesPage.css.map */

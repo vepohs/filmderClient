@@ -1,7 +1,6 @@
-// GroupMoviesSections.tsx
 import React from "react";
-import {MovieWithCount} from "../../../types/MovieAndProviders.ts";
 import {MoviesSection} from "./MoviesSection.tsx";
+import {MovieWithCount} from "../../../types/movie.ts";
 
 
 interface GroupMoviesSectionsProps {

@@ -1,8 +1,7 @@
 import {useEffect, useRef, useState} from "react";
+import {Movie, MovieResponse} from "../types/movie.ts";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
-import {MovieResponse} from "../types/SelectedGroupTypes.ts";
-import {APIgetMovies, APIsendSwipeResponse} from "../Services/MiddlePageAPICalls.ts";
-import {Movie} from "../types/MovieAndProviders.ts";
+import {APIgetMovies, APIsendSwipeResponse} from "../services/MiddlePageAPICalls.ts";
 
 
 const MOVIES_FETCH_THRESHOLD = 19;

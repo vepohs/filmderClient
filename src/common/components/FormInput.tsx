@@ -1,13 +1,11 @@
-// src/AAAcomponents/FormInput.tsx
 import {FieldValues} from 'react-hook-form';
-
 import { ErrorTooltip } from "./ErrorTooltip.tsx";
+import {FormInputProps} from "../../types/forms.ts";
 
 // @ts-ignore
 import "../style/FormInput.sass";
 // @ts-ignore
 import '../style/Icon.sass';
-import {FormInputProps} from "../../types/FormInputPropsTye.ts";
 
 
 function FormInput <TFormValues extends FieldValues> ({
