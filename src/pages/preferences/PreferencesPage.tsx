@@ -5,6 +5,7 @@ import {usePreferences} from "../../context/PreferenceContext.tsx";
 
 // @ts-ignore
 import "./PreferencesPage.sass"
+import {CustomToastContainer} from "../../common/components/CustomToastContainer.tsx";
 
 
 
@@ -20,12 +21,13 @@ const PreferencesForm: React.FC = () => {
         <div className="PreferencesGlobal">
 
             <GenresSelector/>
-            <hr/>
+
 
             <ProviderSelector/>
             <button onClick={submitPreferences} className="submitButton">
                 Enregistrer les préférences
             </button>
+            <CustomToastContainer/>
         </div>
     );
 };

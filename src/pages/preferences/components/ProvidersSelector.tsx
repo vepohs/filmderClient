@@ -21,7 +21,7 @@ const ProviderSelector: React.FC = () => {
     return (
         <>
             <h1>Providers</h1>
-            <div className="providerContainer">
+            <div className="providersContainer">
                 {allProviders.map((provider) => (
                     <button
                         key={provider.id}

@@ -1,7 +1,15 @@
 .PreferencesGlobal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   background: linear-gradient(45deg, #1d0102, #060232, #39030f);
   width: 100vw;
   height: 100vh;
+}
+.PreferencesGlobal h1 {
+  color: white;
+  margin-top: 20px;
 }
 
 .genreContainer {
@@ -52,6 +60,31 @@
 
 h1 {
   color: white;
+}
+
+.submitButton {
+  margin: 30px auto 0 auto;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(45deg, #1d0102, #060232, #39030f);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+}
+.submitButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.submitButton:disabled {
+  background: #999;
+  cursor: not-allowed;
 }
 
 /*# sourceMappingURL=PreferencesPage.css.map */

@@ -5,6 +5,7 @@ import {PreferenceContextType, PreferencesData} from "../types/preferences.ts";
 import {Genre, Provider} from "../types/genreAndProvider.ts";
 import {transformPreferencesToIds, transformPreferencesToObjects} from "../Utils/preferencesUtils.ts";
 import {getAllPreferencesAvailable, getPreferences, setPreferences} from "../services/preferenceApiCalls.ts";
+import {handleErrorToast, handleSuccessToast} from "../Utils/toastUtils.ts";
 
 
 const PreferenceContext = createContext<PreferenceContextType>({
@@ -75,11 +76,12 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             await setPreferences(selectedGroup.groupId, data);
             // Met correctement a jour les préferences
             await askForPreferences();
-            alert("Préférences enregistrées avec succès !");
-            navigate("/protected");
+            handleSuccessToast("Préférences enregistrées avec succès ! Redirection en cours...");
+            setTimeout(() => {
+                navigate("/protected");
+            }, 1500);
         } catch (error) {
-            console.error("Erreur lors de l'envoi des préférences:", error);
-            alert("Une erreur s'est produite lors de l'enregistrement des préférences.");
+            handleErrorToast("Erreur lors de l'enregistrement des préférences.");
         }
     };
 
