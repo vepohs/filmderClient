@@ -10,7 +10,7 @@ import {SvgAgeIcon} from "../../../common/icons/SvgAgeIcon.tsx";
 import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
 import {useNavigate} from "react-router-dom";
 import {FormInputs} from "../../../types/forms.ts";
-import {checkUniqueEmail, createNewUser} from "../../../Services/signUpFormApiCall.ts";
+import {checkUniqueEmail, createNewUser} from "../../../services/signUpFormApiCall.ts";
 import {toast, ToastContainer} from "react-toastify";
 import {handleError, handleSuccess} from "../../../Utils/toastUtils.ts";
 

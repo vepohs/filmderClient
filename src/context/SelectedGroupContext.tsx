@@ -1,4 +1,3 @@
-// src/context/SelectedGroupContext.tsx
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Group, SelectedGroupContextProps} from "../types/group.ts";
