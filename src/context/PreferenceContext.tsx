@@ -68,6 +68,10 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     };
 
     const submitPreferences = async () => {
+        if (selectedGenres.length === 0 || selectedProviders.length === 0) {
+            handleErrorToast("Veuillez sélectionner au moins un genre et un fournisseur.");
+            return;
+        }
         try {
             setSubmitPrefLoading(true);
             const data: PreferencesData = {
