@@ -2,9 +2,9 @@ import {Navigate} from "react-router-dom";
 import {usePreferences} from "../context/PreferenceContext.tsx";
 
 const PreferencesGuard: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const {hasPreferences, loading} = usePreferences();
+    const {hasPreferences, askPrefLoading} = usePreferences();
 
-    if (loading || hasPreferences === null) {
+    if (askPrefLoading || hasPreferences === null) {
         return <div>Chargement...</div>;
     }
 
