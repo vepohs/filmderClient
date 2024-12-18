@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import GenresSelector from "./components/GenresSelector.tsx";
 import ProviderSelector from "./components/ProvidersSelector.tsx";
-import {usePreferences} from "../../context/preferenceContext.tsx";
+import {usePreferences} from "../../context/PreferenceContext.tsx";
 
 // @ts-ignore
 import "./PreferencesPage.sass"

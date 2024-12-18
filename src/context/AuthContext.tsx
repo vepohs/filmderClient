@@ -2,7 +2,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 
 import {useNavigate} from "react-router-dom";
-import {APIlogin, APILogout, APIverifyAccessToken} from "../services/authContextAPICalls.ts";
+import {APIlogin, APILogout, APIverifyAccessToken} from "../Services/authContextAPICalls.ts";
 import {clearLocalStorage, extractUserInfo, getRefreshToken, setLocalStorage} from "../Utils/authContextUtils.ts";
 import {LoginFormInputs, LoginResponse} from "../types/auth.ts";
 

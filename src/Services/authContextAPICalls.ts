@@ -1,8 +1,8 @@
 // src/api/authApi.ts
 import axiosWithAuth from "../Utils/axiosWithAuth.ts";
 import axios from "axios";
-import { LoginFormInputs } from "../types/formInputsTypes.ts";
 import {API_BASE_URL} from "../Utils/serverConstant.ts";
+import {LoginFormInputs} from "../types/auth.ts";
 
 // Effectue le login et récupère les tokens
 export const APIlogin = (credentials: LoginFormInputs) =>

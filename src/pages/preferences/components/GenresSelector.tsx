@@ -1,5 +1,6 @@
 import React from "react";
-import {usePreferences} from "../../../context/preferenceContext.tsx";
+import {usePreferences} from "../../../context/PreferenceContext.tsx";
+
 // @ts-ignore
 import "../PreferencesPage.sass";
 

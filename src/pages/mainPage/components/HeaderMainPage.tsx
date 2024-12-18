@@ -1,6 +1,7 @@
 import FilmderIcon from "../../../common/icons/SvgFilmderIcon.tsx";
 import {SvgLogout} from "./icons/SvgLogout.tsx";
-import {useAuth} from "../../../context/authContext.tsx";
+import {useAuth} from "../../../context/AuthContext.tsx";
+
 // @ts-ignore
 import "../style/HeaderMainPage.sass";
 

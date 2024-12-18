@@ -5,13 +5,12 @@ import FormInput from "../../../common/components/FormInput.tsx";
 import {SvgEmailIcon} from "../../../common/icons/SvgEmailIcon.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
 import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
-import {useAuth} from "../../../context/authContext.tsx";
 import axios from "axios";
 import {LoginFormInputs} from "../../../types/auth.ts";
+import {useAuth} from "../../../context/AuthContext.tsx";
 
 // @ts-ignore
 import "../style/LoginForm.sass";
-
 
 export function LoginForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({

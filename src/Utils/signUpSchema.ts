@@ -1,4 +1,3 @@
-// src/validation/signUpSchema.ts
 import * as yup from 'yup';
 
 

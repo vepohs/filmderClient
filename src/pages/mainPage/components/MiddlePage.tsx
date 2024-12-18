@@ -3,7 +3,6 @@ import {MovieDisplay} from "../../../common/components/MovieDisplay.tsx";
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
 
-
 export function MiddleMainPage() {
     const {
         movies,
