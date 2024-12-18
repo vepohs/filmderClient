@@ -14,6 +14,7 @@ import {checkUniqueEmail, createNewUser} from "../../../services/SignUpFormApiCa
 
 // @ts-ignore
 import "../style/SignUpForm.sass";
+import {toast, ToastContainer} from "react-toastify";
 
 
 
@@ -29,11 +30,15 @@ export function SignUpForm() {
         try {
             const { isUnique } = await checkUniqueEmail(data.email);
             if (!isUnique) {
+                toast.error("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
             await createNewUser(data);
-            navigate("/protected/preferences");
+            toast.success("Inscription réussie !");
+            setTimeout(() => {
+                navigate("/protected/preferences");
+            }, 1500);
         } catch (error: unknown) {
             // TODO POUR L INSTANT Y A TOUJOURS UN POST EN ROUGE DANS LA CONSOLE C EST FAIT PAR LE NAVIGATEUR MAIS C EST POSSIBLE DE LE REMOVE
             handleSignUpError(error);
@@ -43,22 +48,24 @@ export function SignUpForm() {
     function handleSignUpError(error: unknown) {
         if (axios.isAxiosError(error)) {
             if (error.code === "ERR_NETWORK") {
-                alert("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
+                toast.error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
             } else if (error.response?.status === 409) {
+                // On sait jamais que un méchant envoie un mail deja utilisé ou quoi
+                toast.error("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
             } else if (error.response?.status === 500) {
-                alert("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
+                toast.error("Problème serveur lors de la validation du formulaire. Veuillez réessayer.");
             } else {
-                console.error("Erreur inattendue lors de la requête AXIOS:", error);
-                alert("Une erreur inattendue est survenue. Veuillez réessayer.");
+                toast.error("Une erreur inattendue est survenue. Veuillez réessayer.");
             }
         } else {
-            console.error("Erreur inconnue:", error);
-            alert("Une erreur inattendue est survenue. Veuillez réessayer.");
+            toast.error("Une erreur inattendue est survenue. Veuillez réessayer.");
         }
     }
 
     return (
+        <>
+
         <form className="signUpForm" onSubmit={handleSubmit(onSubmit)}>
             <FormInput<FormInputs>
                 icon={SvgNameIcon}
@@ -111,5 +118,15 @@ export function SignUpForm() {
             />
             <button className="submitBtn" type="submit">SIGN UP</button>
         </form>
+
+    <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+    />
+        </>
     );
 }
