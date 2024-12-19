@@ -1,21 +1,21 @@
 import axiosWithAuth from "../Utils/axiosWithAuth.ts";
 import {MovieResponse} from "../types/movie.ts";
 
-export const APIgetMovies = (listExcluedIds: number[], groupId: string): Promise<MovieResponse> => {
+export const APIgetMovies = (excludedMovieIds: number[], groupId: string): Promise<MovieResponse> => {
     return groupId === "me"
-        ? APIgetMoviesForUser(listExcluedIds)
-        : APIgetMoviesForGroup(listExcluedIds, groupId);
+        ? APIgetMoviesForUser(excludedMovieIds)
+        : APIgetMoviesForGroup(excludedMovieIds, groupId);
 }
 
-export const APIgetMoviesForUser = (listExcluedIds: number[]) =>
+export const APIgetMoviesForUser = (excludedMovieIds: number[]) =>
     axiosWithAuth
-        .post<MovieResponse>("movie/protected/getMovie", {listExcluedIds})
+        .post<MovieResponse>("movie/protected/getMovie", {excludedMovieIds})
         .then((response) => response.data);
 
 
-export const APIgetMoviesForGroup = (listExcluedIds: number[], groupId: string) =>
+export const APIgetMoviesForGroup = (excludedMovieIds: number[], groupId: string) =>
     axiosWithAuth
-        .post<MovieResponse>("movie/protected/getGroupMovie", {listExcluedIds, groupId})
+        .post<MovieResponse>("movie/protected/getGroupMovie", {excludedMovieIds, groupId})
         .then((response) => response.data);
 
 export const APIsendSwipeResponse = (movieId: number, liked: boolean) =>
