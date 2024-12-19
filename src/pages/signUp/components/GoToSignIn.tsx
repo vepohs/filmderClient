@@ -6,7 +6,7 @@ export function GoToSignIn() {
     return (
         <div className='signInContainer'>
             <p>Vous avez déjà une compte ?</p>
-            <Link to="/login">sign in</Link>
+            <Link to="/login">Connexion</Link>
         </div>
     );
 }
