@@ -13,6 +13,7 @@ type GroupItemProps = {
 };
 
 export const GroupItem: React.FC<GroupItemProps> = ({group, isSelected, onClick}) => {
+
     const {navigateToGroupSettings, navigateToLikePage} = useGroupActions();
 
     return (

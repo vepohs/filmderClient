@@ -17,7 +17,7 @@ function FormInput <TFormValues extends FieldValues> ({
                        icon: Icon,
                    }: FormInputProps<TFormValues>){
     return (
-        <div                 className={`inputContainer ${error ? 'error' : ''}`}
+        <div                 className={`inputContainer ${error ? 'wrongInput' : ''}`}
                               >
             {Icon && <Icon className="icon" />}
             <input

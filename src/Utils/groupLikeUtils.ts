@@ -1,4 +1,3 @@
-// Fonction utilitaire pour mapper un film
 import {Genre, Provider} from "../types/genreAndProvider.ts";
 import {MovieWithCount} from "../types/movie.ts";
 import {handleErrorToast, handleSuccessToast} from "./toastUtils.ts";
