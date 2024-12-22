@@ -1,5 +1,5 @@
 import React from "react";
-import {useGroupActions} from "../../../hooks/useGroupActions.ts";
+import {useGroupNavigate} from "../../../hooks/useGroupNavigate.ts";
 import {SvgHeart} from "../components/icons/SvgHeart.tsx";
 import {SvgParams} from "../components/icons/SvgParams.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
@@ -7,9 +7,9 @@ import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 // @ts-ignore
 import "../style/FooterMainPage.sass";
 
-export const SelectedGroupControl: React.FC = () => {
+export const SelectedGroup: React.FC = () => {
     const {selectedGroup, userGroups} = useSelectedGroup();
-    const {navigateToGroupSettings, navigateToLikePage} = useGroupActions();
+    const {navigateToGroupSettings, navigateToLikePage} = useGroupNavigate();
 
     const groupName =
         selectedGroup.groupId === "me"

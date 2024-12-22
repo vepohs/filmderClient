@@ -1,7 +1,7 @@
 import React from "react";
-import {GroupItem} from "./GroupItem.tsx";
+import {DropDownMenuItem} from "./DropDownMenuItem.tsx";
 import {SvgParams} from "../components/icons/SvgParams.tsx";
-import {useGroupActions} from "../../../hooks/useGroupActions.ts";
+import {useGroupNavigate} from "../../../hooks/useGroupNavigate.ts";
 import {Group} from "../../../types/group.ts";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 
@@ -15,10 +15,10 @@ type DropdownMenuProps = {
 
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({onGroupChange}) => {
-    const {userGroups, selectedGroup} = useSelectedGroup();
-    const {navigateToGroupSettings} = useGroupActions();
-    const filteredGroups = userGroups.filter((group) => group.groupId !== selectedGroup.groupId);
 
+    const {userGroups, selectedGroup} = useSelectedGroup();
+    const {navigateToGroupSettings} = useGroupNavigate();
+    const filteredGroups = userGroups.filter((group) => group.groupId !== selectedGroup.groupId);
 
     return (
         <ul className="groupList">
@@ -26,7 +26,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({onGroupChange}) => {
             {selectedGroup.groupId !== "me" && (
                 <li
                     className="groupItem"
-                    onClick={() => onGroupChange({groupId: "me", name: "Moi"})} // Sélectionner "me" lors du clic
+                    onClick={() => onGroupChange({groupId: "me", name: "Moi"})}
                 >
                     <span className="groupName">Moi</span>
 
@@ -39,7 +39,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({onGroupChange}) => {
 
             {
                 filteredGroups.map((group) => (
-                    <GroupItem
+                    <DropDownMenuItem
                         key={group.groupId}
                         group={group}
                         isSelected={false}

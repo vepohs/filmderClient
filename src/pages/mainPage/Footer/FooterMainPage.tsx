@@ -1,9 +1,9 @@
 import {useState} from "react";
 import {DropdownMenu} from "./DropdownMenu.tsx";
-import {SelectedGroupControl} from "./SlectedGroupControl.tsx";
+import {SelectedGroup} from "./SelectedGroup.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {Group} from "../../../types/group.ts";
-import GroupManagement from "./GroupManagement.tsx";
+import GroupActions from "./GroupActions.tsx";
 
 // @ts-ignore
 import "../style/FooterMainPage.sass";
@@ -16,7 +16,7 @@ export function FooterMainPage() {
 
     const handleGroupChange = (groupId: Group) => {
         setSelectedGroup(groupId);
-        setIsDropdownOpen(false); // Ferme le menu déroulant après sélection
+        setIsDropdownOpen(false);
     };
 
     return (
@@ -24,12 +24,12 @@ export function FooterMainPage() {
             <div className ="navFooter">
             <div className="customComboBox">
                 <div className="selectedGroup" onClick={toggleDropdown}>
-                    <SelectedGroupControl/>
+                    <SelectedGroup/>
                     <span className="dropdownIcon">{isDropdownOpen ? "▲" : "▼"}</span>
                 </div>
                 {isDropdownOpen && <DropdownMenu onGroupChange={handleGroupChange}/>}
             </div>
-            <GroupManagement/>
+            <GroupActions/>
                 </div>
         </div>
     );

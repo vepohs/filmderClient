@@ -4,7 +4,8 @@ import axios from "axios";
 import {API_BASE_URL} from "../Utils/serverConstant.ts";
 import {LoginFormInputs} from "../types/auth.ts";
 
-// Effectue le login et récupère les tokens
+//TODO voir si je peux pas faire un .then
+
 export const APIlogin = (credentials: LoginFormInputs) =>
     axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
 

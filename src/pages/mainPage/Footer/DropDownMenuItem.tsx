@@ -1,5 +1,5 @@
 import React from "react";
-import {useGroupActions} from "../../../hooks/useGroupActions.ts";
+import {useGroupNavigate} from "../../../hooks/useGroupNavigate.ts";
 import {SvgHeart} from "../components/icons/SvgHeart.tsx";
 import {SvgParams} from "../components/icons/SvgParams.tsx";
 
@@ -12,9 +12,9 @@ type GroupItemProps = {
     onClick: () => void;
 };
 
-export const GroupItem: React.FC<GroupItemProps> = ({group, isSelected, onClick}) => {
+export const DropDownMenuItem: React.FC<GroupItemProps> = ({group, isSelected, onClick}) => {
 
-    const {navigateToGroupSettings, navigateToLikePage} = useGroupActions();
+    const {navigateToGroupSettings, navigateToLikePage} = useGroupNavigate();
 
     return (
         <li className={`groupItem ${isSelected ? "active" : ""}`}
