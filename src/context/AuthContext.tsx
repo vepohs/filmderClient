@@ -43,7 +43,6 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     };
 
     const login = async (credentials: LoginFormInputs) => {
-        // TODO : handle error et averir l'utilisateur
         const response : LoginResponse = await APIlogin(credentials);
         const {accessToken, refreshToken, defaultGroup} = extractUserInfo(response);
         setLocalStorage(accessToken, refreshToken, defaultGroup);

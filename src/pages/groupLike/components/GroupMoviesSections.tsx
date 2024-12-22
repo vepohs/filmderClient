@@ -1,7 +1,10 @@
 import React from "react";
 import {MoviesSection} from "./MoviesSection.tsx";
 import {MovieWithCount} from "../../../types/movie.ts";
+import {Link} from "react-router-dom";
 
+// @ts-ignore
+import "../styles/GroupMoviesSections.sass";
 
 interface GroupMoviesSectionsProps {
     sortedCounts: number[]; // Tableau de counts triés
@@ -16,7 +19,17 @@ export const GroupMoviesSections: React.FC<GroupMoviesSectionsProps> = ({
                                                                             onMovieClick,
                                                                             onSwipe
                                                                         }) => {
-
+    if (sortedCounts.length === 0) {
+        return (
+            <p className="noMoviesMessage">
+                Aucun film en commun pour le moment. <br/>Sélectionnez le groupe sur{" "}
+                <Link to="/protected" className="mainPageLink">
+                    la page principale
+                </Link>{" "}
+                et aimez des films !
+            </p>
+        );
+    }
     return (
         <>
             <ul className='ul-container'>

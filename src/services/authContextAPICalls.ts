@@ -4,8 +4,6 @@ import axios from "axios";
 import {API_BASE_URL} from "../Utils/serverConstant.ts";
 import {LoginFormInputs} from "../types/auth.ts";
 
-//TODO voir si je peux pas faire un .then
-
 export const APIlogin = (credentials: LoginFormInputs) =>
     axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
 
@@ -22,8 +20,6 @@ export const APILogout = (refreshToken: string) =>
             },
         }
     );
-
-//TODO voir si je peux pas faire un .then avec response.x
 
 export const APIverifyAccessToken = () =>
     axiosWithAuth.get("users/protected/verifyAccessToken");

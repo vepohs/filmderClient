@@ -7,7 +7,7 @@ import {MoviePopup} from "./components/MoviePopup.tsx";
 import {GroupHeader} from "./components/GroupHeader.tsx";
 
 // @ts-ignore
-import "./GroupKike.sass";
+import "./GroupLike.sass";
 
 const GroupLike: React.FC = () => {
     const {
@@ -32,7 +32,6 @@ const GroupLike: React.FC = () => {
                 toggleUserSelection={toggleUserSelection}
                 selectedUsers={selectedUsersIds}
             />
-
 
             <GroupMoviesSections
                 sortedCounts={sortedCounts}

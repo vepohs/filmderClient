@@ -91,7 +91,6 @@ const getNewAccessToken = async () => {
         );
 
         const newAccessToken = response.data.accessToken;
-        console.log("newAccessToken", newAccessToken);
         return newAccessToken;
     } catch (error) {
         console.error("Failed to refresh access token", error);

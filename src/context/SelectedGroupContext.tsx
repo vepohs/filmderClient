@@ -10,10 +10,7 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const [selectedGroup, setSelectedGroup] = useState<Group>(() => {
         const storedGroup = localStorage.getItem("selectedGroup");
-        console.log("Stored group", storedGroup);
         return storedGroup ? JSON.parse(storedGroup) : {groupId: "me", name: "Moi"};
-        //return {groupId: "me", name: "Moi"}; // Valeur par défaut
-
     });
 
     const [userGroups, setUserGroups] = useState<Group[]>([]);
@@ -39,16 +36,12 @@ export const SelectedGroupProvider: React.FC<{ children: React.ReactNode }> = ({
             if (selectedGroup.groupId !== "me" &&
                 !response.group.find((group: Group) => group.groupId === selectedGroup.groupId)
             ) {
-                console.log(selectedGroup.groupId)
-                console.log("Resetting selected group");
                 setSelectedGroup({groupId: "me", name: "Moi"});
             }
-
         } catch (error) {
             console.error("Error fetching groups:", error);
         }
     }
-
 
     return (
         <SelectedGroupContext.Provider

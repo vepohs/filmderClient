@@ -4,7 +4,7 @@ import {CardContainer} from "../../../common/components/CardContainer.tsx";
 import {MovieWithCount} from "../../../types/movie.ts";
 
 // @ts-ignore
-import "../GroupKike.sass"
+import "../GroupLike.sass"
 
 interface MoviesSectionProps {
     count: number;

@@ -1,4 +1,4 @@
-import {useMiddleMainPage} from "../../../hooks/useMiddlePage.ts";
+import {useMiddleMainPage} from "../../../hooks/useMiddleMainPage.ts";
 import {MovieDisplay} from "../../../common/components/MovieDisplay.tsx";
 // @ts-ignore
 import "../style/MiddleMainPage.sass";
