@@ -53,6 +53,33 @@
   outline: none;
   color: #ffffff;
   margin-top: 30px;
+  transition: background-color 0.3s ease;
+}
+.submitBtnSignIn:disabled {
+  background: grey;
+  cursor: not-allowed;
+}
+
+.spinnerLogin {
+  position: absolute;
+  top: 56%;
+  left: 70%;
+  margin-left: 8px;
+  border: 2px solid #eee;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spinLogin 1s linear infinite;
+}
+
+@keyframes spinLogin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=LoginForm.css.map */

@@ -19,7 +19,7 @@ function PasswordInput<TFormValues extends FieldValues>({name, register, error, 
 
     return (
 
-        <div className="inputPasswordContainer">
+        <div className={`inputPasswordContainer${error ? ' wrongInput' : ''}`}>
             {Icon && <Icon className="icon" />}
             <input className='inputPassword'
                 id={String(name)}
