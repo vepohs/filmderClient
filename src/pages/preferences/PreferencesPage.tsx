@@ -19,12 +19,9 @@ const PreferencesForm: React.FC = () => {
 
     return (
         <div className="PreferencesGlobal">
-
             <GenresSelector/>
-
-
             <ProviderSelector/>
-            <button onClick={submitPreferences} className="submitButton" disabled={submitPrefLoading}>
+            <button id="submitButton" onClick={submitPreferences} className="submitButton" disabled={submitPrefLoading}>
                 Enregistrer les préférences
             </button>
             <CustomToastContainer/>

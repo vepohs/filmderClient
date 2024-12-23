@@ -1,9 +1,9 @@
 import axios from "axios";
 import {API_BASE_URL} from "./serverConstant.ts";
 
-// Création d'une instance Axios pour la configuration
+
 const axiosWithAuth = axios.create({
-    baseURL: `${API_BASE_URL}/api`,  // Point de départ pour tt les requêtes
+    baseURL: `${API_BASE_URL}/api`,
 });
 
 axiosWithAuth.interceptors.request.use(
@@ -14,14 +14,13 @@ axiosWithAuth.interceptors.request.use(
             const { exp } = decodeJwt(token);
             const nowInSeconds = Math.floor(Date.now() / 1000);
             const timeLeft = exp - nowInSeconds;
-            // Si le token expire dans moins de 60 secondes, on le rafraîchit
+            console.log(timeLeft)
             if (timeLeft < 60) {
+                console.log("Access token is about to expire, refreshing it...");
                 const newAccessToken = await getNewAccessToken();
                 localStorage.setItem('accessToken', newAccessToken);
-                token = newAccessToken; // On utilise le nouveau token
+                token = newAccessToken;
             }
-
-            // Ajout du token (mis à jour si nécessaire) aux headers
             config.headers.Authorization = `Bearer ${token}`;
         }
 
@@ -50,27 +49,6 @@ function decodeJwt (token : string) {
     // (le payload du JWT), en un objet JavaScript.
     return JSON.parse(window.atob(base64));
 }
-
-// Interceptor de réponse - pour rafraîchir le token en cas de 401
-axiosWithAuth.interceptors.response.use(
-    response => response,
-    async error => {
-        if (error.response?.status === 401) {
-            try {
-                // Appel au rafraîchissement du token
-                const newAccessToken = await getNewAccessToken();
-                localStorage.setItem('accessToken', newAccessToken);
-                error.config.headers.Authorization = `Bearer ${newAccessToken}`;
-                // Relancer la requête initiale avec le nouveau token
-                return axiosWithAuth(error.config);
-            } catch (refreshError) {
-                console.error("Token refresh failed:", refreshError);
-                return Promise.reject(refreshError);
-            }
-        }
-        return Promise.reject(error);
-    }
-);
 
 // Function to get a new access token using the refresh token
 const getNewAccessToken = async () => {

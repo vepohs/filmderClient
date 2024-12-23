@@ -20,7 +20,7 @@ const ProviderSelector: React.FC = () => {
 
     return (
         <>
-            <h1>Providers</h1>
+            <h1>Fournisseurs</h1>
             <div className="providersContainer">
                 {allProviders.map((provider) => (
                     <button

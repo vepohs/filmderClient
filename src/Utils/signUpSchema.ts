@@ -12,7 +12,7 @@ export const signUpSchema = yup.object({
     password: yup.string().min(8, 'Au moins 8 caractères \n et un chiffre').matches(/\d/, "Au moins 8 caractères \n et un chiffre").required('Le mot de passe est requis'),
     age: yup
         .number()
-        .typeError("L'âge doit être un nombre") // To handle non-numeric input
+        .typeError("L'âge doit être un nombre")
         .max(100, "L'âge maximal est de 100 ans")
         .integer("l'âge doit etre un entier")
         .required("L'âge est requis"),
