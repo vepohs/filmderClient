@@ -1,11 +1,15 @@
 type SvgParamsProps = {
     onClick: () => void; // Gestionnaire de clic
     className?: string; // Classe CSS optionnelle
+    id: string; // ID optionnel
 };
 
-export function SvgParams({onClick, className}: SvgParamsProps) {
+
+export function SvgParams({onClick, className, id}: SvgParamsProps) {
     return (
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+        <svg
+            id={id}
+            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
              className={className}
              onClick={onClick}
         >

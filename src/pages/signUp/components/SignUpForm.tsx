@@ -117,7 +117,7 @@ export function SignUpForm() {
                 register={register}
                 error={errors.confirmPassword}
             />
-            <button className="submitBtn" type="submit">SIGN UP</button>
+            <button className="submitBtn" type="submit">Inscription</button>
         </form>
         <CustomToastContainer/>
         </>

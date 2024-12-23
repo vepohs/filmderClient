@@ -70,7 +70,7 @@ export function LoginForm() {
                     placeholder='Mot de passe'
                     error={errors.password}
                 />
-                <button className="submitBtnSignIn" type="submit" disabled={loading}>
+                <button id="submitBtnSignIn" className="submitBtnSignIn" type="submit" disabled={loading}>
                     Se connecter
                     {loading && <div className="spinnerLogin"></div>}
                 </button>

@@ -27,6 +27,7 @@ export const SelectedGroup: React.FC = () => {
                     />
                 )}
                 <SvgParams
+                    id="svgParams"
                     className="groupSettingsIcon"
                     onClick={() => navigateToGroupSettings(selectedGroup)}
                 />
