@@ -1,7 +1,7 @@
 type SvgParamsProps = {
-    onClick: () => void; // Gestionnaire de clic
-    className?: string; // Classe CSS optionnelle
-    id: string; // ID optionnel
+    onClick: () => void;
+    className?: string;
+    id?: string;
 };
 
 

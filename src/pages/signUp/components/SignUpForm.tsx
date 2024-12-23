@@ -13,10 +13,10 @@ import {FormInputs} from "../../../types/forms.ts";
 import {checkUniqueEmail, createNewUser} from "../../../services/signUpFormApiCall.ts";
 import {toast} from "react-toastify";
 import {handleErrorToast, handleSuccessToast} from "../../../Utils/toastUtils.ts";
+import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
 
 // @ts-ignore
 import "../style/SignUpForm.sass";
-import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
 
 
 
@@ -117,7 +117,7 @@ export function SignUpForm() {
                 register={register}
                 error={errors.confirmPassword}
             />
-            <button className="submitBtn" type="submit">Inscription</button>
+            <button id = "submitBtn" className="submitBtn" type="submit">Inscription</button>
         </form>
         <CustomToastContainer/>
         </>
