@@ -35,7 +35,10 @@ export const MoviesSection: React.FC<MoviesSectionProps> = ({count, movies, onMo
                         <CardContainer
                             firstBackgroundImage={movie.imagePath}
                             onSwipe={(liked) => onSwipe(liked, movie.id)}
-                            onClick={() => onMovieClick(movie)}
+                            onClick={(e) => {
+                           e.stopPropagation(); // Arrête la propagation de l'événement
+                           onMovieClick(movie);
+                           }}
                         />
                     </li>
                 ))}
