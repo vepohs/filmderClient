@@ -1,7 +1,14 @@
+import {TEST_USER} from "../support/constants";
+
 describe('Page de connexion', () => {
     beforeEach(() => {
-        // Navigue vers la page de connexion avant chaque test
-        cy.visit('http://localhost:5173/login')
+        cy.viewport(430, 932);
+        cy.visit('https://filmder.fr/login')
+
+    })
+
+    afterEach(() => {
+        cy.wait(3000);
     })
 
     it('Doit afficher le formulaire de connexion correctement', () => {
@@ -9,22 +16,27 @@ describe('Page de connexion', () => {
         cy.get('#email').should('be.visible')
         cy.get('#password').should('be.visible')
         cy.get('.submitBtnSignIn').should('be.visible')
-
-        // Vérifie qu'il y a un titre "Connexion"
         cy.contains('Connexion').should('exist')
     })
 
-    it('Doit permettre de remplir le formulaire et de se connecter', () => {
-        // Remplit le formulaire avec les informations d'inscription
-        cy.get('#email').type('jean.dupont@example.co')
-        cy.get('#password').type('MonSuperMotDePasse123!')
-
-        // Clique sur le bouton "Se connecter"
-        cy.get('.submitBtnSignIn').click()
-
-        // Vérifie le comportement après la connexion
-        // Par exemple, redirection vers une page d'accueil utilisateur
-        cy.url().should('include', '/protected') // Remplace "/dashboard" par la page correcte
+    it('Connexion echec mail mauvais', () => {
+        cy.get('#email').type("TEST_USER@dkd.com")
+        cy.get('#password').type("wrongPassword12")
+        cy.get('#submitBtnSignIn').click()
 
     })
+
+    it('Connexion echec mdp', () => {
+        cy.get('#email').type(TEST_USER.email)
+        cy.get('#password').type("wrongPassword12")
+        cy.get('#submitBtnSignIn').click()
+    })
+
+    it('Connexion réussie', () => {
+        cy.get('#email').type(TEST_USER.email)
+        cy.get('#password').type(TEST_USER.password)
+        cy.get('#submitBtnSignIn').click()
+        cy.url().should('include', '/protected')
+    })
+
 });

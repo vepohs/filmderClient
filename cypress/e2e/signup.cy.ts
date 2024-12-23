@@ -1,41 +1,102 @@
+import {TEST_USER} from "../support/constants";
+
 describe('Page d\'inscription', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:5173/signup')
+        cy.viewport(430, 932);
+        cy.visit('https://filmder.fr/signup')
     })
 
-    it('Doit afficher le formulaire d\'inscription correctement', () => {
+    afterEach(() => {
+        cy.wait(5000);
+    })
 
-        // Vérifie la présence des champs
+    it('Vérif affichage correct', () => {
+
         cy.get('#firstName').should('be.visible')
         cy.get('#lastName').should('be.visible')
         cy.get('#email').should('be.visible')
         cy.get('#age').should('be.visible')
         cy.get('#password').should('be.visible')
         cy.get('#confirmPassword').should('be.visible')
-        cy.get('.submitBtn').should('be.visible')
-
-        // Vérifie qu'il y a un titre SIGN UP
-        cy.contains('SIGN UP').should('exist')
+        cy.get('#submitBtn').should('be.visible')
     })
 
-    it('Doit permettre de remplir le formulaire et le soumettre', () => {
-        // On remplit chaque champ avec des valeurs de test
+    it('Mdp non similaire', () => {
+        const emailUnique = `testuser${Date.now()}@example.com`;
+
         cy.get('#firstName').type('Jean')
         cy.get('#lastName').type('Dupont')
-        cy.get('#email').type('jean.dupont@example.co')
+        cy.get('#email').type(emailUnique)
         cy.get('#age').type('30')
-        cy.get('#password').type('MonSuperMotDePasse123!')
-        cy.get('#confirmPassword').type('MonSuperMotDePasse123!')
+        cy.get('#password').type("Password123!")
+        cy.get('#confirmPassword').type("DifferentPassword!123")
 
-        // On clique sur le bouton SIGN UP
-        cy.get('.submitBtn').click()
+        cy.get('#submitBtn').click()
 
-        // Ici tu vérifieras ce qui est supposé se passer après la soumission.
-        // Par exemple, si ton site redirige vers /welcome, tu peux faire :
-         cy.url().should('include', '/login')
-
-        // Ou vérifier un message de succès :
-        // cy.contains('Votre compte a été créé avec succès').should('be.visible')
+        cy.get('.warning').should('be.visible');
+        cy.get('#confirmPassword')
+            .parent()
+            .should('have.class', 'wrongInput');
     })
+
+    it('Champ vides', () => {
+        cy.get('#submitBtn').click();
+
+        cy.get('#firstName')
+            .parent()
+            .should('have.class', 'wrongInput');
+
+        cy.get('#lastName')
+            .parent()
+            .should('have.class', 'wrongInput');
+
+        cy.get('#email')
+            .parent()
+            .should('have.class', 'wrongInput');
+
+        cy.get('#age')
+            .parent()
+            .should('have.class', 'wrongInput');
+
+        cy.get('#password')
+            .parent()
+            .should('have.class', 'wrongInput');
+
+        cy.get('#confirmPassword')
+            .parent()
+            .should('have.class', 'wrongInput');
+    });
+
+
+    it('email deja utilisé', () => {
+        cy.get('#firstName').type('Jean')
+        cy.get('#lastName').type('Dupont')
+        cy.get('#email').type(TEST_USER.email)
+        cy.get('#age').type('30')
+        cy.get('#password').type(TEST_USER.password)
+        cy.get('#confirmPassword').type(TEST_USER.password)
+
+        cy.get('#submitBtn').click()
+
+        cy.get('.warning').should('be.visible');
+        cy.get('#email')
+            .parent()
+            .should('have.class', 'wrongInput');
+
+    })
+
+    it('Création user avec des champs valides', () => {
+        const emailUnique = `testuser${Date.now()}@example.com`;
+        cy.get('#firstName').type('Jean');
+        cy.get('#lastName').type('Dupont');
+        cy.get('#email').type(emailUnique);
+        cy.get('#age').type('30');
+        cy.get('#password').type('Password123!');
+        cy.get('#confirmPassword').type('Password123!');
+        cy.get('#submitBtn').click();
+
+        cy.url().should('include', '/login');
+    });
+
 })
