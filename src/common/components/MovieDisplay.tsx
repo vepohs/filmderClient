@@ -43,7 +43,8 @@ export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
                     handleSwipe(true)
                 }}/>
 
-                {movie1.videoPath && <SVGEye onClick={() => toggleTrailerDisplay()}/>}
+                {movie1.videoPath && <SVGEye
+                onClick={(e) => {e.stopPropagation(); toggleTrailerDisplay();}}/>}
                 {showTrailer && movie1.videoPath && (
                     <div className="videoContainer">
                         <iframe className="video"
