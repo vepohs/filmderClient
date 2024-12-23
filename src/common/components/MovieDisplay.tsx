@@ -8,6 +8,7 @@ import {Movie} from "../../types/movie.ts";
 // @ts-ignore
 import "../style/MovieDisplay.sass";
 
+
 interface MovieDisplayProps {
     movie1: Movie;
     movie2?: Movie;
@@ -20,7 +21,7 @@ export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
         setShowTrailer((prev) => !prev);
     };
 
-    const handleSwipe =  (liked: boolean) => {
+    const handleSwipe = (liked: boolean) => {
         onSwipe(liked);
         setShowTrailer(false);
     }
@@ -43,7 +44,8 @@ export function MovieDisplay({movie1, movie2, onSwipe}: MovieDisplayProps) {
                     handleSwipe(true)
                 }}/>
 
-                {movie1.videoPath && <SVGEye onClick={() => toggleTrailerDisplay()}/>}
+                {movie1.videoPath && <SVGEye
+                    onClick={() => {toggleTrailerDisplay()}}/>}
                 {showTrailer && movie1.videoPath && (
                     <div className="videoContainer">
                         <iframe className="video"
