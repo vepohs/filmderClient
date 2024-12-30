@@ -1,11 +1,11 @@
 import React from "react";
-import {useGroupNavigate} from "../../../hooks/useGroupNavigate.ts";
-import {SvgHeart} from "../components/icons/SvgHeart.tsx";
-import {SvgParams} from "../components/icons/SvgParams.tsx";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {useGroupNavigate} from "../../../../hooks/useGroupNavigate.ts";
+import {SvgHeart} from "../icons/SvgHeart.tsx";
+import {SvgParams} from "../icons/SvgParams.tsx";
+import {useSelectedGroup} from "../../../../context/SelectedGroupContext.tsx";
 
 // @ts-ignore
-import "../style/FooterMainPage.sass";
+import "../../style/FooterMainPage.sass";
 
 export const SelectedGroup: React.FC = () => {
     const {selectedGroup, userGroups} = useSelectedGroup();

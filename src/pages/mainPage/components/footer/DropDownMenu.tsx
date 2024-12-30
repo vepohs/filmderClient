@@ -1,12 +1,12 @@
 import React from "react";
-import {SvgParams} from "../components/icons/SvgParams.tsx";
-import {useGroupNavigate} from "../../../hooks/useGroupNavigate.ts";
-import {Group} from "../../../types/group.ts";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
+import {SvgParams} from "../icons/SvgParams.tsx";
+import {useGroupNavigate} from "../../../../hooks/useGroupNavigate.ts";
+import {Group} from "../../../../types/group.ts";
+import {useSelectedGroup} from "../../../../context/SelectedGroupContext.tsx";
 import {DropDownMenuItem} from "./DropDownMenuItem.tsx";
 
 // @ts-ignore
-import "../style/FooterMainPage.sass";
+import "../../style/FooterMainPage.sass";
 
 
 type DropdownMenuProps = {

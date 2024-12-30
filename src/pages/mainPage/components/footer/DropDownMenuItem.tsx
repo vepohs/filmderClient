@@ -1,10 +1,10 @@
 import React from "react";
-import {useGroupNavigate} from "../../../hooks/useGroupNavigate.ts";
-import {SvgHeart} from "../components/icons/SvgHeart.tsx";
-import {SvgParams} from "../components/icons/SvgParams.tsx";
+import {useGroupNavigate} from "../../../../hooks/useGroupNavigate.ts";
+import {SvgHeart} from "../icons/SvgHeart.tsx";
+import {SvgParams} from "../icons/SvgParams.tsx";
 
 // @ts-ignore
-import "../style/FooterMainPage.sass";
+import "../../style/FooterMainPage.sass";
 
 type GroupItemProps = {
     group: { groupId: string; name: string };

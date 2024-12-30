@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {DropDownMenu} from "./DropDownMenu.tsx";
 import {SelectedGroup} from "./SelectedGroup.tsx";
-import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
-import {Group} from "../../../types/group.ts";
+import {useSelectedGroup} from "../../../../context/SelectedGroupContext.tsx";
+import {Group} from "../../../../types/group.ts";
 import GroupActions from "./GroupActions.tsx";
 
 // @ts-ignore
-import "../style/FooterMainPage.sass";
+import "../../style/FooterMainPage.sass";
 
 export function FooterMainPage() {
     const {setSelectedGroup} = useSelectedGroup();

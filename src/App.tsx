@@ -1,4 +1,3 @@
-
 import {Route, Routes} from "react-router-dom";
 import AuthenticatedGuard from "./guard/AuthenticatedGuard.tsx";
 import PublicGuard from "./guard/PublicGuard.tsx";
@@ -14,7 +13,6 @@ import GroupLike from "./pages/groupLike/GroupLike.tsx";
 import {AuthProvider} from "./context/AuthContext.tsx";
 // @ts-ignore
 import "./App.sass"
-
 
 function App() {
     return (

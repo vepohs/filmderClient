@@ -1,12 +1,12 @@
 import React from "react";
 import Popup from "./Popup.tsx";
-import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
-import {useGroupActions} from "../../../hooks/useGroupActions.ts";
+import {CustomToastContainer} from "../../../../common/components/CustomToastContainer.tsx";
+import {useGroupActions} from "../../../../hooks/useGroupActions.ts";
 
 // @ts-ignore
-import "../style/GroupManagement.sass";
-import {SvgGroupJoin} from "../components/icons/SvgGroupJoin.tsx";
-import {SvgGroupAdd} from "../components/icons/SvgGroupAdd.tsx";
+import "../../style/GroupManagement.sass";
+import {SvgGroupJoin} from "../icons/SvgGroupJoin.tsx";
+import {SvgGroupAdd} from "../icons/SvgGroupAdd.tsx";
 
 
 const GroupActions: React.FC = () => {
