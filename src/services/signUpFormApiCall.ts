@@ -1,6 +1,6 @@
 // src/services/userService.ts
 import axios from "axios";
-import { API_BASE_URL } from "../Utils/serverConstant.ts";
+import { API_BASE_URL } from "../utils/serverConstant.ts";
 import {FormInputs} from "../types/forms.ts";
 
 export interface IsUniqueEmailResponse {

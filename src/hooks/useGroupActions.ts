@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
 import {APICreateGroup, APIJoinGroup} from "../services/groupManagementAPICalls.ts";
-import {handleErrorToast, handleSuccessToast, handleWarningToast} from "../Utils/toastUtils.ts";
+import {handleErrorToast, handleSuccessToast, handleWarningToast} from "../utils/toastUtils.ts";
 
 
 export function useGroupActions() {

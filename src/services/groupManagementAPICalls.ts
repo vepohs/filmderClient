@@ -1,4 +1,4 @@
-import axiosWithAuth from "../Utils/axiosWithAuth.ts";
+import axiosWithAuth from "../utils/axiosWithAuth.ts";
 
 // Création d'un groupe
 export const APICreateGroup = (groupName: string) =>

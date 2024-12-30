@@ -1,6 +1,6 @@
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {loginSchema} from "../../../Utils/loginSchema.ts";
+import {loginSchema} from "../../../utils/loginSchema.ts";
 import FormInput from "../../../common/components/FormInput.tsx";
 import {SvgEmailIcon} from "../../../common/icons/SvgEmailIcon.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
@@ -13,7 +13,7 @@ import {useAuth} from "../../../context/AuthContext.tsx";
 import "../style/LoginForm.sass";
 import {useState} from "react";
 import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
-import {handleErrorToast} from "../../../Utils/toastUtils.ts";
+import {handleErrorToast} from "../../../utils/toastUtils.ts";
 
 export function LoginForm() {
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({

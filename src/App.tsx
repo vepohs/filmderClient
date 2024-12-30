@@ -1,12 +1,12 @@
 
 import {Route, Routes} from "react-router-dom";
-import AuthenticatedGuard from "./Guard/AuthenticatedGuard.tsx";
-import PublicGuard from "./Guard/PublicGuard.tsx";
-import PreferencesGuard from "./Guard/PreferencesGuard.tsx";
+import AuthenticatedGuard from "./guard/AuthenticatedGuard.tsx";
+import PublicGuard from "./guard/PublicGuard.tsx";
+import PreferencesGuard from "./guard/PreferencesGuard.tsx";
 import PreferencesForm from "./pages/preferences/PreferencesPage.tsx";
-import SelectedGroupRoute from "./context/Routes/SelectedGroupRoute.tsx";
-import PreferenceRoute from "./context/Routes/PreferenceRoute.tsx";
-import SelectedGroupGuard from "./Guard/SelectedGroupGuard.tsx";
+import SelectedGroupRoute from "./context/routes/SelectedGroupRoute.tsx";
+import PreferenceRoute from "./context/routes/PreferenceRoute.tsx";
+import SelectedGroupGuard from "./guard/SelectedGroupGuard.tsx";
 import Login from "./pages/login/Login.tsx";
 import MainPage from "./pages/mainPage/MainPage.tsx";
 import SignUp from "./pages/signUp/SignUp.tsx";

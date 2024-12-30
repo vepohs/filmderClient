@@ -2,7 +2,7 @@ import FormInput from "../../../common/components/FormInput.tsx";
 import PasswordInput from "../../../common/components/PasswordInput.tsx";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {signUpSchema} from "../../../Utils/signUpSchema.ts";
+import {signUpSchema} from "../../../utils/signUpSchema.ts";
 import axios from "axios";
 import {SvgEmailIcon} from "../../../common/icons/SvgEmailIcon.tsx";
 import {SvgNameIcon} from "../../../common/icons/SvgNameIcon.tsx";
@@ -12,7 +12,7 @@ import {useNavigate} from "react-router-dom";
 import {FormInputs} from "../../../types/forms.ts";
 import {checkUniqueEmail, createNewUser} from "../../../services/signUpFormApiCall.ts";
 import {toast} from "react-toastify";
-import {handleErrorToast, handleSuccessToast} from "../../../Utils/toastUtils.ts";
+import {handleErrorToast, handleSuccessToast} from "../../../utils/toastUtils.ts";
 import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
 
 // @ts-ignore

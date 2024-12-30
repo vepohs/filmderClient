@@ -1,4 +1,3 @@
-// MoviesSection.tsx
 import React from "react";
 import {CardContainer} from "../../../common/components/CardContainer.tsx";
 import {MovieWithCount} from "../../../types/movie.ts";

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {DropdownMenu} from "./DropdownMenu.tsx";
+import {DropDownMenu} from "./DropDownMenu.tsx";
 import {SelectedGroup} from "./SelectedGroup.tsx";
 import {useSelectedGroup} from "../../../context/SelectedGroupContext.tsx";
 import {Group} from "../../../types/group.ts";
@@ -27,7 +27,7 @@ export function FooterMainPage() {
                     <SelectedGroup/>
                     <span className="dropdownIcon">{isDropdownOpen ? "▲" : "▼"}</span>
                 </div>
-                {isDropdownOpen && <DropdownMenu onGroupChange={handleGroupChange}/>}
+                {isDropdownOpen && <DropDownMenu onGroupChange={handleGroupChange}/>}
             </div>
             <GroupActions/>
                 </div>

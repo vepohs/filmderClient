@@ -1,12 +1,12 @@
-import {SvgLike} from "../../pages/mainPage/components/icons/SvgLike.tsx";
-import {SvgDislike} from "../../pages/mainPage/components/icons/SvgDislike.tsx";
+import {SvgDislike} from "../icons/SvgDislike.tsx";
 import {CardContainer} from "./CardContainer.tsx";
-import {SVGEye} from "../../pages/mainPage/components/icons/SVGEye.tsx";
+import {SVGEye} from "../icons/SVGEye.tsx";
 import {useState} from "react";
 import {Movie} from "../../types/movie.ts";
 
 // @ts-ignore
 import "../style/MovieDisplay.sass";
+import {SvgLike} from "../icons/SvgLike.tsx";
 
 
 interface MovieDisplayProps {

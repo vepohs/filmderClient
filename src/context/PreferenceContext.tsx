@@ -3,9 +3,9 @@ import {useSelectedGroup} from "./SelectedGroupContext.tsx";
 import {useNavigate} from "react-router-dom";
 import {PreferenceContextType, PreferencesData} from "../types/preferences.ts";
 import {Genre, Provider} from "../types/genreAndProvider.ts";
-import {transformPreferencesToIds, transformPreferencesToObjects} from "../Utils/preferencesUtils.ts";
+import {transformPreferencesToIds, transformPreferencesToObjects} from "../utils/preferencesUtils.ts";
 import {getAllPreferencesAvailable, getPreferences, setPreferences} from "../services/preferenceApiCalls.ts";
-import {handleErrorToast, handleSuccessToast} from "../Utils/toastUtils.ts";
+import {handleErrorToast, handleSuccessToast} from "../utils/toastUtils.ts";
 
 
 const PreferenceContext = createContext<PreferenceContextType>({

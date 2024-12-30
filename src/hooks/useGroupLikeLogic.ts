@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import {mapMovie} from "../Utils/groupLikeUtils.ts";
+import {mapMovie} from "../utils/groupLikeUtils.ts";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
 import {User} from "../types/user.ts";
 import {MovieWithCount} from "../types/movie.ts";
