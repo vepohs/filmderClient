@@ -14,10 +14,15 @@ export interface Movie {
     videoPath?: string;
 }
 
-export interface MovieWithCount extends Movie {
-    count: number;
+export interface MovieWithLike extends Movie {
+    nbLike: number;
 }
 
 export interface MovieResponse {
     movies: Movie[];
+}
+
+export interface MovieWithLikeResponse {
+    movie: Movie;
+    count: number;
 }

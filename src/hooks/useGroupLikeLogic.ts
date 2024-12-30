@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from "react";
-import {mapMovie} from "../utils/groupLikeUtils.ts";
+import {mergeMovieAndLike} from "../utils/groupLikeUtils.ts";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
 import {User} from "../types/user.ts";
-import {MovieWithCount} from "../types/movie.ts";
+import {MovieWithLike} from "../types/movie.ts";
 import {APIgetGroupMoviesCommon, APIgetGroupUsers, APISendGroupeSwipe} from "../services/groupLikeApiCall.ts";
 
 
@@ -10,8 +10,8 @@ export const useGroupLikeLogic = () => {
     const {selectedGroup} = useSelectedGroup();
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUsersIds, setSelectedUsersIds] = useState<string[]>([]);
-    const [movies, setMovies] = useState<MovieWithCount[]>([]);
-    const [selectedMovie, setSelectedMovie] = useState<MovieWithCount | null>(null);
+    const [movies, setMovies] = useState<MovieWithLike[]>([]);
+    const [selectedMovie, setSelectedMovie] = useState<MovieWithLike | null>(null);
 
     const getGroupUsers = useCallback(async () => {
         try {
@@ -26,8 +26,10 @@ export const useGroupLikeLogic = () => {
     const getGroupCommonMovies = useCallback(async () => {
         try {
             const response = await APIgetGroupMoviesCommon(selectedUsersIds, selectedGroup.groupId);
-            const moviesWithDetails = response.map(mapMovie);
-            setMovies(moviesWithDetails);
+            console.log(response);
+            const moviesWithLike = response.map(mergeMovieAndLike);
+            console.log(moviesWithLike);
+            setMovies(moviesWithLike);
         } catch (error) {
             console.error("Error fetching group common movies:", error);
         }
@@ -51,7 +53,7 @@ export const useGroupLikeLogic = () => {
         );
     };
 
-    const openMoviePopup = (movie: MovieWithCount) => {
+    const openMoviePopup = (movie: MovieWithLike) => {
         setSelectedMovie(movie);
     };
 
@@ -82,12 +84,12 @@ export const useGroupLikeLogic = () => {
 }
      */
     const moviesByCount = movies.reduce((acc, movie) => {
-        if (!acc[movie.count]) {
-            acc[movie.count] = [];
+        if (!acc[movie.nbLike]) {
+            acc[movie.nbLike] = [];
         }
-        acc[movie.count].push(movie);
+        acc[movie.nbLike].push(movie);
         return acc;
-    }, {} as Record<number, MovieWithCount[]>);
+    }, {} as Record<number, MovieWithLike[]>);
 
 // On récupère les différents "counts" (clés) et on les trie par ordre décroissant
     /* La sortie

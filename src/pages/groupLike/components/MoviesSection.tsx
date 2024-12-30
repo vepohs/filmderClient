@@ -1,14 +1,14 @@
 import React from "react";
 import {CardContainer} from "../../../common/components/CardContainer.tsx";
-import {MovieWithCount} from "../../../types/movie.ts";
+import {MovieWithLike} from "../../../types/movie.ts";
 
 // @ts-ignore
 import "../GroupLike.sass"
 
 interface MoviesSectionProps {
     count: number;
-    movies: MovieWithCount[];
-    onMovieClick: (movie: MovieWithCount) => void;
+    movies: MovieWithLike[];
+    onMovieClick: (movie: MovieWithLike) => void;
     onSwipe: (liked: boolean, movieId: number) => void;
 }
 
@@ -16,17 +16,6 @@ export const MoviesSection: React.FC<MoviesSectionProps> = ({count, movies, onMo
     return (
         <li className="sectionItem">
             <h2>{"❤️".repeat(count)}</h2>
-
-            {
-                /*
-                <h2>
-                    {Array.from({length: count}).map((_, index) => (
-                        <span key={index}>❤️</span>
-                    ))}
-                </h2>
-                
-                 */
-            }
 
             <ul className='movieContainer'>
                 {movies.map((movie) => (

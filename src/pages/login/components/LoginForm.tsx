@@ -16,6 +16,7 @@ import {CustomToastContainer} from "../../../common/components/CustomToastContai
 import {handleErrorToast} from "../../../utils/toastUtils.ts";
 
 export function LoginForm() {
+
     const {register, handleSubmit, formState: {errors}, setError} = useForm<LoginFormInputs>({
         resolver: yupResolver(loginSchema),
         mode: 'onBlur',

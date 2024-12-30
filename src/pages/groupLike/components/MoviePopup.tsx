@@ -1,10 +1,9 @@
 import React from "react";
 import {MovieDisplay} from "../../../common/components/MovieDisplay.tsx";
-import {MovieWithCount} from "../../../types/movie.ts";
-
+import {Movie} from "../../../types/movie.ts";
 
 interface MoviePopupProps {
-    movie: MovieWithCount;
+    movie: Movie;
     onClose: () => void;
     onSwipe: (liked: boolean, movieId: number) => void;
 }

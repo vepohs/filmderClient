@@ -14,9 +14,7 @@ axiosWithAuth.interceptors.request.use(
             const { exp } = decodeJwt(token);
             const nowInSeconds = Math.floor(Date.now() / 1000);
             const timeLeft = exp - nowInSeconds;
-            console.log(timeLeft)
             if (timeLeft < 60) {
-                console.log("Access token is about to expire, refreshing it...");
                 const newAccessToken = await getNewAccessToken();
                 localStorage.setItem('accessToken', newAccessToken);
                 token = newAccessToken;

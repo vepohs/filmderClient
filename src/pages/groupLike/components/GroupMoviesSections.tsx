@@ -1,15 +1,15 @@
 import React from "react";
 import {MoviesSection} from "./MoviesSection.tsx";
-import {MovieWithCount} from "../../../types/movie.ts";
+import {MovieWithLike} from "../../../types/movie.ts";
 import {Link} from "react-router-dom";
 
 // @ts-ignore
 import "../styles/GroupMoviesSections.sass";
 
 interface GroupMoviesSectionsProps {
-    sortedCounts: number[]; // Tableau de counts triés
-    moviesByCount: Record<number, MovieWithCount[]>; // Objet de groupe de films
-    onMovieClick: (movie: MovieWithCount) => void;
+    sortedCounts: number[];
+    moviesByCount: Record<number, MovieWithLike[]>;
+    onMovieClick: (movie: MovieWithLike) => void;
     onSwipe: (liked: boolean, movieId: number) => void;
 }
 

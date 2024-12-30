@@ -1,19 +1,9 @@
-import {Genre, Provider} from "../types/genreAndProvider.ts";
-import {MovieWithCount} from "../types/movie.ts";
+import {MovieWithLike, MovieWithLikeResponse} from "../types/movie.ts";
 import {handleErrorToast, handleSuccessToast} from "./toastUtils.ts";
 
-export const mapMovie = (item: any): MovieWithCount => ({
+export const mergeMovieAndLike = (item: MovieWithLikeResponse): MovieWithLike => ({
     ...item.movie,
-    count: item.count,
-    providers: item.movie.providers.map((provider: Provider) => ({
-        id: provider.id,
-        name: provider.name,
-        logoPath: provider.logoPath,
-    })),
-    genres: item.movie.genres.map((genre: Genre) => ({
-        id: genre.id,
-        name: genre.name,
-    })),
+    nbLike: item.count,
 });
 
 export const copyToClipboard = (text: string) => {
