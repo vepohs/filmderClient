@@ -1,7 +1,7 @@
 import axiosWithAuth from "../utils/axiosWithAuth.ts";
 import axios from "axios";
 import {LoginFormInputs} from "../types/auth.ts";
-import {API_BASE_URL} from "../utils/serverConstantss.ts";
+import {API_BASE_URL} from "../utils/serverConstant.ts";
 
 export const APIlogin = (credentials: LoginFormInputs) =>
     axios.post(`${API_BASE_URL}/api/auth/login`, credentials);
