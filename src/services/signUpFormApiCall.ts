@@ -1,6 +1,6 @@
 import axios from "axios";
 import {FormInputs} from "../types/forms.ts";
-import {API_BASE_URL} from "../utils/serverConstant.ts";
+import {API_BASE_URL} from "../utils/serverConstantss.ts";
 
 export interface IsUniqueEmailResponse {
     isUnique: boolean;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_BASE_URL} from "./serverConstant.ts";
+import {API_BASE_URL} from "./serverConstantss.ts";
 
 
 const axiosWithAuth = axios.create({
