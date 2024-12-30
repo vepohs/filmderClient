@@ -1,10 +1,9 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {mergeMovieAndLike} from "../utils/groupLikeUtils.ts";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
 import {User} from "../types/user.ts";
 import {MovieWithLike} from "../types/movie.ts";
 import {APIgetGroupMoviesCommon, APIgetGroupUsers, APISendGroupeSwipe} from "../services/groupLikeApiCall.ts";
-
 
 export const useGroupLikeLogic = () => {
     const {selectedGroup} = useSelectedGroup();
@@ -13,7 +12,7 @@ export const useGroupLikeLogic = () => {
     const [movies, setMovies] = useState<MovieWithLike[]>([]);
     const [selectedMovie, setSelectedMovie] = useState<MovieWithLike | null>(null);
 
-    const getGroupUsers = useCallback(async () => {
+    const getGroupUsers = async () => {
         try {
             const response: User[] = await APIgetGroupUsers(selectedGroup.groupId);
             setUsers(response);
@@ -21,29 +20,27 @@ export const useGroupLikeLogic = () => {
         } catch (error) {
             console.error("Error fetching group users:", error);
         }
-    }, [selectedGroup.groupId]);
+    };
 
-    const getGroupCommonMovies = useCallback(async () => {
+    const getGroupCommonMovies = async () => {
         try {
             const response = await APIgetGroupMoviesCommon(selectedUsersIds, selectedGroup.groupId);
-            console.log(response);
             const moviesWithLike = response.map(mergeMovieAndLike);
-            console.log(moviesWithLike);
             setMovies(moviesWithLike);
         } catch (error) {
             console.error("Error fetching group common movies:", error);
         }
-    }, [selectedUsersIds]);
+    };
 
     useEffect(() => {
         getGroupUsers();
-    }, [getGroupUsers]);
+    }, []);
 
     useEffect(() => {
         if (selectedUsersIds.length > 0) {
             getGroupCommonMovies();
         }
-    }, [selectedUsersIds, getGroupCommonMovies]);
+    }, [selectedUsersIds]);
 
     const toggleUserSelection = (id: string) => {
         setSelectedUsersIds((prevSelected) =>
