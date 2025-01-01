@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {mergeMovieAndLike} from "../utils/groupLikeUtils.ts";
+import {groupMoviesByLikes, mergeMovieAndLike, sortLikesDescending} from "../utils/groupLikeUtils.ts";
 import {useSelectedGroup} from "../context/SelectedGroupContext.tsx";
 import {User} from "../types/user.ts";
 import {MovieWithLike} from "../types/movie.ts";
@@ -8,7 +8,7 @@ import {APIgetGroupMoviesCommon, APIgetGroupUsers, APISendGroupeSwipe} from "../
 export const useGroupLikeLogic = () => {
     const {selectedGroup} = useSelectedGroup();
     const [users, setUsers] = useState<User[]>([]);
-    const [selectedUsersIds, setSelectedUsersIds] = useState<string[]>([]);
+    const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
     const [movies, setMovies] = useState<MovieWithLike[]>([]);
     const [selectedMovie, setSelectedMovie] = useState<MovieWithLike | null>(null);
 
@@ -16,7 +16,7 @@ export const useGroupLikeLogic = () => {
         try {
             const response: User[] = await APIgetGroupUsers(selectedGroup.groupId);
             setUsers(response);
-            setSelectedUsersIds(response.map((user) => user.id));
+            setSelectedUserIds(response.map((user) => user.id));
         } catch (error) {
             console.error("Error fetching group users:", error);
         }
@@ -24,7 +24,7 @@ export const useGroupLikeLogic = () => {
 
     const getGroupCommonMovies = async () => {
         try {
-            const response = await APIgetGroupMoviesCommon(selectedUsersIds, selectedGroup.groupId);
+            const response = await APIgetGroupMoviesCommon(selectedUserIds, selectedGroup.groupId);
             const moviesWithLike = response.map(mergeMovieAndLike);
             setMovies(moviesWithLike);
         } catch (error) {
@@ -37,13 +37,13 @@ export const useGroupLikeLogic = () => {
     }, []);
 
     useEffect(() => {
-        if (selectedUsersIds.length > 0) {
+        if (selectedUserIds.length > 0) {
             getGroupCommonMovies();
         }
-    }, [selectedUsersIds]);
+    }, [selectedUserIds]);
 
     const toggleUserSelection = (id: string) => {
-        setSelectedUsersIds((prevSelected) =>
+        setSelectedUserIds((prevSelected) =>
             prevSelected.includes(id)
                 ? prevSelected.filter((userId) => userId !== id)
                 : [...prevSelected, id]
@@ -72,39 +72,18 @@ export const useGroupLikeLogic = () => {
         });
     };
 
-    // On regroupe les films par leur "count" de likes
-    /* La sortie
-    {
-  5: [ ...films avec 5 likes... ],
-  3: [ ...films avec 3 likes... ],
-  2: [ ...films avec 2 likes... ]
-}
-     */
-    const moviesByCount = movies.reduce((acc, movie) => {
-        if (!acc[movie.nbLike]) {
-            acc[movie.nbLike] = [];
-        }
-        acc[movie.nbLike].push(movie);
-        return acc;
-    }, {} as Record<number, MovieWithLike[]>);
-
-// On récupère les différents "counts" (clés) et on les trie par ordre décroissant
-    /* La sortie
-    [5, 3, 2]
-     */
-    const sortedCounts = Object.keys(moviesByCount)
-        .map(strKey => parseInt(strKey))
-        .sort((a, b) => b - a);
+    const moviesByLikes = groupMoviesByLikes(movies)
+    const NbLikesDescending = sortLikesDescending(moviesByLikes)
 
     return {
         users,
-        selectedUsersIds,
+        selectedUsersIds: selectedUserIds,
         toggleUserSelection,
         selectedMovie,
         openMoviePopup,
         closeMoviePopup,
-        moviesByCount,
-        sortedCounts,
+        moviesByLikes,
+        NbLikesDescending,
         swiped,
         selectedGroup
     };

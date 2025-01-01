@@ -17,8 +17,8 @@ const GroupLike: React.FC = () => {
         selectedMovie,
         openMoviePopup,
         closeMoviePopup,
-        moviesByCount,
-        sortedCounts,
+        moviesByLikes,
+        NbLikesDescending,
         swiped,
         selectedGroup,
     } = useGroupLikeLogic();
@@ -34,8 +34,8 @@ const GroupLike: React.FC = () => {
             />
 
             <GroupMoviesSections
-                sortedCounts={sortedCounts}
-                moviesByCount={moviesByCount}
+                sortedCounts={NbLikesDescending}
+                moviesByCount={moviesByLikes}
                 onMovieClick={openMoviePopup}
                 onSwipe={swiped}
             />
