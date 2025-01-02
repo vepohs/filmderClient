@@ -7,7 +7,6 @@ import {transformPreferencesToIds, transformPreferencesToObjects} from "../utils
 import {getAllPreferencesAvailable, getPreferences, setPreferences} from "../services/preferenceApiCalls.ts";
 import {handleErrorToast, handleSuccessToast} from "../utils/toastUtils.ts";
 
-
 const PreferenceContext = createContext<PreferenceContextType>({
     hasPreferences: null,
     askPrefLoading: false,
@@ -32,7 +31,7 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
     const [submitPrefLoading, setSubmitPrefLoading] = useState<boolean>(false);
 
     const [allGenres, setAllGenres] = useState<Genre[]>([]);
-    const [allProviders, setallProviders] = useState<Provider[]>([]);
+    const [allProviders, setAllProviders] = useState<Provider[]>([]);
 
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
     const [selectedProviders, setSelectedProviders] = useState<number[]>([]);
@@ -45,7 +44,7 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             const response = await getAllPreferencesAvailable();
             const {genres, providers} = transformPreferencesToObjects(response.data);
             setAllGenres(genres);
-            setallProviders(providers);
+            setAllProviders(providers);
         } catch (error) {
             console.error(error);
         }
@@ -61,7 +60,7 @@ export const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({chi
             setSelectedProviders(providers);
         } catch (error) {
             console.error("Erreur lors de la récupération des préférences utilisateur:", error);
-            alert("Impossible de récupérer les préférences utilisateur. Veuillez réessayer.");
+            handleErrorToast("Impossible de récupérer les préférences utilisateur. Veuillez réessayer.");
         } finally {
             setAskPrefLoading(false);
         }

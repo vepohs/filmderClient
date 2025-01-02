@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 
-
 export const signUpSchema = yup.object({
     firstName: yup.string().required('Le prénom est requis').matches(/^[A-Za-zÀ-ÖØ-öø-ÿ '-]+$/, 'Le prénom ne doit pas contenir de chiffres'),
     lastName: yup.string().required('Le nom est requis').matches(/^[A-Za-zÀ-ÖØ-öø-ÿ '-]+$/, 'Le nom ne doit pas contenir de chiffres'),

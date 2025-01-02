@@ -10,7 +10,7 @@ import {SvgAgeIcon} from "../../../common/icons/SvgAgeIcon.tsx";
 import {SvgPasswordIcon} from "../../../common/icons/SvgPasswordIcon.tsx";
 import {useNavigate} from "react-router-dom";
 import {FormInputs} from "../../../types/forms.ts";
-import {checkUniqueEmail, createNewUser} from "../../../services/signUpFormApiCall.ts";
+import {APICheckUniqueEmail, APICreateNewUser} from "../../../services/signUpFormApiCall.ts";
 import {toast} from "react-toastify";
 import {handleErrorToast, handleSuccessToast} from "../../../utils/toastUtils.ts";
 import {CustomToastContainer} from "../../../common/components/CustomToastContainer.tsx";
@@ -22,6 +22,7 @@ import "../style/SignUpForm.sass";
 
 
 export function SignUpForm() {
+
     const {register, handleSubmit, formState: {errors}, setError} = useForm<FormInputs>({
         resolver: yupResolver(signUpSchema),
         mode: 'onBlur',
@@ -31,13 +32,13 @@ export function SignUpForm() {
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         try {
-            const { isUnique } = await checkUniqueEmail(data.email);
+            const { isUnique } = await APICheckUniqueEmail(data.email);
             if (!isUnique) {
                 handleErrorToast("Cet email est déjà utilisé");
                 setError('email', {message: 'Cet email est déjà utilisé'});
                 return;
             }
-            await createNewUser(data);
+            await APICreateNewUser(data);
             handleSuccessToast("Inscription réussie. Redirection vers la page de connexion...");
             setTimeout(() => {
                 navigate("/login");
