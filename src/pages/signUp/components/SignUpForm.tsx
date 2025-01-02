@@ -18,9 +18,6 @@ import {CustomToastContainer} from "../../../common/components/CustomToastContai
 // @ts-ignore
 import "../style/SignUpForm.sass";
 
-
-
-
 export function SignUpForm() {
 
     const {register, handleSubmit, formState: {errors}, setError} = useForm<FormInputs>({
